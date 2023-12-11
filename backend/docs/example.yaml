@@ -1,0 +1,33 @@
+database:
+  driver: mysql # supports mysql and postgres
+  host: localhost # database host
+  port: 3306 # database port
+  username: root # database username
+  password: root # database password
+  database_name: ids # database name
+  auto_migrate: true # auto migrate database on startup
+  CACert: "" # path to CA certificate for TLS connection
+
+facility:
+  identifier: ZAN # FAA Facility Identifier
+  name: Anchorage ARTCC # Facility Name
+  adh: # ADH Partnership configuration
+    api_base: https://api.zanartcc.org # Base URL for ADH API
+    rostered: true # Allow only rostered controllers
+
+oauth:
+  Provider: adh # OAuth Provider, supports adh or vatsim
+  base_url: https://auth.zanartcc.org # Base URL for OAuth Provider
+  client_id: 123456 # OAuth Client ID
+  client_secret: 123456 # OAuth Client Secret
+  my_base_url: https://ids.zanartcc.org # Base URL for this application
+  endpoints: # OAuth Endpoints
+    authorize: /oauth/authorize # OAuth Authorize
+    token: /oauth/token # OAuth Token
+    userinfo: /oauth/userinfo # OAuth Userinfo
+
+server:
+  port: 3000 # Port to listen on
+  mode:
+    h2c # Server mode, supports plain, https (h2), h2c
+    # for https, expects SSL_CERT_FILE and SSL_KEY_FILE env vars to be set
