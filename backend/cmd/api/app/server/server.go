@@ -1,11 +1,11 @@
 package server
 
 import (
-	"github.com/adh-partnership/api/pkg/logger"
+	"github.com/adh-partnership/ids/backend/pkg/logger"
 	"github.com/urfave/cli/v2"
 )
 
-var log = logger.Logger.WithField("component", "server")
+var log = logger.ZL.With().Str("component", "server").Logger()
 
 func NewCommand() *cli.Command {
 	return &cli.Command{
@@ -21,8 +21,8 @@ func NewCommand() *cli.Command {
 			},
 		},
 		Action: func(c *cli.Context) error {
-			log.Infof("Starting server...")
-			log.Infof("config=%s", c.String("config"))
+			log.Info().Msgf("Starting server...")
+			log.Info().Msgf("config=%s", c.String("config"))
 
 			return nil
 		},
