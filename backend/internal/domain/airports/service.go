@@ -3,8 +3,10 @@ package airports
 import (
 	"errors"
 	"sync"
+	"time"
 
 	"github.com/adh-partnership/ids/backend/internal/cache"
+	"github.com/adh-partnership/ids/backend/pkg/config"
 	"gorm.io/gorm"
 )
 
@@ -20,11 +22,14 @@ var (
 type AirportService struct {
 	db    *gorm.DB
 	cache *cache.Cache
+	exp   time.Duration
 	mut   sync.RWMutex
 }
 
 func NewAirportService(db *gorm.DB, c *cache.Cache) *AirportService {
-	return &AirportService{db: db, cache: c}
+	exp := time.Duration(config.GetConfig().Cache.DefaultExpiration.Airports) * time.Second
+
+	return &AirportService{db: db, cache: c, exp: exp}
 }
 
 func (s *AirportService) GetAirports() ([]*Airport, error) {
@@ -38,7 +43,7 @@ func (s *AirportService) GetAirports() ([]*Airport, error) {
 		if err := s.db.Find(&airports).Error; err != nil {
 			return nil, err
 		}
-		if err := s.cache.Set(cacheAll, airports); err != nil {
+		if err := s.cache.Set(cacheAll, airports, s.exp); err != nil {
 			return nil, err
 		}
 	}
@@ -59,10 +64,10 @@ func (s *AirportService) GetAirport(id string) (*Airport, error) {
 				return nil, ErrInvalidAirport
 			}
 		}
-		if err := s.cache.Set(cachePrefix+"/"+airport.FAAID, airport); err != nil {
+		if err := s.cache.Set(cachePrefix+"/"+airport.FAAID, airport, s.exp); err != nil {
 			return nil, err
 		}
-		if err := s.cache.Set(cachePrefix+"/"+airport.ICAOID, airport); err != nil {
+		if err := s.cache.Set(cachePrefix+"/"+airport.ICAOID, airport, s.exp); err != nil {
 			return nil, err
 		}
 	}
@@ -77,10 +82,10 @@ func (s *AirportService) CreateAirport(airport *Airport) error {
 	if err := s.db.Create(airport).Error; err != nil {
 		return err
 	}
-	if err := s.cache.Set(cachePrefix+"/"+airport.FAAID, airport); err != nil {
+	if err := s.cache.Set(cachePrefix+"/"+airport.FAAID, airport, s.exp); err != nil {
 		return err
 	}
-	if err := s.cache.Set(cachePrefix+"/"+airport.ICAOID, airport); err != nil {
+	if err := s.cache.Set(cachePrefix+"/"+airport.ICAOID, airport, s.exp); err != nil {
 		return err
 	}
 	if err := s.cache.Delete(cacheAll); err != nil {
@@ -97,10 +102,10 @@ func (s *AirportService) UpdateAirport(airport *Airport) error {
 	if err := s.db.Save(airport).Error; err != nil {
 		return err
 	}
-	if err := s.cache.Set(cachePrefix+"/"+airport.FAAID, airport); err != nil {
+	if err := s.cache.Set(cachePrefix+"/"+airport.FAAID, airport, s.exp); err != nil {
 		return err
 	}
-	if err := s.cache.Set(cachePrefix+"/"+airport.ICAOID, airport); err != nil {
+	if err := s.cache.Set(cachePrefix+"/"+airport.ICAOID, airport, s.exp); err != nil {
 		return err
 	}
 	if err := s.cache.Delete(cacheAll); err != nil {

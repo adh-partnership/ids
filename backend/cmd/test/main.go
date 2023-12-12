@@ -1,31 +1,31 @@
 package main
 
 import (
-	"fmt"
 	"runtime"
 	"time"
 
-	"github.com/adh-partnership/api/pkg/logger"
 	"github.com/adh-partnership/ids/backend/pkg/faa/nasr"
+	"github.com/adh-partnership/ids/backend/pkg/logger"
 	"github.com/adh-partnership/ids/backend/pkg/utils"
 )
 
 func main() {
-	fmt.Printf("Is today a cycle date? %+v\n", nasr.IsDateNewCycle(utils.Now()))
-	fmt.Printf("Next cycle date? %+v\n", nasr.GetNextCycle(utils.Now()))
-	fmt.Printf("Current cycle date? %+v\n", nasr.GetCurrentCycle(utils.Now()))
+	logger.New("info")
+	logger.ZL.Info().Msgf("Is today a cycle date? %+v", nasr.IsDateNewCycle(utils.Now()))
+	logger.ZL.Info().Msgf("Next cycle date? %+v", nasr.GetNextCycle(utils.Now()))
+	logger.ZL.Info().Msgf("Current cycle date? %+v", nasr.GetCurrentCycle(utils.Now()))
 
 	PrintMemUsage()
 
 	apts, err := nasr.ProcessAirports()
 	if err != nil {
-		logger.Logger.WithField("component", "main").Errorf("unable to process airports: %s", err)
+		logger.ZL.Error().Msgf("unable to process airports: %s", err)
 		return
 	}
 
 	PrintMemUsage()
-	logger.Logger.WithField("component", "main").Infof("Sleeping")
-	logger.Logger.WithField("component", "main").Infof("%+v", len(apts))
+	logger.ZL.Info().Msg("Sleeping")
+	logger.ZL.Info().Msgf("%+v", len(apts))
 
 	runtime.GC()
 	PrintMemUsage()
@@ -40,8 +40,8 @@ func main() {
 func PrintMemUsage() {
 	var m runtime.MemStats
 	runtime.ReadMemStats(&m)
-	fmt.Printf("Alloc = %v MiB", m.Alloc/1024/1024)
-	fmt.Printf("\tTotalAlloc = %v MiB", m.TotalAlloc/1024/1024)
-	fmt.Printf("\tSys = %v MiB", m.Sys/1024/1024)
-	fmt.Printf("\tNumGC = %v\n", m.NumGC)
+	logger.ZL.Info().Msgf("Alloc = %v MiB", m.Alloc/1024/1024)
+	logger.ZL.Info().Msgf("\tTotalAlloc = %v MiB", m.TotalAlloc/1024/1024)
+	logger.ZL.Info().Msgf("\tSys = %v MiB", m.Sys/1024/1024)
+	logger.ZL.Info().Msgf("\tNumGC = %v", m.NumGC)
 }

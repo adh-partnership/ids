@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/adh-partnership/api/pkg/logger"
 	"github.com/adh-partnership/ids/backend/pkg/network"
 	"github.com/adh-partnership/ids/backend/pkg/utils"
 	"github.com/gocarina/gocsv"
@@ -15,6 +14,7 @@ import (
 type Airport struct {
 	State              string  `csv:"STATE_CODE"`
 	FAAID              string  `csv:"ARPT_ID"`
+	ICAO               string  `csv:"ICAO_ID"`
 	City               string  `csv:"CITY"`
 	Name               string  `csv:"ARPT_NAME"`
 	Latitude           float64 `csv:"LAT_DECIMAL"`
@@ -23,10 +23,6 @@ type Airport struct {
 	MagnaticVariation  int     `csv:"MAG_VARN"`
 	MagneticHemisphere string  `csv:"MAG_HEMIS"`
 }
-
-var (
-	log = logger.Logger.WithField("component", "faa/nasr")
-)
 
 func ProcessAirports() (map[string]*Airport, error) {
 	airports := make(map[string]*Airport)

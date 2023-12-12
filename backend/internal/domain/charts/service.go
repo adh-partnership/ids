@@ -3,9 +3,11 @@ package charts
 import (
 	"errors"
 	"sync"
+	"time"
 
 	"github.com/adh-partnership/ids/backend/internal/cache"
 	"github.com/adh-partnership/ids/backend/internal/domain/airports"
+	"github.com/adh-partnership/ids/backend/pkg/config"
 	"gorm.io/gorm"
 )
 
@@ -22,13 +24,17 @@ type ChartService struct {
 	airportService *airports.AirportService
 	db             *gorm.DB
 	cache          *cache.Cache
+	exp            time.Duration
 	mut            sync.RWMutex
 }
 
 func NewChartService(db *gorm.DB, cache *cache.Cache, airportService *airports.AirportService) *ChartService {
+	exp := time.Duration(config.GetConfig().Cache.DefaultExpiration.Charts) * time.Second
+
 	return &ChartService{
 		db:    db,
 		cache: cache,
+		exp:   exp,
 	}
 }
 
@@ -53,7 +59,7 @@ func (s *ChartService) GetCharts(apt_id string) ([]*Chart, error) {
 		if err := s.db.Model(Chart{}).Where(Chart{AirportID: airport.FAAID}).Find(&charts).Error; err != nil {
 			return nil, err
 		}
-		if err := s.cache.Set(cachePrefix+"/"+apt_id, charts); err != nil {
+		if err := s.cache.Set(cachePrefix+"/"+apt_id, charts, s.exp); err != nil {
 			return nil, err
 		}
 	}

@@ -1,3 +1,13 @@
+cache:
+  driver: memory # supports memory or redis
+  host: localhost # redis host
+  port: 6379 # redis port
+  password: "" # redis password
+  db: 0 # redis database
+  default_expiration: # set default expiration, in seconds for different types
+    airports: 3600 # 1 hour, airport cache (includes METARs, TAFs, SIA, etc.)
+    charts: 86400 # 1 day, chart cache
+
 database:
   driver: mysql # supports mysql and postgres
   host: localhost # database host

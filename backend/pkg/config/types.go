@@ -1,11 +1,26 @@
 package config
 
 type Config struct {
+	Cache    Cache    `json:"cache"`
 	Database Database `json:"database"`
 	Facility Facility `json:"facility"`
 	OAuth    OAuth    `json:"oauth"`
 	Server   Server   `json:"server"`
 	Session  Session  `json:"session"`
+}
+
+type Cache struct {
+	Driver            string           `json:"driver"`
+	Host              string           `json:"host"`
+	Port              int              `json:"port"`
+	Password          string           `json:"password"`
+	DB                int              `json:"db"`
+	DefaultExpiration *CacheExpiration `json:"default_expiration"`
+}
+
+type CacheExpiration struct {
+	Airports int `json:"airports"`
+	Charts   int `json:"charts"`
 }
 
 type Database struct {
