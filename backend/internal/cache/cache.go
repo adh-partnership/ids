@@ -44,9 +44,12 @@ func NewCache(ctx context.Context, r *redis.Client, defaultExpiration time.Durat
 		inMem: make(map[string]Item),
 	}
 
-	j := newJanitor(janitorInterval)
-	j.Run(c)
-	runtime.SetFinalizer(c, stopJanitor)
+	// We only need the janitor if we are not using redis. Redis will handle item expiration on its own.
+	if r == nil {
+		j := newJanitor(janitorInterval)
+		j.Run(c)
+		runtime.SetFinalizer(c, stopJanitor)
+	}
 
 	return c
 }
