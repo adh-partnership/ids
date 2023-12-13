@@ -23,17 +23,9 @@ func NewRootCommand() *cli.App {
 				EnvVars: []string{"LOG_LEVEL"},
 				Aliases: []string{"l"},
 			},
-			&cli.StringFlag{
-				Name:    "log-format",
-				Value:   "text",
-				Usage:   "Set the logging format",
-				EnvVars: []string{"LOG_FORMAT"},
-				Aliases: []string{"f"},
-			},
 		},
 		Before: func(c *cli.Context) error {
-			format := c.String("log-format")
-			logger.New(format)
+			logger.New(c.String("log-level"))
 
 			return nil
 		},

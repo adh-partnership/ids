@@ -40,4 +40,11 @@ server:
   port: 3000 # Port to listen on
   mode:
     h2c # Server mode, supports plain, https (h2), h2c
-    # for https, expects SSL_CERT_FILE and SSL_KEY_FILE env vars to be set
+    # for https, expects SSL_CERT and SSL_KEY env vars to be set
+
+session:
+  algorithm: HS512 # See the README
+  secret: 123456 # See the README
+  issuer: https://ids.zanartcc.org # See the README
+  audience: https://ids.zanartcc.org
+  access_expire: 3600 # See the README

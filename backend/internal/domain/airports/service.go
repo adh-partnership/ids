@@ -2,7 +2,6 @@ package airports
 
 import (
 	"errors"
-	"sync"
 	"time"
 
 	"github.com/adh-partnership/ids/backend/internal/cache"
@@ -23,7 +22,7 @@ type AirportService struct {
 	db    *gorm.DB
 	cache *cache.Cache
 	exp   time.Duration
-	mut   sync.RWMutex
+	hooks []func(old *Airport, new *Airport)
 }
 
 func NewAirportService(db *gorm.DB, c *cache.Cache) *AirportService {
@@ -32,14 +31,21 @@ func NewAirportService(db *gorm.DB, c *cache.Cache) *AirportService {
 	return &AirportService{db: db, cache: c, exp: exp}
 }
 
-func (s *AirportService) GetAirports() ([]*Airport, error) {
-	s.mut.RLock()
-	defer s.mut.RUnlock()
+func (s *AirportService) AddHook(h func(old *Airport, new *Airport)) {
+	s.hooks = append(s.hooks, h)
+}
 
+func (s *AirportService) callHooks(old *Airport, new *Airport) {
+	for _, h := range s.hooks {
+		h(old, new)
+	}
+}
+
+func (s *AirportService) GetAirports() ([]*Airport, error) {
 	var airports []*Airport
 	if airport, err := s.cache.Get(cacheAll); err == nil {
 		airports = airport.([]*Airport)
-	} else if err != cache.ErrorKeyNotFound {
+	} else if err == cache.ErrorKeyNotFound {
 		if err := s.db.Find(&airports).Error; err != nil {
 			return nil, err
 		}
@@ -52,13 +58,11 @@ func (s *AirportService) GetAirports() ([]*Airport, error) {
 }
 
 func (s *AirportService) GetAirport(id string) (*Airport, error) {
-	s.mut.RLock()
-	defer s.mut.RUnlock()
-
 	var airport *Airport
-	if apt, err := s.cache.Get(cachePrefix + "/" + id); err == nil {
+	apt, err := s.cache.Get(cachePrefix + "/" + id)
+	if err == nil {
 		airport = apt.(*Airport)
-	} else if err != cache.ErrorKeyNotFound {
+	} else if err == cache.ErrorKeyNotFound {
 		if err := s.db.Model(Airport{}).Where(Airport{FAAID: id}).Or(Airport{ICAOID: id}).First(&airport).Error; err != nil {
 			if errors.Is(err, gorm.ErrRecordNotFound) {
 				return nil, ErrInvalidAirport
@@ -76,9 +80,6 @@ func (s *AirportService) GetAirport(id string) (*Airport, error) {
 }
 
 func (s *AirportService) CreateAirport(airport *Airport) error {
-	s.mut.Lock()
-	defer s.mut.Unlock()
-
 	if err := s.db.Create(airport).Error; err != nil {
 		return err
 	}
@@ -92,12 +93,17 @@ func (s *AirportService) CreateAirport(airport *Airport) error {
 		return err
 	}
 
+	s.callHooks(nil, airport)
+
 	return nil
 }
 
 func (s *AirportService) UpdateAirport(airport *Airport) error {
-	s.mut.Lock()
-	defer s.mut.Unlock()
+	var oldAirport *Airport
+	oldAirport, err := s.GetAirport(airport.FAAID)
+	if err != nil {
+		return err
+	}
 
 	if err := s.db.Save(airport).Error; err != nil {
 		return err
@@ -111,14 +117,12 @@ func (s *AirportService) UpdateAirport(airport *Airport) error {
 	if err := s.cache.Delete(cacheAll); err != nil {
 		return err
 	}
+	s.callHooks(oldAirport, airport)
 
 	return nil
 }
 
 func (s *AirportService) DeleteAirport(id string) error {
-	s.mut.Lock()
-	defer s.mut.Unlock()
-
 	var airport Airport
 	if err := s.db.Where(Airport{FAAID: id}).Or(Airport{ICAOID: id}).First(&airport).Error; err != nil {
 		return err
@@ -135,6 +139,8 @@ func (s *AirportService) DeleteAirport(id string) error {
 	if err := s.cache.Delete(cacheAll); err != nil {
 		return err
 	}
+
+	s.callHooks(&airport, nil)
 
 	return nil
 }

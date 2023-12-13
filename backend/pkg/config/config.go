@@ -46,6 +46,8 @@ func ParseConfig(file string) error {
 		return err
 	}
 
+	ValidateConfig(c)
+
 	cfg = c
 
 	return nil

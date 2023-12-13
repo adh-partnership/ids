@@ -10,6 +10,14 @@ var (
 	ErrInvalidCacheRedisDB   = errors.New("invalid redis db")
 )
 
+func ValidateConfig(c *Config) error {
+	if err := ValidateCache(&c.Cache); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func ValidateCache(c *Cache) error {
 	if c.Driver == "redis" {
 		if c.Host == "" || c.Port == 0 {

@@ -13,10 +13,11 @@ import (
 	"github.com/adh-partnership/ids/backend/pkg/config"
 	"github.com/adh-partnership/ids/backend/pkg/faa/nasr"
 	"github.com/adh-partnership/ids/backend/pkg/logger"
+	"github.com/rs/zerolog"
 	"github.com/urfave/cli/v2"
 )
 
-var log = logger.ZL.With().Str("component", "update").Logger()
+var log zerolog.Logger
 
 func NewCommand() *cli.Command {
 	return &cli.Command{
@@ -39,6 +40,7 @@ func NewCommand() *cli.Command {
 			},
 		},
 		Action: func(c *cli.Context) error {
+			log = logger.ZL.With().Str("component", "update").Logger()
 			log.Info().Msg("Updating Data...")
 			log.Info().Msgf("config=%s", c.String("config"))
 			log.Info().Msgf("airports=%s", c.String("airports"))

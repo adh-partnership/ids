@@ -76,9 +76,9 @@ type requestLogger struct {
 
 func (l *requestLogger) NewLogEntry(r *http.Request) middleware.LogEntry {
 	entry := &RequestLoggerEntry{}
-	msg := fmt.Sprintf("Request: %s %s", r.Method, r.URL.Path)
+	//msg := fmt.Sprintf("Request: %s %s", r.Method, r.URL.Path)
 	entry.Logger = l.Logger.With().Fields(requestLogFields(r)).Logger()
-	entry.Logger.Info().Fields(requestLogFields(r)).Msgf(msg)
+	//entry.Logger.Info().Fields(requestLogFields(r)).Msgf(msg)
 	return entry
 }
 
@@ -88,20 +88,15 @@ type RequestLoggerEntry struct {
 }
 
 func (l *RequestLoggerEntry) Write(status, bytes int, header http.Header, elapsed time.Duration, extra interface{}) {
-	msg := fmt.Sprintf("Response: %d %s", status, statusLabel(status))
-	if l.msg != "" {
-		msg = fmt.Sprintf("%s - %s", msg, l.msg)
-	}
-
 	responseLog := map[string]interface{}{
 		"status":  status,
 		"bytes":   bytes,
-		"elapsed": float64(elapsed.Nanoseconds()) / 1000000.0, // in milliseconds
+		"elapsed": elapsed.String(), // in milliseconds
 	}
 
 	l.Logger.WithLevel(statusLevel(status)).Fields(map[string]interface{}{
 		"httpResponse": responseLog,
-	}).Msgf(msg)
+	}).Msgf("")
 }
 
 func (l *RequestLoggerEntry) Panic(v interface{}, stack []byte) {
@@ -169,10 +164,8 @@ func statusLevel(status int) zerolog.Level {
 	switch {
 	case status <= 0:
 		return zerolog.WarnLevel
-	case status < 400: // for codes in 100s, 200s, 300s
+	case status < 500: // for codes in 100-499
 		return zerolog.InfoLevel
-	case status >= 400 && status < 500:
-		return zerolog.WarnLevel
 	case status >= 500:
 		return zerolog.ErrorLevel
 	default:

@@ -50,7 +50,8 @@ var _ logger.Interface = &GormLogger{}
 // NewGormLogger creates and initializes a new GormLogger.
 func NewGormLogger() *GormLogger {
 	l := &GormLogger{
-		FieldsOrder: gormDefaultFieldsOrder(),
+		FieldsOrder:               gormDefaultFieldsOrder(),
+		IgnoreRecordNotFoundError: true,
 	}
 
 	return l

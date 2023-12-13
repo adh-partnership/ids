@@ -7,7 +7,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/redis/go-redis/v9"
+	goredis "github.com/redis/go-redis/v9"
+
+	"github.com/adh-partnership/ids/backend/internal/redis"
 )
 
 const (
@@ -27,20 +29,20 @@ type Item struct {
 type Cache struct {
 	defaultExpiration time.Duration
 	ctx               context.Context
-	r                 *redis.Client
+	redis             *redis.Redis
 	inMem             map[string]Item
 	mut               sync.RWMutex
 	janitor           *janitor
 }
 
-func NewCache(ctx context.Context, r *redis.Client, defaultExpiration time.Duration, janitorInterval time.Duration) *Cache {
+func NewCache(ctx context.Context, r *redis.Redis, defaultExpiration time.Duration, janitorInterval time.Duration) *Cache {
 	if janitorInterval == 0 {
 		janitorInterval = 2 * time.Minute
 	}
 
 	c := &Cache{
 		ctx:   ctx,
-		r:     r,
+		redis: r,
 		inMem: make(map[string]Item),
 	}
 
@@ -55,19 +57,19 @@ func NewCache(ctx context.Context, r *redis.Client, defaultExpiration time.Durat
 }
 
 func (c *Cache) Get(key string) (interface{}, error) {
-	if c.r == nil {
+	if c.redis == nil {
 		c.mut.RLock()
 		defer c.mut.RUnlock()
 		if val, ok := c.inMem[key]; ok {
-			return val, nil
+			return val.Value, nil
 		} else {
 			return nil, ErrorKeyNotFound
 		}
 	}
 
-	val, err := c.r.Get(c.ctx, key).Result()
+	val, err := c.redis.Get(c.ctx, key).Result()
 	if err != nil {
-		if errors.Is(err, redis.Nil) {
+		if errors.Is(err, goredis.Nil) {
 			return nil, ErrorKeyNotFound
 		}
 		return nil, err
@@ -81,7 +83,7 @@ func (c *Cache) SetDefault(key string, val interface{}) error {
 }
 
 func (c *Cache) Set(key string, val interface{}, d time.Duration) error {
-	if c.r == nil {
+	if c.redis == nil {
 		var exp int64
 
 		if d == DefaultExpiration {
@@ -109,7 +111,7 @@ func (c *Cache) Set(key string, val interface{}, d time.Duration) error {
 		exp = 0
 	}
 
-	err := c.r.Set(c.ctx, key, val, exp).Err()
+	err := c.redis.Set(c.ctx, key, val, exp).Err()
 	if err != nil {
 		return err
 	}
@@ -118,14 +120,14 @@ func (c *Cache) Set(key string, val interface{}, d time.Duration) error {
 }
 
 func (c *Cache) Delete(key string) error {
-	if c.r == nil {
+	if c.redis == nil {
 		c.mut.Lock()
 		defer c.mut.Unlock()
 		delete(c.inMem, key)
 		return nil
 	}
 
-	err := c.r.Del(c.ctx, key).Err()
+	err := c.redis.Del(c.ctx, key).Err()
 	if err != nil {
 		return err
 	}

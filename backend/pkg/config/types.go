@@ -65,10 +65,11 @@ type Server struct {
 }
 
 type Session struct {
-	Algorithm     string `json:"algorithm"`
-	Secret        string `json:"secret"`
-	AccessExpire  int    `json:"access_expire"`
-	RefreshExpire int    `json:"refresh_expire"`
+	Algorithm    string `json:"algorithm"`
+	Secret       string `json:"secret"`
+	Issuer       string `json:"issuer"`
+	Audience     string `json:"audience"`
+	AccessExpire int    `json:"access_expire"`
 }
 
 type Weather struct {
