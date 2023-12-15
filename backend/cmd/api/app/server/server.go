@@ -10,8 +10,10 @@ import (
 	"github.com/adh-partnership/ids/backend/internal/cache"
 	"github.com/adh-partnership/ids/backend/internal/database"
 	"github.com/adh-partnership/ids/backend/internal/domain/airports"
+	"github.com/adh-partnership/ids/backend/internal/domain/auth"
 	"github.com/adh-partnership/ids/backend/internal/domain/charts"
 	"github.com/adh-partnership/ids/backend/internal/handlers"
+	"github.com/adh-partnership/ids/backend/internal/middleware/session"
 	"github.com/adh-partnership/ids/backend/internal/redis"
 	"github.com/adh-partnership/ids/backend/internal/server"
 	"github.com/adh-partnership/ids/backend/pkg/config"
@@ -88,12 +90,17 @@ func NewCommand() *cli.Command {
 			s := server.New()
 
 			log.Info().Msg("Registering services...")
-			as := airports.NewAirportService(db.DB, che)
-			cs := charts.NewChartService(db.DB, che, as)
+			airportService := airports.NewAirportService(db.DB, che)
+			authservice := auth.NewAuthService(session.Store, config.GetConfig().OAuth.Provider)
+			chartService := charts.NewChartService(db.DB, che, airportService)
 
 			log.Info().Msg("Registering handlers...")
 			s.Router.Route("/v1", func(r chi.Router) {
-				handlers.RegisterHandlers(r, as, cs)
+				handlers.RegisterHandlers(r, &handlers.Services{
+					AirportService: airportService,
+					AuthService:    authservice,
+					ChartService:   chartService,
+				})
 			})
 			handlers.NewServiceHandlers(s.Router)
 

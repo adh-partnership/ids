@@ -43,8 +43,11 @@ server:
     # for https, expects SSL_CERT and SSL_KEY env vars to be set
 
 session:
-  algorithm: HS512 # See the README
-  secret: 123456 # See the README
-  issuer: https://ids.zanartcc.org # See the README
-  audience: https://ids.zanartcc.org
-  access_expire: 3600 # See the README
+  hash_key: 123456 # Session Hash Key
+  block_key: 123456 # Session Block Key
+  name: ids # Session Name
+  domain: localhost # Session Domain
+  path: / # Session Path
+  max_age: 86400 # Session Max Age, in seconds
+  secure: false # Session Secure
+  http_only: true # Session HTTP Only

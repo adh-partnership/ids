@@ -28,3 +28,7 @@ func Respond(w http.ResponseWriter, r *http.Request, data interface{}, status in
 	w.Header().Set("Content-Type", contentType)
 	w.Write([]byte(resp))
 }
+
+func Redirect(w http.ResponseWriter, r *http.Request, url string, status int) {
+	http.Redirect(w, r, url, status)
+}

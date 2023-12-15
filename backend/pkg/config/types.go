@@ -35,8 +35,9 @@ type Database struct {
 }
 
 type Facility struct {
-	Identifier string `json:"identifier"`
-	Name       string `json:"name"`
+	Identifier string      `json:"identifier"`
+	Name       string      `json:"name"`
+	ADH        FacilityADH `json:"adh"`
 }
 
 type FacilityADH struct {
@@ -65,11 +66,14 @@ type Server struct {
 }
 
 type Session struct {
-	Algorithm    string `json:"algorithm"`
-	Secret       string `json:"secret"`
-	Issuer       string `json:"issuer"`
-	Audience     string `json:"audience"`
-	AccessExpire int    `json:"access_expire"`
+	HashKey  string `json:"hash_key"`
+	BlockKey string `json:"block_key"`
+	Name     string `json:"name"`
+	Path     string `json:"path"`
+	Domain   string `json:"domain"`
+	MaxAge   int    `json:"max_age"`
+	Secure   bool   `json:"secure"`
+	HttpOnly bool   `json:"http_only"`
 }
 
 type Weather struct {
