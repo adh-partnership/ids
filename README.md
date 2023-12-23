@@ -14,6 +14,23 @@ There may be some consideration of VATUSA API integration once the new API is re
 
 This project will also rely on the [chart-parser](https://github.com/adh-partnership/chart-parser) to populate the charts table. This is a separate project and will need to be run via cron or a kubernetes CronJob.
 
+## Configuration
+
+### Backend Configuration
+
+Please consult the [backend README](backend/README.md) for configuration information.
+
+### Frontend Configuration
+
+Soon (TM).
+
+### Shared
+
+There are some items that are shared between backend and frontend. This configuration is shared so that we can reduce
+the amount of duplication.
+
+Please consult the [shared README](shared/README.md) for configuration information.
+
 ## License
 
 This project is licensed under the Apache 2.0 license. See the [LICENSE](LICENSE) file for more information.

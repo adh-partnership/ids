@@ -76,8 +76,3 @@ type Session struct {
 	Secure   bool   `json:"secure"`
 	HttpOnly bool   `json:"http_only"`
 }
-
-type Weather struct {
-	Airports  []string `json:"airports"`
-	Frequency int      `json:"frequency"`
-}

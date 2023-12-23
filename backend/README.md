@@ -175,40 +175,45 @@ This is the mode the IDS backend will run in. The supported modes are:
 
 ### session
 
-The ADH IDS utilizes JSON Web Tokens for authentication. We do not support Refresh Tokens as the current
-intention is to require authentication on every visit... provided it is outside the configured AccessExpire window.
+The ADH IDS utilizes sessions via cookies for authentication. The only data we really care about is, are they
+a VATSIM member, and if configured in the Facility section, are they rostered (ADH members only due to reliance
+on the API).
 
-#### algorithm
+#### block_key
 
-There are a number of algorithms supported by the underlying dependency. At the moment, we have
-selected to only support symmetrical algorithms. We may consider expanding to using JWKs in the future.
+The block key used for encryption. The length should be 16 bytes (AES-128), 20 bytes (AES-192), or 32 bytes (AES-256). The length dictates the encryption algorithm used. 32 bytes is highly encouraged.
 
-The supported algorithms are ([Reference](https://pkg.go.dev/github.com/lestrrat-go/jwx/v2/jwa#SignatureAlgorithm)):
+### hash_key
 
-- HS256
-- HS384
-- HS512
+The hash key used for encryption. This should be at least 32 bytes but may be longer.
 
-### secret
+### name
 
-This is a key used to sign the JWT. It is recommended to be a randomly generated string of at least 32 characters.
-The string should be a mix of characters, numbers, letters, symbols, and casing.
+The name of the cookie to set. This should be something unique to the IDS, such as "ids" or "ids-session".
 
-### issuer
+### path
 
-This is a set string that identifies the issuer of the JWT. It has no meaning outside of validation
-and can be any string. Generally, though, it is an identifier of the issuer ([Reference](https://datatracker.ietf.org/doc/html/rfc7519#section-4.1.1)).
+Sets the path option of the cookie. This should be set to "/" to allow the cookie to be sent to all paths used by the IDS API and frontend.
 
-### audience
+### domain
 
-This is a string that is converted into an array of a single string. It is generally used to identify the
-audience of the JWT. We use it as part of the validation process. ([Reference](https://datatracker.ietf.org/doc/html/rfc7519#section-4.1.3))
+This should be the domain of the IDS. Note that if the IDS backend and frontend run on different subdomains, 
+you should set this to the common domain name used between them. For example if the IDS API is at
+ids-api.zanartcc.org and the frontend is at ids.zanartcc.org, set this to zanartcc.org. While calls to the backend are the only ones that necessitate the cookie, cross-subdomain cookies are difficult and may lose support.
 
-### access_expire
+### max_age
 
-This is an integer that represents the number of seconds an access_token is valid for. A recommended setting
-is 3600, which equates to 1 hour. Access tokens will be refreshed by the frontend while the sessions is
-active. Lower numbers are better, but shouldn't be less than 15 minutes. ([Reference](https://datatracker.ietf.org/doc/html/rfc7519#section-4.1.4))
+This is how long the cookie should last. By default, we set this to 86400 seconds (24 hours). The cookie is refreshed
+on every request, so this time will be reset. If you set this to 0, the cookie will be a session cookie and will be
+removed when the browser is closed.
+
+### secure
+
+This is a boolean value that determines whether or not the cookie should be set as secure. This should be set to true.
+
+### http_only
+
+This is a boolean value that determines whether or not the cookie should be set as HTTP only. This should be set to true.
 
 ## Environment Variables
 
