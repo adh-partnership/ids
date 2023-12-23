@@ -40,3 +40,37 @@ func (a *AirportPatch) MergeInto(airport *airports.Airport) {
 		airport.ArrivalRunways = *a.ArrivalRunways
 	}
 }
+
+type AirportResponse struct {
+	ID               string     `json:"id"`
+	ATIS             string     `json:"atis"`
+	ATISTime         *time.Time `json:"atis_time"`
+	ArrivalATIS      string     `json:"arrival_atis"`
+	ArrivalATISTime  *time.Time `json:"arrival_atis_time"`
+	DepartureRunways string     `json:"departure_runways"`
+	ArrivalRunways   string     `json:"arrival_runways"`
+	METAR            string     `json:"metar"`
+	TAF              string     `json:"taf"`
+}
+
+func AirportResponseFromEntity(airport *airports.Airport) *AirportResponse {
+	return &AirportResponse{
+		ID:               airport.FAAID,
+		ATIS:             airport.ATIS,
+		ATISTime:         airport.ATISTime,
+		ArrivalATIS:      airport.ArrivalATIS,
+		ArrivalATISTime:  airport.ArrivalATISTime,
+		DepartureRunways: airport.DepartureRunways,
+		ArrivalRunways:   airport.ArrivalRunways,
+		METAR:            airport.METAR,
+		TAF:              airport.TAF,
+	}
+}
+
+func AirportResponsesFromEntities(airports []*airports.Airport) []*AirportResponse {
+	var responses []*AirportResponse
+	for _, airport := range airports {
+		responses = append(responses, AirportResponseFromEntity(airport))
+	}
+	return responses
+}

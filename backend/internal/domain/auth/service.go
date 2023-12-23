@@ -40,6 +40,7 @@ func NewAuthService(store sessions.Store, oauth2provider string) *AuthService {
 		ClientID:     c.ClientID,
 		ClientSecret: c.ClientSecret,
 		Scopes:       []string{"vatsim_details"},
+		RedirectURL:  fmt.Sprintf("%s/v1/auth/callback", c.MyBaseURL),
 		Endpoint: oauth2.Endpoint{
 			AuthURL:  fmt.Sprintf("%s%s", c.BaseURL, c.Endpoints.Authorization),
 			TokenURL: fmt.Sprintf("%s%s", c.BaseURL, c.Endpoints.Token),
@@ -83,6 +84,13 @@ func (s *AuthService) GetUserInfo(token *oauth2.Token) (string, bool, error) {
 	contents, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return "", false, err
+	}
+
+	if resp.StatusCode != 200 {
+		logger.ZL.Error().Msgf("received non-200 status code: %d", resp.StatusCode)
+		logger.ZL.Debug().Msgf("Body: %s", string(contents))
+
+		return "", false, fmt.Errorf("received non-200 status code: %d", resp.StatusCode)
 	}
 
 	var cid string = ""
@@ -140,7 +148,10 @@ func (s *AuthService) Session(r *http.Request, w http.ResponseWriter) *AuthServi
 }
 
 func (s *AuthServiceSessions) Save() {
-	s.Session.Save(s.r, s.w)
+	err := s.Session.Save(s.r, s.w)
+	if err != nil {
+		logger.ZL.Error().Err(err).Msgf("failed to save session: %+v", err)
+	}
 }
 
 func (s *AuthServiceSessions) Get(key string) interface{} {

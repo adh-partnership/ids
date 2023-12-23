@@ -54,6 +54,10 @@ func ValidateCache(c *Cache) error {
 		c.DefaultExpiration.Charts = 60 * 60
 	}
 
+	if c.DefaultExpiration.PIREPs == 0 {
+		c.DefaultExpiration.PIREPs = 60 * 60
+	}
+
 	return nil
 }
 

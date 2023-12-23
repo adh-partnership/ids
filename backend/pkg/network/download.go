@@ -3,6 +3,8 @@ package network
 import (
 	"io"
 	"net/http"
+
+	"github.com/adh-partnership/ids/backend/pkg/logger"
 )
 
 func Request(method, url string, headers map[string]string, body io.Reader) (*http.Response, error) {
@@ -16,6 +18,7 @@ func Request(method, url string, headers map[string]string, body io.Reader) (*ht
 		return nil, err
 	}
 
+	logger.ZL.Debug().Msgf("request: %+v", req)
 	client := &http.Client{}
 	return client.Do(req)
 }

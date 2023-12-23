@@ -6,6 +6,8 @@ import (
 
 	"github.com/adh-partnership/ids/backend/internal/cache"
 	"github.com/adh-partnership/ids/backend/pkg/config"
+	"github.com/adh-partnership/ids/backend/pkg/logger"
+	"github.com/adh-partnership/ids/backend/pkg/weather"
 	"gorm.io/gorm"
 )
 
@@ -37,7 +39,7 @@ func (s *AirportService) AddHook(h func(old *Airport, new *Airport)) {
 
 func (s *AirportService) callHooks(old *Airport, new *Airport) {
 	for _, h := range s.hooks {
-		h(old, new)
+		go h(old, new)
 	}
 }
 
@@ -141,6 +143,94 @@ func (s *AirportService) DeleteAirport(id string) error {
 	}
 
 	s.callHooks(&airport, nil)
+
+	return nil
+}
+
+func (s *AirportService) CleanupATIS() error {
+	airports, err := s.GetAirports()
+	if err != nil {
+		return err
+	}
+
+	var errs []error
+
+	for _, airport := range airports {
+		// Check if airport.ATISTime is more than 2 hours ago
+		if airport.ATISTime != nil {
+			if airport.ATISTime.Before(time.Now().Add(-2 * time.Hour)) {
+				airport.ATIS = ""
+				airport.ATISTime = &time.Time{}
+				airport.ArrivalATIS = ""
+				airport.ArrivalATISTime = &time.Time{}
+				airport.ArrivalRunways = ""
+				airport.DepartureRunways = ""
+				if err := s.UpdateAirport(airport); err != nil {
+					errs = append(errs, err)
+				}
+			}
+		}
+	}
+
+	if len(errs) > 0 {
+		var errStr string
+		for _, err := range errs {
+			errStr += err.Error() + " // "
+		}
+		return errors.New(errStr)
+	}
+
+	return nil
+}
+
+func (s *AirportService) UpdateWeather() error {
+	err := weather.UpdateWeatherCache()
+	if err != nil {
+		logger.ZL.Err(err).Msg("error updating weather cache")
+		return err
+	}
+
+	airports, err := s.GetAirports()
+	if err != nil {
+		logger.ZL.Err(err).Msg("error getting airports")
+		return err
+	}
+
+	for _, airport := range airports {
+		changed := false
+		wx, err := weather.GetWeather(airport.ICAOID)
+		if err != nil && !errors.Is(err, weather.ErrorNoWeather) {
+			logger.ZL.Err(err).Msgf("error getting weather for %s, skipping", airport.FAAID)
+			continue
+		}
+
+		// If we don't have weather, treat as empty so we can blank out our cache
+		if errors.Is(err, weather.ErrorNoWeather) {
+			wx = &weather.Weather{
+				METAR: "",
+				TAF:   "",
+			}
+		}
+
+		if airport.METAR != wx.METAR {
+			logger.ZL.Debug().Msgf("updating METAR for %s to %s", airport.FAAID, wx.METAR)
+			airport.METAR = wx.METAR
+			changed = true
+		}
+		if airport.TAF != wx.TAF {
+			logger.ZL.Debug().Msgf("updating TAF for %s to %s", airport.FAAID, wx.TAF)
+			airport.TAF = wx.TAF
+			changed = true
+		}
+
+		if changed {
+			logger.ZL.Debug().Msgf("updating airport %s", airport.FAAID)
+			if err := s.UpdateAirport(airport); err != nil {
+				logger.ZL.Err(err).Msgf("error updating airport %s", airport.FAAID)
+				return err
+			}
+		}
+	}
 
 	return nil
 }

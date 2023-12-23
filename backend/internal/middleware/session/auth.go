@@ -9,6 +9,10 @@ import (
 )
 
 func IsAuthenticated(r *http.Request) bool {
+	if r.Context().Value("session") == nil {
+		return false
+	}
+
 	session := r.Context().Value("session").(*gsess.Session)
 	if session.Values["user"] != nil {
 		return true

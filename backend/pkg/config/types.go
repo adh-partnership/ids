@@ -21,6 +21,7 @@ type Cache struct {
 type CacheExpiration struct {
 	Airports int `json:"airports"`
 	Charts   int `json:"charts"`
+	PIREPs   int `json:"pireps"`
 }
 
 type Database struct {

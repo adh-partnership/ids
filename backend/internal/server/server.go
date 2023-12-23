@@ -9,8 +9,11 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/adh-partnership/ids/backend/internal/jobs"
 	"github.com/adh-partnership/ids/backend/internal/middleware/logger"
+	"github.com/adh-partnership/ids/backend/internal/middleware/session"
 	adhlog "github.com/adh-partnership/ids/backend/pkg/logger"
+	"github.com/adh-partnership/ids/backend/pkg/response"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/rs/zerolog"
@@ -40,6 +43,15 @@ func New() *Server {
 	log = adhlog.ZL.With().Str("component", "server").Logger()
 	router.Use(logger.Logger(adhlog.ZL.With().Str("component", "access").Logger())) // Includes RequestID and Recoverer middleware
 	router.Use(middleware.RealIP)
+	router.Use(session.Middleware)
+
+	router.NotFound(func(w http.ResponseWriter, r *http.Request) {
+		response.Respond(w, r, "Not Found", http.StatusNotFound)
+	})
+
+	router.MethodNotAllowed(func(w http.ResponseWriter, r *http.Request) {
+		response.Respond(w, r, "Method Not Allowed", http.StatusMethodNotAllowed)
+	})
 
 	return &Server{
 		Router: router,
@@ -52,7 +64,7 @@ func New() *Server {
 // would require a TLS certificate and key to be set.
 //
 // Will block.
-func (s *Server) Start(mode string, addr string) error {
+func (s *Server) Start(mode string, addr string, jobmanager jobs.JobManager) error {
 	var cert string
 	var key string
 	var err error
@@ -78,7 +90,11 @@ func (s *Server) Start(mode string, addr string) error {
 				log.Warn().Msg("Graceful shutdown timed out. Forcing exit...")
 			}
 		}()
-		err := srv.Shutdown(shutdownCtx)
+		err := jobmanager.Stop()
+		if err != nil {
+			log.Error().Msgf("Error stopping job manager: %s", err)
+		}
+		err = srv.Shutdown(shutdownCtx)
 		if err != nil {
 			log.Error().Msgf("Error shutting down server: %s", err)
 		}

@@ -6,6 +6,7 @@ import (
 
 	"github.com/adh-partnership/ids/backend/internal/domain/airports"
 	"github.com/adh-partnership/ids/backend/internal/dtos"
+	"github.com/adh-partnership/ids/backend/internal/middleware/session"
 	"github.com/adh-partnership/ids/backend/pkg/logger"
 	"github.com/adh-partnership/ids/backend/pkg/render"
 	"github.com/adh-partnership/ids/backend/pkg/response"
@@ -22,7 +23,10 @@ func NewAirportHandler(router chi.Router, airportService *airports.AirportServic
 	router.Route("/airports", func(r chi.Router) {
 		r.Get("/", controller.GetAirports)
 		r.Get("/{id}", controller.GetAirport)
-		r.Patch("/{id}", controller.PatchAirport)
+		r.Group(func(r chi.Router) {
+			r.Use(session.AuthenticatedMiddleware)
+			r.Patch("/{id}", controller.PatchAirport)
+		})
 	})
 
 	return controller
@@ -36,7 +40,7 @@ func (h *AirportHandler) GetAirports(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response.Respond(w, r, airports, http.StatusOK)
+	response.Respond(w, r, dtos.AirportResponsesFromEntities(airports), http.StatusOK)
 }
 
 func (h *AirportHandler) GetAirport(w http.ResponseWriter, r *http.Request) {
@@ -53,7 +57,7 @@ func (h *AirportHandler) GetAirport(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response.Respond(w, r, airport, http.StatusOK)
+	response.Respond(w, r, dtos.AirportResponseFromEntity(airport), http.StatusOK)
 }
 
 func (h *AirportHandler) PatchAirport(w http.ResponseWriter, r *http.Request) {
@@ -79,5 +83,5 @@ func (h *AirportHandler) PatchAirport(w http.ResponseWriter, r *http.Request) {
 	patch.MergeInto(airport)
 	h.AirportService.UpdateAirport(airport)
 
-	response.Respond(w, r, airport, http.StatusOK)
+	response.Respond(w, r, dtos.AirportResponseFromEntity(airport), http.StatusOK)
 }

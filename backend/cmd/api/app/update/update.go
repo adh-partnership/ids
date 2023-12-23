@@ -103,7 +103,7 @@ func NewCommand() *cli.Command {
 				arpt, err := aptService.GetAirport(apt_id)
 
 				magVar := apt.MagnaticVariation
-				if apt.MagneticHemisphere == "W" {
+				if apt.MagneticHemisphere == "E" {
 					magVar = -1 * magVar
 				}
 

@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 
+	"github.com/adh-partnership/ids/backend/pkg/logger"
 	"github.com/adh-partnership/ids/backend/pkg/network"
 	"github.com/adh-partnership/ids/backend/pkg/utils"
 	"github.com/gocarina/gocsv"
@@ -24,8 +25,8 @@ type Airport struct {
 	MagneticHemisphere string  `csv:"MAG_HEMIS"`
 }
 
-func ProcessAirports() (map[string]*Airport, error) {
-	airports := make(map[string]*Airport)
+func ProcessAirports() (map[string]Airport, error) {
+	airports := make(map[string]Airport)
 
 	data, err := downloadAndExtract()
 	if err != nil {
@@ -39,7 +40,7 @@ func ProcessAirports() (map[string]*Airport, error) {
 	}
 
 	for _, apt := range apts {
-		airports[apt.FAAID] = &apt
+		airports[apt.FAAID] = apt
 	}
 
 	return airports, nil
@@ -48,6 +49,7 @@ func ProcessAirports() (map[string]*Airport, error) {
 func downloadAndExtract() ([]byte, error) {
 	// Download the file
 	url := URL(GetCurrentCycle(utils.Now()), "APT")
+	logger.ZL.Info().Msgf("Downloading %s", url)
 
 	data, err := network.DownloadFile(url)
 	if err != nil {

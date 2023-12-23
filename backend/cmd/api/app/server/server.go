@@ -2,6 +2,7 @@ package server
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"net/http"
@@ -12,10 +13,13 @@ import (
 	"github.com/adh-partnership/ids/backend/internal/domain/airports"
 	"github.com/adh-partnership/ids/backend/internal/domain/auth"
 	"github.com/adh-partnership/ids/backend/internal/domain/charts"
+	"github.com/adh-partnership/ids/backend/internal/domain/pireps"
 	"github.com/adh-partnership/ids/backend/internal/handlers"
+	"github.com/adh-partnership/ids/backend/internal/jobs"
 	"github.com/adh-partnership/ids/backend/internal/middleware/session"
 	"github.com/adh-partnership/ids/backend/internal/redis"
 	"github.com/adh-partnership/ids/backend/internal/server"
+	"github.com/adh-partnership/ids/backend/internal/signalr"
 	"github.com/adh-partnership/ids/backend/pkg/config"
 	"github.com/adh-partnership/ids/backend/pkg/logger"
 	"github.com/go-chi/chi/v5"
@@ -23,7 +27,11 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-var log zerolog.Logger
+var (
+	log        zerolog.Logger
+	Hub        *signalr.IDSHub
+	JobManager *jobs.JobManager
+)
 
 func NewCommand() *cli.Command {
 	return &cli.Command{
@@ -51,6 +59,9 @@ func NewCommand() *cli.Command {
 				return err
 			}
 
+			data, _ := json.MarshalIndent(config.GetConfig(), "", "  ")
+			log.Debug().Msgf("config=%s", string(data))
+
 			log.Info().Msg("Connecting to database...")
 			db, err := database.New(database.DBOptions{
 				Host:     config.GetConfig().Database.Host,
@@ -70,6 +81,7 @@ func NewCommand() *cli.Command {
 				err = db.Migrate(
 					airports.Airport{},
 					charts.Chart{},
+					pireps.PIREP{},
 				)
 				if err != nil {
 					log.Error().Msgf("unable to migrate database: %s", err)
@@ -86,6 +98,9 @@ func NewCommand() *cli.Command {
 			log.Info().Msg("Configuring cache service")
 			che := cache.NewCache(context.TODO(), r, 15*time.Minute, 2*time.Minute)
 
+			log.Info().Msg("Setting up sessions store")
+			session.New(&config.GetConfig().Session)
+
 			log.Info().Msg("Building Server service")
 			s := server.New()
 
@@ -93,6 +108,19 @@ func NewCommand() *cli.Command {
 			airportService := airports.NewAirportService(db.DB, che)
 			authservice := auth.NewAuthService(session.Store, config.GetConfig().OAuth.Provider)
 			chartService := charts.NewChartService(db.DB, che, airportService)
+			pirepService := pireps.NewPIREPService(db.DB, che)
+
+			log.Info().Msg("Configuring SignalR Hub...")
+			s.Router.Route("/signalr", func(r chi.Router) {
+				Hub, err = signalr.New(context.Background(), r, airportService, pirepService)
+			})
+			if err != nil {
+				log.Error().Msgf("unable to configure signalr: %s", err)
+				return err
+			}
+
+			log.Info().Msg("Configuring service to SignalR hooks...")
+			Hub.ConfigureHooks(airportService, pirepService)
 
 			log.Info().Msg("Registering handlers...")
 			s.Router.Route("/v1", func(r chi.Router) {
@@ -100,9 +128,10 @@ func NewCommand() *cli.Command {
 					AirportService: airportService,
 					AuthService:    authservice,
 					ChartService:   chartService,
+					PIREPService:   pirepService,
 				})
 			})
-			handlers.NewServiceHandlers(s.Router)
+			handlers.NewServiceHandler(s.Router, db.DB)
 
 			log.Info().Msg("Listing defined routes:")
 			chi.Walk(s.Router, func(method string, route string, handler http.Handler, middlewares ...func(http.Handler) http.Handler) error {
@@ -110,8 +139,23 @@ func NewCommand() *cli.Command {
 				return nil
 			})
 
+			log.Info().Msg("Configuring and starting jobs...")
+			JobManager, err = jobs.New(airportService, pirepService)
+			if err != nil {
+				log.Error().Msgf("unable to configure jobs: %s", err)
+				return err
+			}
+			JobManager.Start()
+
+			log.Info().Msg("Preloading weather")
+			err = airportService.UpdateWeather()
+			if err != nil {
+				log.Error().Msgf("unable to preload weather: %s", err)
+				return err
+			}
+
 			log.Info().Msg("Starting server...")
-			err = s.Start(config.GetConfig().Server.Mode, fmt.Sprintf(":%d", config.GetConfig().Server.Port))
+			err = s.Start(config.GetConfig().Server.Mode, fmt.Sprintf("127.0.0.1:%d", config.GetConfig().Server.Port), *JobManager)
 			if err != nil && !errors.Is(err, http.ErrServerClosed) {
 				log.Error().Msgf("unable to start server: %s", err)
 			}
