@@ -18,6 +18,12 @@ const signalrConnection = new HubConnectionBuilder()
     skipNegotiation: true,
     transport: HttpTransportType.WebSockets,
   })
+  .withAutomaticReconnect({
+    // Attempt to reconnect every 15 seconds indefinitely
+    nextRetryDelayInMilliseconds: (retryContext) => {
+      return 15000;
+    },
+  })
   .build();
 
 export default signalrConnection;

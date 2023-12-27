@@ -1,26 +1,30 @@
 <template>
   <tr v-if="sia[props.airport] === undefined">
-    <td rowspan="2" class="text-5xl w-[10%] border border-gray-500 text-center">
+    <td rowspan="2" class="text-5xl w-[10%] border border-opacity-30 border-gray-500 text-center">
       {{ props.airport }}
     </td>
-    <td rowspan="2" class="text-5xl text-center w-[5%] border border-gray-500">??</td>
-    <td class="w-[10%] border border-gray-500"><span class="pr-2">ARR:</span> ??</td>
-    <td class="w-[10%] border border-gray-500 text-center">??</td>
-    <td rowspan="2" class="border border-gray-500 align-top">??</td>
+    <td rowspan="2" class="text-5xl text-center w-[5%] border border-opacity-30 border-gray-500">??</td>
+    <td class="w-[10%] border border-opacity-30 border-gray-500"><span class="pr-2">ARR:</span> ??</td>
+    <td class="w-[10%] border border-opacity-30 border-gray-500 text-center">??</td>
+    <td rowspan="2" class="border border-opacity-30 border-gray-500 align-top">??</td>
   </tr>
   <tr v-if="sia[props.airport] === undefined">
-    <td class="border border-gray-500"><span class="pr-2">DEP:</span> ??</td>
-    <td class="border border-gray-500 text-center">??</td>
+    <td class="border border-opacity-30 border-gray-500"><span class="pr-2">DEP:</span> ??</td>
+    <td class="border border-opacity-30 border-gray-500 text-center">??</td>
   </tr>
   <tr v-if="sia[props.airport] !== undefined">
-    <td rowspan="2" class="text-5xl w-[3em] border border-gray-500 text-center" :class="config.colors.sia.identifier">
+    <td
+      rowspan="2"
+      class="text-5xl w-[3em] border border-opacity-30 border-gray-500 text-center"
+      :class="config.colors.sia.identifier"
+    >
       {{ props.airport }}
     </td>
     <td
       v-if="!isClosed && hasDualATIS"
       ref="arratisbox"
       rowspan="2"
-      class="text-5xl text-center w-[1em] border border-gray-500"
+      class="text-5xl text-center w-[1em] border border-opacity-30 border-gray-500"
       :class="config.colors.sia.arrival_atis"
       @click.right.stop.prevent="checkHideArr()"
       @click.middle.stop.prevent="clearField('arrival_atis')"
@@ -32,7 +36,7 @@
       v-if="!isClosed && hasDualATIS"
       ref="atisbox"
       rowspan="2"
-      class="text-5xl text-center w-[1em] border border-gray-500"
+      class="text-5xl text-center w-[1em] border border-opacity-30 border-gray-500"
       :class="config.colors.sia.atis"
       @click.middle.stop.prevent="clearField('atis')"
       @click="editATIS()"
@@ -44,7 +48,7 @@
       ref="atisbox"
       colspan="2"
       rowspan="2"
-      class="text-5xl text-center w-[2em] border border-gray-500"
+      class="text-5xl text-center w-[2em] border border-opacity-30 border-gray-500"
       :class="config.colors.sia.atis"
       @click.right.stop.prevent="overrideArrival = true"
       @click.middle.stop.prevent="clearField('atis')"
@@ -55,7 +59,7 @@
     <td
       v-if="!isClosed"
       ref="arrrwybox"
-      class="border border-gray-500 w-[15em]"
+      class="border border-opacity-30 border-gray-500 w-[15em]"
       :class="config.colors.sia.arrival_runways"
       @click="editArrRwy()"
       @click.middle.stop.prevent="clearField('arrival_runways')"
@@ -63,11 +67,21 @@
       <span class="pr-2">ARR:</span>
       {{ sia[props.airport].arrival_runways != "" ? sia[props.airport].arrival_runways : "______" }}
     </td>
-    <td v-if="isClosed" rowspan="2" colspan="3" class="border border-gray-500 closed text-center">CLOSED</td>
-    <td class="w-[10em] border border-gray-500 text-center font-bold" :class="config.colors.sia.wind_foreground">
+    <td v-if="isClosed" rowspan="2" colspan="3" class="border border-opacity-30 border-gray-500 closed text-center">
+      CLOSED
+    </td>
+    <td
+      class="w-[10em] border border-opacity-30 border-gray-500 text-center font-bold"
+      :class="config.colors.sia.wind_foreground"
+    >
       {{ wind }}
     </td>
-    <td ref="metarbox" rowspan="2" class="border border-gray-500 align-top" :class="config.colors.sia.metar">
+    <td
+      ref="metarbox"
+      rowspan="2"
+      class="border border-opacity-30 border-gray-500 align-top"
+      :class="config.colors.sia.metar"
+    >
       {{ sia[props.airport].metar }}
     </td>
   </tr>
@@ -75,7 +89,7 @@
     <td
       v-if="!isClosed"
       ref="deprwybox"
-      class="border border-gray-500"
+      class="border border-opacity-30 border-gray-500"
       :class="config.colors.sia.departure_runways"
       @click="editDepRwy()"
       @click.middle.stop.prevent="clearField('departure_runways')"
@@ -83,7 +97,10 @@
       <span class="pr-2">DEP:</span>
       {{ sia[props.airport].departure_runways != "" ? sia[props.airport].departure_runways : "______" }}
     </td>
-    <td class="border border-gray-500 text-center font-bold" :class="config.colors.sia.altimeter_foreground">
+    <td
+      class="border border-opacity-30 border-gray-500 text-center font-bold"
+      :class="config.colors.sia.altimeter_foreground"
+    >
       {{ altimeter }}
     </td>
   </tr>
@@ -125,7 +142,10 @@
             />
           </div>
         </div>
-        <button class="px-6 py-2 text-gray-100 border border-red-600 light-red rounded" @click="showModal = false">
+        <button
+          class="px-6 py-2 text-gray-100 border border-opacity-30 border-red-600 light-red rounded"
+          @click="showModal = false"
+        >
           Cancel
         </button>
         <button class="px-6 py-2 ml-2 text-blue-100 bg-blue-600 rounded" @click="saveModal">Save</button>

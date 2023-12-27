@@ -26,7 +26,13 @@
       </div>
     </header>
     <main class="pt-[95px] flex-1 overflow-y-auto p-5 pb-[44px] flex flex-col">
-      <router-view v-if="loggedIn" />
+      <router-view v-if="loggedIn && connected" />
+      <div class="py-10 w-full flex items-center justify-center bg-red-950 bg-opacity-50" v-if="loggedIn && !connected">
+        <div class="flex flex-col items-center justify-center">
+          <div class="text-4xl font-bold text-red-500">DISCONNECTED FROM SIGNALR HUB</div>
+          <div class="text-2xl font-bold text-red-500">Reconnecting...</div>
+        </div>
+      </div>
     </main>
     <footer class="fixed z-50 bg-neutral-700 text-white bottom-0 p-0 w-full">
       <div v-if="loggedIn">
@@ -93,6 +99,7 @@ const store = useViewStore();
 const router = useRouter();
 const { view, loggedIn } = storeToRefs(store);
 const location = ref(window.location.href);
+const connected = ref(false);
 
 const changeView = () => {
   store.view = view.value;
@@ -117,14 +124,32 @@ onMounted(() => {
   signalrConnection.on("airports", store.signalRAirports);
   signalrConnection.on("airportUpdate", store.signalRAirportUpdate);
   signalrConnection.on("pirepUpdate", store.signalRPIREPUpdate);
+  signalrConnection.onclose(() => {
+    console.log("SignalR connection closed");
+    connected.value = false;
+  });
+  signalrConnection.onreconnecting(() => {
+    console.log("SignalR connection reconnecting");
+    connected.value = false;
+  });
+  signalrConnection.onreconnected(() => {
+    console.log("SignalR connection reconnected");
+    connected.value = true;
+  });
+  signalrConnection.on("connected", () => {
+    console.log("SignalR connection connected");
+    connected.value = true;
+  });
 });
 
 watch(
   () => store.loggedIn,
-  () => {
+  async () => {
     console.log(`Logged in? ${store.loggedIn}`);
     if (store.loggedIn) {
-      signalrConnection.start();
+      await signalrConnection.start();
+      console.log("SignalR connection started");
+      connected.value = true;
     }
   }
 );

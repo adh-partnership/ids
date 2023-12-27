@@ -99,30 +99,40 @@
             </table>
           </div>
           <div :class="{ hidden: openTab !== 2, block: openTab === 2 }" class="align-center">
-            <video controls="" width="956" height="717">
-              <source :src="config.weather['PRE-DUTY BRIEF'].videoUrl" type="video/mp4" />
-            </video>
+            <center>
+              <video controls="" width="956" height="717">
+                <source :src="config.weather['PRE-DUTY BRIEF'].videoUrl" type="video/mp4" />
+              </video>
+            </center>
           </div>
           <div :class="{ hidden: openTab !== 3, block: openTab === 3 }" class="text-white grid grid-cols-3 gap-4">
             <div v-for="(img, i) in config.weather['SATELITE'].images" :key="i">
-              <img :src="img.url" :alt="img.title" />
-              <p class="text-xs">{{ img.title }}</p>
+              <center>
+                <img :src="img.src" :alt="img.title" />
+                <p class="text-xs">{{ img.title }}</p>
+              </center>
             </div>
           </div>
           <div :class="{ hidden: openTab !== 4, block: openTab === 4 }">
             <div v-for="(img, i) in config.weather['REQ PIREP'].images" :key="i">
-              <img :src="img.url" :alt="img.title" />
-              <p class="text-xs">{{ img.title }}</p>
+              <center>
+                <img :src="img.src" :alt="img.title" />
+                <p class="text-xs">{{ img.title }}</p>
+              </center>
             </div>
           </div>
           <div :class="{ hidden: openTab !== 5, block: openTab === 5 }" class="grid grid-cols-4 gap-4">
             <div v-for="(img, i) in config.weather['ICING+CONV'].images" :key="i">
-              <img :src="img.url" alt="icing graphic" />
+              <center>
+                <img :src="img.src" alt="icing graphic" />
+              </center>
             </div>
           </div>
           <div :class="{ hidden: openTab !== 6, block: openTab === 6 }" class="grid grid-cols-2 gap-4">
             <div v-for="(img, i) in config.weather['PROG+SIG WX CHART'].images" :key="i">
-              <img :src="img.url" alt="prog+sig wx chart" />
+              <center>
+                <img :src="img.src" alt="prog+sig wx chart" />
+              </center>
             </div>
           </div>
         </div>
