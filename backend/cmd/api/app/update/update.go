@@ -33,7 +33,7 @@ func NewCommand() *cli.Command {
 			},
 			&cli.StringFlag{
 				Name:    "airports",
-				Value:   "airports.json",
+				Value:   "shared/airports.json",
 				Usage:   "Define airports to build/update from `FILE`",
 				Aliases: []string{"a"},
 				EnvVars: []string{"AIRPORTS"},

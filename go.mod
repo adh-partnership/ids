@@ -2,6 +2,8 @@ module github.com/adh-partnership/ids
 
 go 1.21.5
 
+replace github.com/adh-partnership/signalr => ../signalr
+
 require (
 	github.com/adh-partnership/signalr v0.7.1
 	github.com/go-chi/chi/v5 v5.0.11
@@ -15,6 +17,7 @@ require (
 
 require (
 	github.com/cenkalti/backoff/v4 v4.2.1 // indirect
+	github.com/go-chi/cors v1.2.1 // indirect
 	github.com/go-kit/log v0.2.1 // indirect
 	github.com/go-logfmt/logfmt v0.6.0 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect

@@ -37,10 +37,10 @@ oauth:
     userinfo: /oauth/userinfo # OAuth Userinfo
 
 server:
+  ip: "" # IP to bind to (if needed, leave empty if not
   port: 3000 # Port to listen on
-  mode:
-    h2c # Server mode, supports plain, https (h2), h2c
-    # for https, expects SSL_CERT and SSL_KEY env vars to be set
+  mode: h2c # Server mode, supports plain, https (h2), h2c
+  # for https, expects SSL_CERT and SSL_KEY env vars to be set
 
 session:
   hash_key: 123456 # Session Hash Key

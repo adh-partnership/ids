@@ -16,6 +16,7 @@ import (
 	"github.com/adh-partnership/ids/backend/pkg/response"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
+	"github.com/go-chi/cors"
 	"github.com/rs/zerolog"
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
@@ -44,6 +45,13 @@ func New() *Server {
 	router.Use(logger.Logger(adhlog.ZL.With().Str("component", "access").Logger())) // Includes RequestID and Recoverer middleware
 	router.Use(middleware.RealIP)
 	router.Use(session.Middleware)
+	router.Use(cors.Handler(cors.Options{
+		AllowOriginFunc:  func(r *http.Request, origin string) bool { return true },
+		AllowedMethods:   []string{"GET", "PATCH", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
+		AllowCredentials: true,
+		MaxAge:           300,
+	}))
 
 	router.NotFound(func(w http.ResponseWriter, r *http.Request) {
 		response.Respond(w, r, "Not Found", http.StatusNotFound)

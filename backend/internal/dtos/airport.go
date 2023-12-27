@@ -51,10 +51,11 @@ type AirportResponse struct {
 	ArrivalRunways   string     `json:"arrival_runways"`
 	METAR            string     `json:"metar"`
 	TAF              string     `json:"taf"`
+	MagVar           int        `json:"mag_var"`
 }
 
-func AirportResponseFromEntity(airport *airports.Airport) *AirportResponse {
-	return &AirportResponse{
+func AirportResponseFromEntity(airport airports.Airport) AirportResponse {
+	return AirportResponse{
 		ID:               airport.FAAID,
 		ATIS:             airport.ATIS,
 		ATISTime:         airport.ATISTime,
@@ -64,11 +65,12 @@ func AirportResponseFromEntity(airport *airports.Airport) *AirportResponse {
 		ArrivalRunways:   airport.ArrivalRunways,
 		METAR:            airport.METAR,
 		TAF:              airport.TAF,
+		MagVar:           airport.MagVar,
 	}
 }
 
-func AirportResponsesFromEntities(airports []*airports.Airport) []*AirportResponse {
-	var responses []*AirportResponse
+func AirportResponsesFromEntities(airports []airports.Airport) []AirportResponse {
+	var responses []AirportResponse
 	for _, airport := range airports {
 		responses = append(responses, AirportResponseFromEntity(airport))
 	}

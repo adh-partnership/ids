@@ -19,7 +19,7 @@ func (h *IDSHub) SendServerMessage(connectionID string, message string) {
 	h.Clients().Client(connectionID).Send(RECEIVE_SERVER_MESSAGE, message)
 }
 
-func (h *IDSHub) SendAirportUpdate(connectionID string, old, new *airports.Airport) {
+func (h *IDSHub) SendAirportUpdate(connectionID string, old, new airports.Airport) {
 	h.Clients().Client(connectionID).Send(
 		RECEIVE_AIRPORT_UPDATE,
 		dtos.AirportResponseFromEntity(old),

@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "Vue.volar",
+    "EditorConfig.EditorConfig",
+    "sdras.vue-vscode-snippets",
+    "Vue.vscode-typescript-vue-plugin"
+  ]
+}

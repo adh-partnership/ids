@@ -74,13 +74,13 @@ func (h *AirportHandler) PatchAirport(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	patch := &dtos.AirportPatch{}
-	if err := render.Bind(r, patch); err != nil {
+	patch := dtos.AirportPatch{}
+	if err := render.Bind(r, &patch); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
-	patch.MergeInto(airport)
+	patch.MergeInto(&airport)
 	h.AirportService.UpdateAirport(airport)
 
 	response.Respond(w, r, dtos.AirportResponseFromEntity(airport), http.StatusOK)

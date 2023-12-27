@@ -7,6 +7,7 @@ import (
 	"github.com/adh-partnership/ids/backend/internal/cache"
 	"github.com/adh-partnership/ids/backend/pkg/config"
 	"github.com/adh-partnership/ids/backend/pkg/logger"
+	"github.com/adh-partnership/ids/backend/pkg/utils"
 	"github.com/adh-partnership/ids/backend/pkg/weather"
 	"gorm.io/gorm"
 )
@@ -24,7 +25,7 @@ type AirportService struct {
 	db    *gorm.DB
 	cache *cache.Cache
 	exp   time.Duration
-	hooks []func(old *Airport, new *Airport)
+	hooks []func(old Airport, new Airport)
 }
 
 func NewAirportService(db *gorm.DB, c *cache.Cache) *AirportService {
@@ -33,20 +34,20 @@ func NewAirportService(db *gorm.DB, c *cache.Cache) *AirportService {
 	return &AirportService{db: db, cache: c, exp: exp}
 }
 
-func (s *AirportService) AddHook(h func(old *Airport, new *Airport)) {
+func (s *AirportService) AddHook(h func(old Airport, new Airport)) {
 	s.hooks = append(s.hooks, h)
 }
 
-func (s *AirportService) callHooks(old *Airport, new *Airport) {
+func (s *AirportService) callHooks(old Airport, new Airport) {
 	for _, h := range s.hooks {
 		go h(old, new)
 	}
 }
 
-func (s *AirportService) GetAirports() ([]*Airport, error) {
-	var airports []*Airport
+func (s *AirportService) GetAirports() ([]Airport, error) {
+	var airports []Airport
 	if airport, err := s.cache.Get(cacheAll); err == nil {
-		airports = airport.([]*Airport)
+		airports = airport.([]Airport)
 	} else if err == cache.ErrorKeyNotFound {
 		if err := s.db.Find(&airports).Error; err != nil {
 			return nil, err
@@ -59,22 +60,22 @@ func (s *AirportService) GetAirports() ([]*Airport, error) {
 	return airports, nil
 }
 
-func (s *AirportService) GetAirport(id string) (*Airport, error) {
-	var airport *Airport
+func (s *AirportService) GetAirport(id string) (Airport, error) {
+	var airport Airport
 	apt, err := s.cache.Get(cachePrefix + "/" + id)
 	if err == nil {
-		airport = apt.(*Airport)
+		airport = apt.(Airport)
 	} else if err == cache.ErrorKeyNotFound {
 		if err := s.db.Model(Airport{}).Where(Airport{FAAID: id}).Or(Airport{ICAOID: id}).First(&airport).Error; err != nil {
 			if errors.Is(err, gorm.ErrRecordNotFound) {
-				return nil, ErrInvalidAirport
+				return Airport{}, ErrInvalidAirport
 			}
 		}
 		if err := s.cache.Set(cachePrefix+"/"+airport.FAAID, airport, s.exp); err != nil {
-			return nil, err
+			return Airport{}, err
 		}
 		if err := s.cache.Set(cachePrefix+"/"+airport.ICAOID, airport, s.exp); err != nil {
-			return nil, err
+			return Airport{}, err
 		}
 	}
 
@@ -95,16 +96,24 @@ func (s *AirportService) CreateAirport(airport *Airport) error {
 		return err
 	}
 
-	s.callHooks(nil, airport)
+	s.callHooks(Airport{}, *airport)
 
 	return nil
 }
 
-func (s *AirportService) UpdateAirport(airport *Airport) error {
-	var oldAirport *Airport
+func (s *AirportService) UpdateAirport(airport Airport) error {
+	var oldAirport Airport
 	oldAirport, err := s.GetAirport(airport.FAAID)
 	if err != nil {
 		return err
+	}
+
+	if oldAirport.ATIS != airport.ATIS && airport.ATIS != "" {
+		airport.ATISTime = utils.Now()
+	}
+
+	if oldAirport.ArrivalATIS != airport.ArrivalATIS && airport.ArrivalATIS != "" {
+		airport.ArrivalATISTime = utils.Now()
 	}
 
 	if err := s.db.Save(airport).Error; err != nil {
@@ -142,7 +151,7 @@ func (s *AirportService) DeleteAirport(id string) error {
 		return err
 	}
 
-	s.callHooks(&airport, nil)
+	s.callHooks(airport, Airport{})
 
 	return nil
 }

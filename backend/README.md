@@ -1,5 +1,59 @@
 # IDS Backend
 
+## Table of Contents
+
+- [IDS Backend](#ids-backend)
+  - [Table of Contents](#table-of-contents)
+  - [Configuration](#configuration)
+    - [cache](#cache)
+      - [driver](#driver)
+      - [host (only if driver=redis)](#host-only-if-driverredis)
+      - [port (only if driver=redis)](#port-only-if-driverredis)
+      - [password (only if driver=redis)](#password-only-if-driverredis)
+      - [db (only if driver=redis)](#db-only-if-driverredis)
+      - [default\_expiration](#default_expiration)
+    - [database](#database)
+      - [driver](#driver-1)
+      - [host](#host)
+      - [port](#port)
+      - [username](#username)
+      - [password](#password)
+      - [database\_name](#database_name)
+      - [auto\_migrate](#auto_migrate)
+    - [facility](#facility)
+      - [identifier](#identifier)
+      - [name](#name)
+      - [adh](#adh)
+        - [api\_base](#api_base)
+        - [rostered](#rostered)
+    - [oauth](#oauth)
+      - [provider](#provider)
+      - [base\_url](#base_url)
+      - [client\_id](#client_id)
+      - [client\_secret](#client_secret)
+      - [my\_base\_url](#my_base_url)
+      - [endpoints](#endpoints)
+        - [authorize](#authorize)
+        - [token](#token)
+        - [userinfo](#userinfo)
+    - [server](#server)
+      - [ip](#ip)
+      - [port](#port-1)
+      - [mode](#mode)
+    - [session](#session)
+      - [block\_key](#block_key)
+    - [hash\_key](#hash_key)
+    - [name](#name-1)
+    - [path](#path)
+    - [domain](#domain)
+    - [max\_age](#max_age)
+    - [secure](#secure)
+    - [http\_only](#http_only)
+  - [Environment Variables](#environment-variables)
+    - [General](#general)
+    - [SSL\_CERT](#ssl_cert)
+    - [SSL\_KEY](#ssl_key)
+
 ## Configuration
 
 ### cache
@@ -39,6 +93,8 @@ how long we should cache that data for.
 
 An update of the information, IE, ATIS information, will cause the airport cache to be invalidated and repulled on the next request.
 
+---
+
 ### database
 
 This is the database configuration used by [Gorm](https://gorm.io) to connect to the RDMS. Gorm supports
@@ -75,6 +131,8 @@ This is the name of the database to connect to.
 
 This is a boolean value that will cause the IDS to automatically migrate the database schema on startup.
 
+---
+
 ### facility
 
 This is the facility configuration. Primarily used for display purposes.
@@ -100,6 +158,8 @@ The base of the API. For example, https://api.zanartcc.org. This is used to vali
 ##### rostered
 
 A boolean value to determine whether or not to restrict access to rostered controllers. A call will be made to the api_base to look at the `controller_type` field for the controller. Where a 404 is returned, or the `controller_type` field is `none`, and this field is true the IDS will restrict access for this user.
+
+---
 
 ### oauth
 
@@ -157,7 +217,16 @@ Generally:
 - ADH: /v1/info
 - VATSIM: /api/user
 
+---
+
 ### server
+
+#### ip
+
+The ip to bind to. This should be left blank to bind to all interfaces. This is not needed, except if developing
+on Windows Subsystem for Linux, where dualstack is not supported correctly at the present moment. Binding to all
+interfaces causes connections to fail outside of IPv6 from outside the WSL environment. In this instance, bind to
+IP `127.0.0.1` unless you want to use IPv6-only.
 
 #### port
 
@@ -173,6 +242,8 @@ This is the mode the IDS backend will run in. The supported modes are:
 
 **NOTE** When running in TLS mode, the SSL_CERT and SSL_KEY environment variables must be set as described later in this document.
 
+---
+
 ### session
 
 The ADH IDS utilizes sessions via cookies for authentication. The only data we really care about is, are they
@@ -183,17 +254,25 @@ on the API).
 
 The block key used for encryption. The length should be 16 bytes (AES-128), 20 bytes (AES-192), or 32 bytes (AES-256). The length dictates the encryption algorithm used. 32 bytes is highly encouraged.
 
+---
+
 ### hash_key
 
 The hash key used for encryption. This should be at least 32 bytes but may be longer.
+
+---
 
 ### name
 
 The name of the cookie to set. This should be something unique to the IDS, such as "ids" or "ids-session".
 
+---
+
 ### path
 
 Sets the path option of the cookie. This should be set to "/" to allow the cookie to be sent to all paths used by the IDS API and frontend.
+
+---
 
 ### domain
 
@@ -201,21 +280,29 @@ This should be the domain of the IDS. Note that if the IDS backend and frontend 
 you should set this to the common domain name used between them. For example if the IDS API is at
 ids-api.zanartcc.org and the frontend is at ids.zanartcc.org, set this to zanartcc.org. While calls to the backend are the only ones that necessitate the cookie, cross-subdomain cookies are difficult and may lose support.
 
+---
+
 ### max_age
 
 This is how long the cookie should last. By default, we set this to 86400 seconds (24 hours). The cookie is refreshed
 on every request, so this time will be reset. If you set this to 0, the cookie will be a session cookie and will be
 removed when the browser is closed.
 
+---
+
 ### secure
 
 This is a boolean value that determines whether or not the cookie should be set as secure. This should be set to true.
+
+---
 
 ### http_only
 
 This is a boolean value that determines whether or not the cookie should be set as HTTP only. This should be set to true.
 
 ## Environment Variables
+
+---
 
 ### General
 
@@ -228,11 +315,15 @@ and teams.
 Implementations can be made to have the configuration generated by init containers with passwords
 populated at that point from secrets, vaults, etc. as desired.
 
+---
+
 ### SSL_CERT
 
 This should be the path to the SSL certificate to be used for the server *if* the server mode is set
 to TLS. Many deployment environments put the IDS behind a Kubernetes Ingress Controller that can handle
 TLS termination, where this may not be needed.
+
+---
 
 ### SSL_KEY
 

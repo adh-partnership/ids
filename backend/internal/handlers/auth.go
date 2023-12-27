@@ -115,9 +115,9 @@ func (h *AuthHandler) Callback(w http.ResponseWriter, r *http.Request) {
 func (h *AuthHandler) Check(w http.ResponseWriter, r *http.Request) {
 	s := h.authService.Session(r, w)
 	if s.Get("user") == nil {
-		response.Respond(w, r, nil, http.StatusUnauthorized)
+		response.Respond(w, r, "Unauthorized", http.StatusUnauthorized)
 		return
 	}
 
-	response.Respond(w, r, nil, http.StatusOK)
+	response.Respond(w, r, s.Get("user"), http.StatusOK)
 }

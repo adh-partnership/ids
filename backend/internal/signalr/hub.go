@@ -32,6 +32,7 @@ func New(ctx context.Context, r chi.Router, as *airports.AirportService, ps *pir
 	server, err := signalr.NewServer(ctx,
 		signalr.SimpleHubFactory(&hub),
 		signalr.HTTPTransports(signalr.TransportWebSockets), // Only allow websocket connections
+		signalr.AllowOriginPatterns([]string{"*"}),
 		signalr.KeepAliveInterval(5*time.Second),
 		signalr.Logger(l, false),
 	)
@@ -95,7 +96,7 @@ func (h *IDSHub) UpdateAirport(id string, patch json.RawMessage) json.RawMessage
 		panic(err)
 	}
 
-	airportPatch.MergeInto(airport)
+	airportPatch.MergeInto(&airport)
 	if err := airportService.UpdateAirport(airport); err != nil {
 		panic(err)
 	}
@@ -122,10 +123,17 @@ func (h *IDSHub) SubmitPIREP(pirep json.RawMessage) {
 	}
 }
 
-func AirportHook(old, new *airports.Airport) {
-	hub.server.HubClients().All().Send("airportUpdate", old, new)
+func AirportHook(old, new airports.Airport) {
+	hub.server.HubClients().All().Send(
+		"airportUpdate",
+		dtos.AirportResponseFromEntity(old),
+		dtos.AirportResponseFromEntity(new),
+	)
 }
 
 func PIREPHook(pirep *pireps.PIREP) {
-	hub.server.HubClients().All().Send("pirepUpdate", pirep)
+	hub.server.HubClients().All().Send(
+		"pirepUpdate",
+		dtos.PIREPResponseFromEntity(pirep),
+	)
 }

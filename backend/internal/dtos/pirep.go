@@ -104,3 +104,7 @@ func NewPIREPResponses(pireps []*pireps.PIREP) []*PIREPResponse {
 	}
 	return pirepResponses
 }
+
+func PIREPResponseFromEntity(pirep *pireps.PIREP) *PIREPResponse {
+	return NewPIREPResponse(pirep)
+}

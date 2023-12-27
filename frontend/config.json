@@ -1,0 +1,542 @@
+{
+  "ids_api_base_url": "http://ids-api.hawton.haus:3000",
+  "ids_base_url": "http://ids-api.hawton.haus:5173",
+  "subdivision": {
+    "name": "Anchorage ARTCC",
+    "id": "ZAN",
+    "update_flash_duration": 16
+  },
+  "timezone": {
+    "name": "America/Anchorage",
+    "offset": -9,
+    "offset_dst": -8
+  },
+  "colors": {
+    "navbar": {
+      "facility": "#002766",
+      "ids": "#ffb612",
+      "clock_background": "#000000",
+      "clock_foreground": "#ffb612"
+    },
+    "sia": {
+      "flash_background_class": "bg-blue-950",
+      "closed_background": "#ff00001a",
+      "identifier": "text-white",
+      "atis": "text-yellow-400",
+      "arrival_atis": "text-green-500",
+      "arrival_runways": "text-white",
+      "departure_runways": "text-white",
+      "wind_foreground": "text-yellow-400",
+      "altimeter_foreground": "text-blue-400",
+      "metar": "text-white"
+    }
+  },
+  "weather": {
+    "PRE-DUTY BRIEF": {
+      "videoUrl": "https://www.weather.gov/media/zan/ZAN%20PDWB/ZAN_PDWB.mp4"
+    },
+    "SATELITE": {
+      "images": [
+        {
+          "title": "IR View",
+          "src": "https://www.weather.gov/images/aawu/GOES/IR_loop.gif"
+        },
+        {
+          "title": "Visible View",
+          "src": "https://www.weather.gov/images/aawu/GOES/VIS_loop.gif"
+        },
+        {
+          "title": "Water Vapor View",
+          "src": "https://www.weather.gov/images/aawu/GOES/WV_loop.gif"
+        }
+      ]
+    },
+    "REQ PIREP": {
+      "images": [
+        {
+          "title": "Requested PIREPs",
+          "src": "https://www.weather.gov/images/zme/zan_pirep.png"
+        }
+      ]
+    },
+    "ICING+CONV": {
+      "images": [
+        {
+          "src": "https://www.weather.gov/images/aawu/fcstgraphics/icing_1.png"
+        },
+        {
+          "src": "https://www.weather.gov/images/aawu/fcstgraphics/icing_2.png"
+        },
+        {
+          "src": "https://www.weather.gov/images/aawu/fcstgraphics/icing_3.png"
+        },
+        {
+          "src": "https://www.weather.gov/images/aawu/fcstgraphics/icing_4.png"
+        }
+      ]
+    },
+    "PROG+SIG WX CHART": {
+      "images": [
+        {
+          "src": "https://www.weather.gov/images/aawu/fcstgraphics/ifr_1.png"
+        },
+        {
+          "src": "https://www.weather.gov/images/aawu/fcstgraphics/ifr_2.png"
+        },
+        {
+          "src": "http://www.weather.gov/images/aawu/sigWx24.gif"
+        },
+        {
+          "src": "http://www.weather.gov/images/aawu/sigWx36.gif"
+        },
+        {
+          "src": "http://www.weather.gov/images/aawu/sigWx48.gif"
+        },
+        {
+          "src": "http://www.weather.gov/images/aawu/sigWx60.gif"
+        }
+      ]
+    }
+  },
+  "views": [
+    {
+      "name": "Allen AAF ATCT",
+      "facilities": [
+        "BIG"
+      ],
+      "sops": "https://sops.zanartcc.org/docs/terminal/military/"
+    },
+    {
+      "name": "Anchorage ATCT",
+      "default": true,
+      "facilities": [
+        "ANC"
+      ],
+      "sops": "https://sops.zanartcc.org/docs/terminal/panc/"
+    },
+    {
+      "name": "Bethel ATCT",
+      "facilities": [
+        "BET"
+      ],
+      "sops": "https://sops.zanartcc.org/docs/terminal/pabe/"
+    },
+    {
+      "name": "Eielson AFB ATCT",
+      "facilities": [
+        "EIL"
+      ],
+      "sops": "https://sops.zanartcc.org/docs/terminal/military/"
+    },
+    {
+      "name": "Fairbanks ATCT",
+      "facilities": [
+        "FAI"
+      ],
+      "sops": "https://sops.zanartcc.org/docs/terminal/pafa/"
+    },
+    {
+      "name": "Juneau ATCT",
+      "facilities": [
+        "JNU"
+      ],
+      "sops": "https://sops.zanartcc.org/docs/terminal/pajn/"
+    },
+    {
+      "name": "Kenai ATCT",
+      "facilities": [
+        "ENA"
+      ],
+      "sops": "https://sops.zanartcc.org/docs/terminal/paen/"
+    },
+    {
+      "name": "King Salmon ATCT",
+      "facilities": [
+        "AKN"
+      ],
+      "sops": "https://sops.zanartcc.org/docs/terminal/pakn/"
+    },
+    {
+      "name": "Kodiak ATCT",
+      "facilities": [
+        "ADQ"
+      ],
+      "sops": "https://sops.zanartcc.org/docs/terminal/padq/"
+    },
+    {
+      "name": "Ladd AAF ATCT",
+      "facilities": [
+        "FBK"
+      ],
+      "sops": "https://sops.zanartcc.org/docs/terminal/military/"
+    },
+    {
+      "name": "Lake Hood ATCT",
+      "facilities": [
+        "LHD"
+      ],
+      "sops": "https://sops.zanartcc.org/docs/terminal/panc/"
+    },
+    {
+      "name": "Merrill Field ATCT",
+      "facilities": [
+        "MRI"
+      ],
+      "sops": "https://sops.zanartcc.org/docs/terminal/pamr/"
+    },
+    {
+      "name": "Anchorage TRACON",
+      "facilities": [
+        "ANC",
+        "LHD",
+        "MRI",
+        "EDF"
+      ],
+      "sops": "https://sops.zanartcc.org/docs/approaches/a11/"
+    },
+    {
+      "name": "Fairbanks TRACON",
+      "facilities": [
+        "FAI",
+        "FBK",
+        "EIL"
+      ],
+      "sops": "https://sops.zanartcc.org/docs/approaches/fai/"
+    },
+    {
+      "name": "ZAN Consolidated",
+      "facilities": [
+        "ANC",
+        "JNU",
+        "ADQ",
+        "ENA",
+        "MRI",
+        "EDF",
+        "FAI",
+        "FBK",
+        "EIL",
+        "BIG",
+        "BET",
+        "AKN",
+        "LHD"
+      ],
+      "sops": "https://sops.zanartcc.org/docs/enroute/"
+    },
+    {
+      "name": "ZAN North Area",
+      "facilities": [
+        "FAI",
+        "AKN",
+        "BET",
+        "FBK",
+        "EIL",
+        "BIG"
+      ],
+      "sops": "https://sops.zanartcc.org/docs/enroute/"
+    },
+    {
+      "name": "ZAN South Area",
+      "facilities": [
+        "ANC",
+        "JNU",
+        "ADQ",
+        "ENA",
+        "MRI",
+        "EDF"
+      ],
+      "sops": "https://sops.zanartcc.org/docs/enroute/"
+    }
+  ],
+  "airports": [
+    {
+      "name": "ANC",
+      "dual-atis": true,
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "ADQ",
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "start": {
+              "month": 4,
+              "day": 1
+            },
+            "end": {
+              "month": 9,
+              "day": 30
+            },
+            "open": "07:00",
+            "close": "22:00",
+            "local": true
+          },
+          {
+            "start": {
+              "month": 10,
+              "day": 1
+            },
+            "end": {
+              "month": 3,
+              "day": 31
+            },
+            "open": "06:30",
+            "close": "20:00",
+            "local": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "AKN",
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "start": {
+              "month": 8,
+              "day": 1
+            },
+            "end": {
+              "month": 6,
+              "day": 14
+            },
+            "open": "08:00",
+            "close": "20:00",
+            "local": true
+          },
+          {
+            "start": {
+              "month": 6,
+              "day": 15
+            },
+            "end": {
+              "month": 7,
+              "day": 31
+            },
+            "open": "08:00",
+            "close": "22:00",
+            "local": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "BET",
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "start": {
+              "month": 4,
+              "day": 1
+            },
+            "end": {
+              "month": 10,
+              "day": 31
+            },
+            "open": "07:00",
+            "close": "22:00",
+            "local": true
+          },
+          {
+            "start": {
+              "month": 11,
+              "day": 1
+            },
+            "end": {
+              "month": 3,
+              "day": 31
+            },
+            "open": "07:00",
+            "close": "20:00",
+            "local": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "BIG",
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "whenDST": true,
+            "open": "16:15",
+            "close": "00:00",
+            "days": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "local": false
+          },
+          {
+            "whenDST": false,
+            "open": "17:15",
+            "close": "01:00",
+            "days": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "local": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "EDF",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "EIL",
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "whenDST": true,
+            "open": "15:00",
+            "close": "07:00",
+            "local": false
+          },
+          {
+            "whenDST": false,
+            "open": "16:00",
+            "close": "08:00",
+            "local": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "ENA",
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "start": {
+              "month": 5,
+              "day": 1
+            },
+            "end": {
+              "month": 9,
+              "day": 30
+            },
+            "open": "06:00",
+            "close": "22:00",
+            "local": true
+          },
+          {
+            "start": {
+              "month": 10,
+              "day": 1
+            },
+            "end": {
+              "month": 4,
+              "day": 30
+            },
+            "open": "07:00",
+            "close": "21:00",
+            "local": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "FAI",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "FBK",
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "whenDST": true,
+            "open": "16:00",
+            "close": "07:00",
+            "local": false
+          },
+          {
+            "whenDST": false,
+            "open": "17:00",
+            "close": "08:00",
+            "local": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "JNU",
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "start": {
+              "month": 4,
+              "day": 1
+            },
+            "end": {
+              "month": 9,
+              "day": 30
+            },
+            "open": "06:00",
+            "close": "23:00",
+            "local": true
+          },
+          {
+            "start": {
+              "month": 10,
+              "day": 1
+            },
+            "end": {
+              "month": 3,
+              "day": 31
+            },
+            "open": "07:00",
+            "close": "20:00",
+            "local": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "LHD",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "MRI",
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "start": {
+              "month": 1,
+              "day": 1
+            },
+            "end": {
+              "month": 12,
+              "day": 31
+            },
+            "open": "07:00",
+            "close": "22:00",
+            "local": true
+          }
+        ]
+      }
+    }
+  ]
+}

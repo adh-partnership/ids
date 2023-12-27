@@ -38,8 +38,8 @@ func (h *ExternalHandler) vatis(w http.ResponseWriter, r *http.Request) {
 	}
 
 	airport, err := h.airportService.GetAirport(dto.Facility)
-	if err != nil || airport == nil {
-		if errors.Is(err, airports.ErrInvalidAirport) || airport == nil {
+	if err != nil || airport.FAAID == "" {
+		if errors.Is(err, airports.ErrInvalidAirport) || airport.FAAID == "" {
 			response.Respond(w, r, nil, http.StatusNotFound)
 			return
 		}

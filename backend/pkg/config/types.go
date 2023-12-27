@@ -62,6 +62,7 @@ type OAuthEndpoints struct {
 }
 
 type Server struct {
+	IP   string `json:"ip"`
 	Port int    `json:"port"`
 	Mode string `json:"mode"`
 }
