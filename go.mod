@@ -7,17 +7,17 @@ replace github.com/adh-partnership/signalr => ../signalr
 require (
 	github.com/adh-partnership/signalr v0.7.1
 	github.com/go-chi/chi/v5 v5.0.11
+	github.com/go-chi/cors v1.2.1
 	github.com/go-co-op/gocron/v2 v2.1.1
 	github.com/goccy/go-json v0.10.2
 	github.com/google/uuid v1.5.0
 	github.com/rs/zerolog v1.31.0
-	github.com/urfave/cli/v2 v2.26.0
+	github.com/urfave/cli/v2 v2.27.0
 	golang.org/x/oauth2 v0.15.0
 )
 
 require (
 	github.com/cenkalti/backoff/v4 v4.2.1 // indirect
-	github.com/go-chi/cors v1.2.1 // indirect
 	github.com/go-kit/log v0.2.1 // indirect
 	github.com/go-logfmt/logfmt v0.6.0 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
@@ -36,7 +36,7 @@ require (
 	github.com/vmihailenco/msgpack/v5 v5.4.1 // indirect
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
 	golang.org/x/crypto v0.17.0 // indirect
-	golang.org/x/exp v0.0.0-20231219180239-dc181d75b848 // indirect
+	golang.org/x/exp v0.0.0-20231226003508-02704c960a9b // indirect
 	golang.org/x/sync v0.5.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 	google.golang.org/appengine v1.6.8 // indirect
