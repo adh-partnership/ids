@@ -43,31 +43,31 @@
           SIA
         </button>
         <button
-          class="border-2 border-gray-500 bg-blue-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded h-full w-[10rem] mr-1"
+          class="border-2 border-gray-500 bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded h-full w-[10rem] mr-1"
           @click="router.push('/weather')"
         >
           WX
         </button>
         <button
-          class="border-2 border-gray-500 bg-green-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded h-full w-[10rem] mr-1"
+          class="border-2 border-gray-500 bg-green-800 hover:bg-green-700 text-white font-bold py-2 px-4 rounded h-full w-[10rem] mr-1"
           @click="router.push('/sops')"
         >
           SOP
         </button>
         <button
-          class="border-2 border-gray-500 bg-amber-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded h-full w-[10rem] mr-1"
+          class="border-2 border-gray-500 bg-amber-600 hover:bg-amber-500 text-white font-bold py-2 px-4 rounded h-full w-[10rem] mr-1"
           @click="router.push('/pireps')"
         >
           PIREPs
         </button>
         <button
-          class="border-2 border-gray-500 bg-purple-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded h-full w-[10rem] mr-1"
+          class="border-2 border-gray-500 bg-purple-800 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded h-full w-[10rem] mr-1"
           @click="router.push('/charts')"
         >
           CHARTS
         </button>
         <button
-          class="border-2 border-gray-500 bg-rose-900 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded h-full w-[10rem] mr-1"
+          class="border-2 border-gray-500 bg-rose-900 hover:bg-rose-800 text-white font-bold py-2 px-4 rounded h-full w-[10rem] mr-1"
           @click="router.push('/briefing')"
         >
           BRIEF
@@ -122,6 +122,7 @@ onMounted(() => {
   // We aren't connected... yet... but will when logged in is verified.
   // So this *should* work here, if not move to the watch below
   signalrConnection.on("airports", store.signalRAirports);
+  signalrConnection.on("charts", store.signalRCharts);
   signalrConnection.on("airportUpdate", store.signalRAirportUpdate);
   signalrConnection.on("pirepUpdate", store.signalRPIREPUpdate);
   signalrConnection.onclose(() => {

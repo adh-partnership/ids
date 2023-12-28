@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/adh-partnership/ids/backend/internal/domain/airports"
+	"github.com/adh-partnership/ids/backend/internal/domain/charts"
 	"github.com/adh-partnership/ids/backend/internal/domain/pireps"
 	"github.com/adh-partnership/ids/backend/internal/dtos"
 	"github.com/adh-partnership/ids/backend/pkg/logger"
@@ -23,9 +24,10 @@ var (
 	hub            IDSHub
 	airportService *airports.AirportService
 	pirepService   *pireps.PIREPService
+	chartService   *charts.ChartService
 )
 
-func New(ctx context.Context, r chi.Router, as *airports.AirportService, ps *pireps.PIREPService) (*IDSHub, error) {
+func New(ctx context.Context, r chi.Router, as *airports.AirportService, cs *charts.ChartService, ps *pireps.PIREPService) (*IDSHub, error) {
 	hub = IDSHub{}
 	l := &Logger{}
 
@@ -43,6 +45,7 @@ func New(ctx context.Context, r chi.Router, as *airports.AirportService, ps *pir
 	hub.server = server
 	airportService = as
 	pirepService = ps
+	chartService = cs
 
 	handler = NewHandler(r, server)
 
@@ -63,6 +66,12 @@ func (h *IDSHub) OnConnected(connectionID string) {
 		return
 	}
 	h.Clients().Client(connectionID).Send("airports", dtos.AirportResponsesFromEntities(airports))
+	charts, err := chartService.GetAllCharts()
+	if err != nil {
+		logger.ZL.Error().Err(err).Msg("Error getting charts")
+		return
+	}
+	h.Clients().Client(connectionID).Send("charts", dtos.ChartSeparatedResponsesFromEntities(airportService, charts))
 }
 
 func (h *IDSHub) OnDisconnected(connectionID string) {

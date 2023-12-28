@@ -1,6 +1,9 @@
 package dtos
 
-import "github.com/adh-partnership/ids/backend/internal/domain/charts"
+import (
+	"github.com/adh-partnership/ids/backend/internal/domain/airports"
+	"github.com/adh-partnership/ids/backend/internal/domain/charts"
+)
 
 type ChartsResponse struct {
 	ChartCode string `json:"chart_code" example:"DP"`
@@ -20,6 +23,15 @@ func ChartResponsesFromEntities(charts []*charts.Chart) []ChartsResponse {
 	responses := make([]ChartsResponse, len(charts))
 	for i, chart := range charts {
 		responses[i] = ChartResponseFromEntity(chart)
+	}
+	return responses
+}
+
+func ChartSeparatedResponsesFromEntities(airportService *airports.AirportService, charts map[string][]*charts.Chart) map[string][]ChartsResponse {
+	responses := make(map[string][]ChartsResponse)
+	for airport, charts := range charts {
+		responses[airport] = ChartResponsesFromEntities(charts)
+
 	}
 	return responses
 }

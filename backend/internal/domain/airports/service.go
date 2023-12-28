@@ -169,9 +169,9 @@ func (s *AirportService) CleanupATIS() error {
 		if airport.ATISTime != nil {
 			if airport.ATISTime.Before(time.Now().Add(-2 * time.Hour)) {
 				airport.ATIS = ""
-				airport.ATISTime = &time.Time{}
+				airport.ATISTime = nil
 				airport.ArrivalATIS = ""
-				airport.ArrivalATISTime = &time.Time{}
+				airport.ArrivalATISTime = nil
 				airport.ArrivalRunways = ""
 				airport.DepartureRunways = ""
 				if err := s.UpdateAirport(airport); err != nil {
@@ -242,4 +242,15 @@ func (s *AirportService) UpdateWeather() error {
 	}
 
 	return nil
+}
+
+// Takes an airport identifier and returns both FAAID and ICAOID, useful for converting
+// between the two.
+func (s *AirportService) GetIdentifiers(id string) (string, string, error) {
+	airport, err := s.GetAirport(id)
+	if err != nil {
+		return "", "", err
+	}
+
+	return airport.FAAID, airport.ICAOID, nil
 }

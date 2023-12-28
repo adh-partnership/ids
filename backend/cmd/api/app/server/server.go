@@ -112,7 +112,7 @@ func NewCommand() *cli.Command {
 
 			log.Info().Msg("Configuring SignalR Hub...")
 			s.Router.Route("/signalr", func(r chi.Router) {
-				Hub, err = signalr.New(context.Background(), r, airportService, pirepService)
+				Hub, err = signalr.New(context.Background(), r, airportService, chartService, pirepService)
 			})
 			if err != nil {
 				log.Error().Msgf("unable to configure signalr: %s", err)
@@ -151,6 +151,13 @@ func NewCommand() *cli.Command {
 			err = airportService.UpdateWeather()
 			if err != nil {
 				log.Error().Msgf("unable to preload weather: %s", err)
+				return err
+			}
+
+			log.Info().Msg("Preloading charts")
+			_, err = chartService.GetAllCharts()
+			if err != nil && !errors.Is(err, charts.ErrNoCharts) {
+				log.Error().Msgf("unable to preload charts: %s", err)
 				return err
 			}
 

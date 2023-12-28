@@ -7,6 +7,7 @@ export const useViewStore = defineStore("view", {
     view: config.views.findIndex((v) => v.default),
     sia: {},
     metars: {},
+    charts: {},
     pireps: [],
     fetching: [],
     metarFetching: false,
@@ -32,12 +33,11 @@ export const useViewStore = defineStore("view", {
           arrival_runways: airport.arrival_runways,
           metar: airport.metar,
           mag_var: airport.mag_var,
-          first: false,
+          first: true,
         }
       });
     },
     signalRAirportUpdate(oldAirport, newAirport) {
-      console.log(`signalRAirportUpdate: oldAirport:`, oldAirport, `newAirport:`, newAirport)
       this.sia[newAirport.id] = {
         atis: newAirport.atis,
         atis_time: newAirport.atis_time,
@@ -49,6 +49,10 @@ export const useViewStore = defineStore("view", {
         mag_var: newAirport.mag_var,
         first: false,
       }
+    },
+    signalRCharts(charts) {
+      console.log(`signalRCharts:`, charts)
+      this.charts = charts;
     },
     signalRPIREPUpdate(pirep) {
       this.pireps.push(pirep);
@@ -66,50 +70,9 @@ export const useViewStore = defineStore("view", {
         arrival_runways: "",
         metar: "",
       };
-      /*      if (this.timers[airport] === undefined) {
-              await this.updateSIA(airport);
-              this.sia[airport].first = true;
-              setTimeout(() => {
-                this.sia[airport].first = false;
-              }, 1000);
-              this.timers[airport] = setInterval(() => {
-                this.updateSIA(airport);
-              }, 15000);
-            }*/
     },
-    async updateSIA(airport) {
-      /*      if (this.fetching.includes(airport)) return;
-            this.fetching.push(airport);
-            try {
-              const response = await API.get(`/v1/sia/${airport}`);
-              this.sia[airport] = response.data;
-            } catch (error) {
-              console.error(error);
-              // Try again in 15 seconds
-              setTimeout(() => {
-                this.updateSIA(airport);
-              }, 15000);
-            } finally {
-              this.fetching.splice(this.fetching.indexOf(airport), 1);
-            }*/
-    },
-    async updateMetars() {
-      /*      try {
-              const response = await API.get("/v1/weather/metar/all");
-              Object.keys(response.data).forEach((key) => {
-                if (response.data[key] !== "") {
-                  this.metars[key] = response.data[key];
-                }
-              });
-            } catch (error) {
-              console.error(error);
-            }
-            if (this.metarTimer === null) {
-              this.metarTimer = setInterval(() => {
-                this.updateMetars();
-              }, 60000);
-            }*/
-    },
+    // We could send this via SignalR, but let's do it this way to also refresh the auth cookie
+    // we won't update the data on our side, that will be when we get the update via SignalR.
     async patchSIA(airport, field, value) {
       if (field === "ATIS") {
         field = "atis";
@@ -130,13 +93,10 @@ export const useViewStore = defineStore("view", {
       console.log(`in getAuthed... stack:`, new Error().stack);
       try {
         await API.get("/v1/auth/check");
-        console.log(`got authed`);
         this.loggedIn = true;
-        console.log(`set loggedIn to true`);
         return true;
       } catch (err) {
         console.error(err);
-        console.log(`got error`);
         this.loggedIn = false;
         return false;
       }
