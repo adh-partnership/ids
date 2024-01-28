@@ -21,14 +21,51 @@
     "sia": {
       "flash_background_class": "bg-blue-950",
       "closed_background": "#ff00001a",
-      "identifier": "text-white",
+      "identifier": "text-neutral-300",
       "atis": "text-yellow-400",
-      "arrival_atis": "text-green-500",
+      "arrival_atis": "text-blue-400",
       "arrival_runways": "text-white",
       "departure_runways": "text-white",
       "wind_foreground": "text-yellow-400",
       "altimeter_foreground": "text-blue-400",
       "metar": "text-white"
+    },
+    "buttons": {
+      "SIA": {
+        "background": "bg-slate-800",
+        "hover": "bg-gray-700",
+        "foreground": "text-white"
+      },
+      "WX": {
+        "background": "bg-blue-800",
+        "hover": "bg-blue-700",
+        "foreground": "text-white"
+      },
+      "SOP": {
+        "background": "bg-green-800",
+        "hover": "bg-green-700",
+        "foreground": "text-white"
+      },
+      "PIREPS": {
+        "background": "bg-yellow-800",
+        "hover": "bg-yellow-700",
+        "foreground": "text-white"
+      },
+      "CHARTS": {
+        "background": "bg-purple-800",
+        "hover": "bg-purple-700",
+        "foreground": "text-white"
+      },
+      "BRIEF": {
+        "background": "bg-rose-900",
+        "hover": "bg-rose-800",
+        "foreground": "text-white"
+      },
+      "Login": {
+        "background": "bg-slate-800",
+        "hover": "bg-gray-700",
+        "foreground": "text-white"
+      }
     }
   },
   "weather": {
