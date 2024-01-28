@@ -37,37 +37,43 @@
     <footer class="fixed z-50 bg-neutral-700 text-white bottom-0 p-0 w-full">
       <div v-if="loggedIn">
         <button
-          class="border-2 border-gray-500 bg-slate-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded h-full w-[10rem] mr-1"
+          class="border-2 border-gray-500 font-bold py-2 px-4 rounded h-full w-[10rem] mr-1"
+          :class="`${config.colors.buttons.SIA.background} hover:${config.colors.buttons.SIA.hover} ${config.colors.buttons.SIA.foreground}`"
           @click="router.push('/')"
         >
           SIA
         </button>
         <button
-          class="border-2 border-gray-500 bg-blue-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded h-full w-[10rem] mr-1"
+          class="border-2 border-gray-500 font-bold py-2 px-4 rounded h-full w-[10rem] mr-1"
+          :class="`${config.colors.buttons.WX.background} hover:${config.colors.buttons.WX.hover} ${config.colors.buttons.WX.foreground}`"
           @click="router.push('/weather')"
         >
           WX
         </button>
         <button
-          class="border-2 border-gray-500 bg-green-800 hover:bg-green-700 text-white font-bold py-2 px-4 rounded h-full w-[10rem] mr-1"
+          class="border-2 border-gray-500 font-bold py-2 px-4 rounded h-full w-[10rem] mr-1"
+          :class="`${config.colors.buttons.SOP.background} hover:${config.colors.buttons.SOP.hover} ${config.colors.buttons.SOP.foreground}`"
           @click="router.push('/sops')"
         >
           SOP
         </button>
         <button
-          class="border-2 border-gray-500 bg-amber-600 hover:bg-amber-500 text-white font-bold py-2 px-4 rounded h-full w-[10rem] mr-1"
+          class="border-2 border-gray-500 font-bold py-2 px-4 rounded h-full w-[10rem] mr-1"
+          :class="`${config.colors.buttons.PIREPS.background} hover:${config.colors.buttons.PIREPS.hover} ${config.colors.buttons.PIREPS.foreground}`"
           @click="router.push('/pireps')"
         >
           PIREPs
         </button>
         <button
-          class="border-2 border-gray-500 bg-purple-800 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded h-full w-[10rem] mr-1"
+          class="border-2 border-gray-500 font-bold py-2 px-4 rounded h-full w-[10rem] mr-1"
+          :class="`${config.colors.buttons.CHARTS.background} hover:${config.colors.buttons.CHARTS.hover} ${config.colors.buttons.CHARTS.foreground}`"
           @click="router.push('/charts')"
         >
           CHARTS
         </button>
         <button
-          class="border-2 border-gray-500 bg-rose-900 hover:bg-rose-800 text-white font-bold py-2 px-4 rounded h-full w-[10rem] mr-1"
+          class="border-2 border-gray-500 font-bold py-2 px-4 rounded h-full w-[10rem] mr-1"
+          :class="`${config.colors.buttons.BRIEF.background} hover:${config.colors.buttons.BRIEF.hover} ${config.colors.buttons.BRIEF.foreground}`"
           @click="router.push('/briefing')"
         >
           BRIEF
@@ -76,7 +82,8 @@
       <div v-else>
         <a :href="`${config.ids_api_base_url}/v1/oauth/login?redirect=${location}`">
           <button
-            class="border-2 border-gray-500 bg-slate-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded h-full w-[10rem] mr-1"
+            class="border-2 border-gray-500 font-bold py-2 px-4 rounded h-full w-[10rem] mr-1"
+            :class="`${config.colors.buttons.Login.background} hover:${config.colors.buttons.Login.hover} ${config.colors.buttons.Login.foreground}`"
           >
             Login
           </button>
@@ -108,6 +115,11 @@ const changeView = () => {
 store.getAuthed();
 
 onMounted(() => {
+  // Create a timer to cleanup PIREPs every minute, this will drop any PIREPs older than one hour
+  setInterval(() => {
+    store.cleanupPIREPs();
+  }, 60000);
+
   config.views.forEach((v) => {
     v.facilities.forEach(async (f) => {
       if (store.sia[f] === undefined) {

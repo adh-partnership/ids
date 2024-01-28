@@ -67,7 +67,12 @@
       <span class="pr-2">ARR:</span>
       {{ sia[props.airport].arrival_runways != "" ? sia[props.airport].arrival_runways : "______" }}
     </td>
-    <td v-if="isClosed" rowspan="2" colspan="3" class="border border-opacity-30 border-gray-500 closed text-center">
+    <td
+      v-if="isClosed"
+      rowspan="2"
+      colspan="3"
+      class="border border-opacity-30 border-gray-500 closed text-center w-[16em]"
+    >
       CLOSED
     </td>
     <td
@@ -184,7 +189,6 @@ const deprwybox = ref(null);
 const arrrwybox = ref(null);
 const isClosed = ref(false);
 const overrideArrival = ref(false);
-let initialized = false;
 const hasDualATIS = computed(
   () =>
     config.airports.filter((a) => a.name === props.airport)[0]["dual-atis"] === true &&
@@ -221,7 +225,6 @@ watch(
   () => {
     if (store.sia[props.airport].first) return;
     if (typeof metarbox.value === "undefined") return;
-    console.log("flashing metar");
     flashes.metar = config.subdivision["update_flash_duration"];
   }
 );
@@ -231,7 +234,6 @@ watch(
   () => {
     if (store.sia[props.airport].first) return;
     if (typeof atisbox.value === "undefined") return;
-    console.log("flashing atis");
     flashes.atis = config.subdivision["update_flash_duration"];
   }
 );
@@ -241,7 +243,6 @@ watch(
   () => {
     if (store.sia[props.airport].first) return;
     if (typeof arratisbox.value === "undefined") return;
-    console.log("flashing arratis");
     flashes.arratis = config.subdivision["update_flash_duration"];
   }
 );
@@ -251,7 +252,6 @@ watch(
   () => {
     if (store.sia[props.airport].first) return;
     if (typeof deprwybox.value === "undefined") return;
-    console.log("flashing deprwy");
     flashes.deprwy = config.subdivision["update_flash_duration"];
   }
 );
@@ -261,7 +261,6 @@ watch(
   () => {
     if (store.sia[props.airport].first) return;
     if (typeof arrrwybox.value === "undefined") return;
-    console.log("flashing arrrwy");
     flashes.arrrwy = config.subdivision["update_flash_duration"];
   }
 );
@@ -370,7 +369,7 @@ const altimeter = computed(() => {
     return "??";
   }
 
-  return parseMetar(sia.value[props.airport].metar).barometer.hg.toFixed(2) || "??";
+  return parseMetar(sia.value[props.airport].metar).barometer?.hg.toFixed(2) || "??";
 });
 
 const closed = () => {

@@ -98,41 +98,31 @@
               ></MetarRow>
             </table>
           </div>
-          <div :class="{ hidden: openTab !== 2, block: openTab === 2 }" class="align-center">
-            <center>
-              <video controls="" width="956" height="717">
-                <source :src="config.weather['PRE-DUTY BRIEF'].videoUrl" type="video/mp4" />
-              </video>
-            </center>
+          <div :class="{ hidden: openTab !== 2, block: openTab === 2 }">
+            <video controls="" width="956" height="717" class="mx-auto">
+              <source :src="config.weather['PRE-DUTY BRIEF'].videoUrl" type="video/mp4" />
+            </video>
           </div>
           <div :class="{ hidden: openTab !== 3, block: openTab === 3 }" class="text-white grid grid-cols-3 gap-4">
-            <div v-for="(img, i) in config.weather['SATELITE'].images" :key="i">
-              <center>
-                <img :src="img.src" :alt="img.title" />
-                <p class="text-xs">{{ img.title }}</p>
-              </center>
+            <div v-for="(img, i) in config.weather['SATELITE'].images" :key="i" style="text-align: center">
+              <img :src="img.src" :alt="img.title" class="mx-auto" />
+              <p class="text-xs">{{ img.title }}</p>
             </div>
           </div>
           <div :class="{ hidden: openTab !== 4, block: openTab === 4 }">
-            <div v-for="(img, i) in config.weather['REQ PIREP'].images" :key="i">
-              <center>
-                <img :src="img.src" :alt="img.title" />
-                <p class="text-xs">{{ img.title }}</p>
-              </center>
+            <div v-for="(img, i) in config.weather['REQ PIREP'].images" :key="i" class="text-center">
+              <img :src="img.src" :alt="img.title" class="mx-auto" />
+              <p class="text-xs">{{ img.title }}</p>
             </div>
           </div>
           <div :class="{ hidden: openTab !== 5, block: openTab === 5 }" class="grid grid-cols-4 gap-4">
             <div v-for="(img, i) in config.weather['ICING+CONV'].images" :key="i">
-              <center>
-                <img :src="img.src" alt="icing graphic" />
-              </center>
+              <img :src="img.src" alt="icing graphic" class="mx-auto" />
             </div>
           </div>
           <div :class="{ hidden: openTab !== 6, block: openTab === 6 }" class="grid grid-cols-2 gap-4">
             <div v-for="(img, i) in config.weather['PROG+SIG WX CHART'].images" :key="i">
-              <center>
-                <img :src="img.src" alt="prog+sig wx chart" />
-              </center>
+              <img :src="img.src" alt="prog+sig wx chart" class="mx-auto" />
             </div>
           </div>
         </div>

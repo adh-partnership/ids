@@ -89,7 +89,7 @@ export const parseMetar = (metarString) => {
     if (mode < 5 && metarPart.match(/^(FEW|SCT|BKN|OVC)(\d+)?/)) {
       mode = 5; // no visibility / conditions reported
     }
-    if (mode < 6 && metarPart.match(/(^M?\d+\/M?\d+$)|(^\/\/\/\/\/)/)) {
+    if (mode < 6 && metarPart.match(/(^M?\d+\/M?\d*$)|(^\/\/\/\/\/)/)) {
       mode = 6; // end of clouds
     }
     switch (mode) {
@@ -200,7 +200,8 @@ export const parseMetar = (metarString) => {
         break;
       case 6:
         // Temperature
-        match = metarPart.match(/^(M?\d+)\/(M?\d+)$/);
+        // NOTE: Dewpoint may be missing from some automated stations, especially if temperature gets below -40C
+        match = metarPart.match(/^(M?\d+)\/(M?\d*)$/);
         if (match === null && metarPart.match(/^\/\/\/\/\/$/)) {
           mode = 7;
           break;

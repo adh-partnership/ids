@@ -17,11 +17,7 @@
 
 <script setup>
 import { computed, ref } from "vue";
-import { storeToRefs } from "pinia";
-import { useViewStore } from "../store/viewstore";
 import { calcWindDir, parseMetar } from "@/utils/metar.js";
-
-const flightcategory = ref("");
 
 const props = defineProps({
   airport: {
@@ -36,6 +32,7 @@ const props = defineProps({
   mag_var: {
     type: Number,
     required: true,
+    default: 0,
   },
 });
 

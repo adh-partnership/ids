@@ -51,7 +51,6 @@ export const useViewStore = defineStore("view", {
       }
     },
     signalRCharts(charts) {
-      console.log(`signalRCharts:`, charts)
       this.charts = charts;
     },
     signalRPIREPUpdate(pirep) {
@@ -70,6 +69,13 @@ export const useViewStore = defineStore("view", {
         arrival_runways: "",
         metar: "",
       };
+    },
+    async submitPirep(pirep) {
+      try {
+        await API.put(`/v1/pireps`, pirep);
+      } catch (err) {
+        console.error(err);
+      }
     },
     // We could send this via SignalR, but let's do it this way to also refresh the auth cookie
     // we won't update the data on our side, that will be when we get the update via SignalR.
@@ -101,5 +107,13 @@ export const useViewStore = defineStore("view", {
         return false;
       }
     },
+    cleanupPIREPs() {
+      // Cleanup any PIREPs where `TM` is more than 1 hour ago
+      const now = new Date();
+      this.pireps = this.pireps.filter((p) => {
+        const tm = new Date(p.tm);
+        return (now - tm) < 1 * 60 * 60 * 1000;
+      });
+    }
   },
 });
