@@ -27,7 +27,7 @@
     </header>
     <main class="pt-[95px] flex-1 overflow-y-auto p-5 pb-[44px] flex flex-col">
       <router-view v-if="loggedIn && connected" />
-      <div class="py-10 w-full flex items-center justify-center bg-red-950 bg-opacity-50" v-if="loggedIn && !connected">
+      <div v-if="loggedIn && !connected" class="py-10 w-full flex items-center justify-center bg-red-950 bg-opacity-50">
         <div class="flex flex-col items-center justify-center">
           <div class="text-4xl font-bold text-red-500">DISCONNECTED FROM SIGNALR HUB</div>
           <div class="text-2xl font-bold text-red-500">Reconnecting...</div>
@@ -95,11 +95,11 @@
 
 <script setup>
 import { onMounted, ref, watch } from "vue";
-import { useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
-import { useViewStore } from "@/store/viewstore";
-import Clock from "./components/Clock.vue";
+import { useRouter } from "vue-router";
+import { useViewStore } from "@/store/viewstore.js";
 import config from "../config.json";
+import Clock from "./components/Clock.vue";
 import signalrConnection from "@/main.js";
 
 const store = useViewStore();
@@ -129,7 +129,7 @@ onMounted(() => {
   });
 
   // We now update via SignalR... so we don't need this?
-  //store.updateMetars();
+  // store.updateMetars();
 
   // We aren't connected... yet... but will when logged in is verified.
   // So this *should* work here, if not move to the watch below

@@ -15,8 +15,8 @@
       <div>
         <h2 class="text-2xl font-bold text-white">{{ airport }}</h2>
         <div
-          class="grid grid-cols-3 gap-x-8 gap-y-4 py-2"
           v-if="charts.filter((chart) => chart.chart_code === 'STAR').length > 0"
+          class="grid grid-cols-3 gap-x-8 gap-y-4 py-2"
         >
           <div v-for="(chart, index) of charts.filter((c) => c.chart_code === 'STAR')" :key="index">
             <button
@@ -28,8 +28,8 @@
           </div>
         </div>
         <div
-          class="grid grid-cols-3 gap-x-8 gap-y-4 py-2"
           v-if="charts.filter((chart) => chart.chart_code === 'DP').length > 0"
+          class="grid grid-cols-3 gap-x-8 gap-y-4 py-2"
         >
           <div v-for="(chart, index) of charts.filter((c) => c.chart_code === 'DP')" :key="index">
             <button
@@ -41,8 +41,8 @@
           </div>
         </div>
         <div
-          class="grid grid-cols-3 gap-x-8 gap-y-4 py-2"
           v-if="charts.filter((chart) => chart.chart_code === 'IAP').length > 0"
+          class="grid grid-cols-3 gap-x-8 gap-y-4 py-2"
         >
           <div v-for="(chart, index) of charts.filter((c) => c.chart_code === 'IAP')" :key="index">
             <button
@@ -54,8 +54,8 @@
           </div>
         </div>
         <div
-          class="grid grid-cols-3 gap-x-8 gap-y-4 py-2"
           v-if="charts.filter((chart) => chart.chart_code === 'OTHER').length > 0"
+          class="grid grid-cols-3 gap-x-8 gap-y-4 py-2"
         >
           <div v-for="(chart, index) of charts.filter((c) => c.chart_code === 'OTHER')" :key="index">
             <button
@@ -73,9 +73,9 @@
 
 <script setup>
 import { computed, ref } from "vue";
-import { useViewStore } from "../store/viewstore";
 import { useRoute } from "vue-router";
 import { Base64 } from "js-base64";
+import { useViewStore } from "../store/viewstore";
 
 const store = useViewStore();
 const route = useRoute();

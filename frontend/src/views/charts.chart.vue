@@ -28,9 +28,9 @@
 
 <script setup>
 import { computed, onMounted, ref } from "vue";
-import { useViewStore } from "../store/viewstore";
 import { useRoute, useRouter } from "vue-router";
 import { Base64 } from "js-base64";
+import { useViewStore } from "../store/viewstore";
 
 const store = useViewStore();
 const route = useRoute();

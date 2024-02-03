@@ -184,8 +184,8 @@
             <tr>
               <td colspan="2">
                 <button
-                  @click.prevent="addPirep"
                   class="w-full px-4 py-2 mt-4 text-sm font-medium text-white uppercase bg-blue-600 rounded-lg shadow hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-blue-200"
+                  @click.prevent="addPirep"
                 >
                   Submit PIREP
                 </button>
@@ -194,8 +194,8 @@
             <tr>
               <td colspan="2">
                 <button
-                  @click.prevent="resetPirep"
                   class="w-full px-4 py-2 mt-4 text-sm font-medium text-white uppercase bg-red-600 rounded-lg shadow hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-red-200"
+                  @click.prevent="resetPirep"
                 >
                   Cancel
                 </button>
@@ -210,8 +210,8 @@
 
 <script setup>
 import { storeToRefs } from "pinia";
-import { useViewStore } from "../store/viewstore";
 import { ref } from "vue";
+import { useViewStore } from "../store/viewstore";
 
 const store = useViewStore();
 const { pireps } = storeToRefs(store);

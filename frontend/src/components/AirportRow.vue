@@ -191,7 +191,7 @@ const isClosed = ref(false);
 const overrideArrival = ref(false);
 const hasDualATIS = computed(
   () =>
-    config.airports.filter((a) => a.name === props.airport)[0]["dual-atis"] === true &&
+    config.airports.filter((a) => a.name === props.airport)[0]["dual_atis"] === true &&
     (overrideArrival.value || sia.value[props.airport].arrival_atis !== "")
 );
 const airport = config.airports.filter((a) => a.name === props.airport)[0];
@@ -225,7 +225,7 @@ watch(
   () => {
     if (store.sia[props.airport].first) return;
     if (typeof metarbox.value === "undefined") return;
-    flashes.metar = config.subdivision["update_flash_duration"];
+    flashes.metar = config.subdivision.update_flash_duration;
   }
 );
 
@@ -234,7 +234,7 @@ watch(
   () => {
     if (store.sia[props.airport].first) return;
     if (typeof atisbox.value === "undefined") return;
-    flashes.atis = config.subdivision["update_flash_duration"];
+    flashes.atis = config.subdivision.update_flash_duration;
   }
 );
 
@@ -243,7 +243,7 @@ watch(
   () => {
     if (store.sia[props.airport].first) return;
     if (typeof arratisbox.value === "undefined") return;
-    flashes.arratis = config.subdivision["update_flash_duration"];
+    flashes.arratis = config.subdivision.update_flash_duration;
   }
 );
 
@@ -252,7 +252,7 @@ watch(
   () => {
     if (store.sia[props.airport].first) return;
     if (typeof deprwybox.value === "undefined") return;
-    flashes.deprwy = config.subdivision["update_flash_duration"];
+    flashes.deprwy = config.subdivision.update_flash_duration;
   }
 );
 
@@ -261,7 +261,7 @@ watch(
   () => {
     if (store.sia[props.airport].first) return;
     if (typeof arrrwybox.value === "undefined") return;
-    flashes.arrrwy = config.subdivision["update_flash_duration"];
+    flashes.arrrwy = config.subdivision.update_flash_duration;
   }
 );
 
@@ -276,13 +276,13 @@ watch(
           return;
         }
         const f = fields[field].value;
-        if (f.classList.contains(config.colors.sia["flash_background_class"])) {
-          f.classList.remove(config.colors.sia["flash_background_class"]);
+        if (f.classList.contains(config.colors.sia.flash_background_class)) {
+          f.classList.remove(config.colors.sia.flash_background_class);
         } else {
-          f.classList.add(config.colors.sia["flash_background_class"]);
+          f.classList.add(config.colors.sia.flash_background_class);
         }
       } else {
-        fields[field].value.classList.remove(config.colors.sia["flash_background_class"]);
+        fields[field].value.classList.remove(config.colors.sia.flash_background_class);
         flashes[field] = undefined;
       }
     });

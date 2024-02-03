@@ -28,9 +28,4 @@ const signalrConnection = new HubConnectionBuilder()
 
 export default signalrConnection;
 
-app
-  .use(router)
-  .use(pinia)
-  .use(VueSignalR, { connection: signalrConnection })
-  .mount("#app");
-
+app.use(router).use(pinia).use(VueSignalR, { connection: signalrConnection }).mount("#app");

@@ -1,0 +1,268 @@
+// An example configuration
+// Use this as a base... but store in configs/subdivision.json
+// Do not use jsonc as the extension, jsonc is just so we can add comments in the docs
+{
+  // The public facing URL to access the IDS' API. This is useful to change for local development
+  "ids_api_base_url": "http://ids-api.hawton.haus:3000",
+  // The public facing URL to access the IDS. This is useful to change for local development
+  "ids_base_url": "http://ids-api.hawton.haus:5173",
+  // Subdivision facility configuration
+  "subdivision": {
+    // Textual name of the subdivision
+    "name": "Anchorage ARTCC",
+    // The ID of the subdivision, will display in header
+    "id": "ZAN",
+    // How many times to flash a change in the SIA
+    "update_flash_duration": 16
+  },
+  "timezone": {
+    // Name of the timezone to use... this is the timezone name from the IANA Timezone Database
+    "name": "America/Anchorage",
+    // The offset from UTC in hours
+    "offset": -9,
+    // The offset from UTC in hours during daylight savings time
+    "offset_dst": -8
+  },
+  "colors": {
+    // The colors to use in the navbar
+    "navbar": {
+      // The background color of the navbar
+      "facility": "#002766",
+      // The foreground color of the "IDS" text in the navbar
+      "ids": "#ffb612",
+      // The background color of the clock area in the navbar
+      "clock_background": "#000000",
+      // The foreground color of the clock area in the navbar
+      "clock_foreground": "#ffb612"
+    },
+    "sia": {
+      // The Tailwind class to apply/remove when flashing the background of the SIA
+      "flash_background_class": "bg-blue-950",
+      // The Tailwind class to apply when an airport is closed
+      "closed_background": "#ff00001a",
+      // Foreground color of the airport identifier in the SIA
+      "identifier": "text-neutral-300",
+      // Foreground color of the Departure/Primary ATIS in the SIA
+      "atis": "text-yellow-400",
+      // Foreground color of the Arrival ATIS in the SIA
+      "arrival_atis": "text-blue-400",
+      // Foreground color of the Arrival Runways in the SIA
+      "arrival_runways": "text-white",
+      // Foreground color of the Departure Runways in the SIA
+      "departure_runways": "text-white",
+      // Foreground color of the Wind in the SIA
+      "wind_foreground": "text-yellow-400",
+      // Foreground color of the Altimeter in the SIA
+      "altimeter_foreground": "text-blue-400",
+      // Foreground color of the raw METAR in the SIA
+      "metar": "text-white"
+    },
+    "buttons": {
+      // The following are tailwind classes to apply to the buttons in the footer
+      "SIA": {
+        "background": "bg-slate-800",
+        "hover": "bg-gray-700",
+        "foreground": "text-white"
+      },
+      "WX": {
+        "background": "bg-blue-800",
+        "hover": "bg-blue-700",
+        "foreground": "text-white"
+      },
+      "SOP": {
+        "background": "bg-green-800",
+        "hover": "bg-green-700",
+        "foreground": "text-white"
+      },
+      "PIREPS": {
+        "background": "bg-yellow-800",
+        "hover": "bg-yellow-700",
+        "foreground": "text-white"
+      },
+      "CHARTS": {
+        "background": "bg-purple-800",
+        "hover": "bg-purple-700",
+        "foreground": "text-white"
+      },
+      "BRIEF": {
+        "background": "bg-rose-900",
+        "hover": "bg-rose-800",
+        "foreground": "text-white"
+      },
+      "Login": {
+        "background": "bg-slate-800",
+        "hover": "bg-gray-700",
+        "foreground": "text-white"
+      }
+    }
+  },
+  "weather": {
+    // Weather panels, please note the panels themselves are predefined and cannot be changed
+    "PRE-DUTY BRIEF": {
+      // Video to embed for the preduty brief
+      "videoUrl": "https://www.weather.gov/media/zan/ZAN%20PDWB/ZAN_PDWB.mp4"
+    },
+    "SATELITE": {
+      // An array of images to display for satellite view. Dynamic, 1+ images can be displayed
+      "images": [
+        {
+          "title": "IR View",
+          "src": "https://www.weather.gov/images/aawu/GOES/IR_loop.gif"
+        },
+        {
+          "title": "Visible View",
+          "src": "https://www.weather.gov/images/aawu/GOES/VIS_loop.gif"
+        },
+        {
+          "title": "Water Vapor View",
+          "src": "https://www.weather.gov/images/aawu/GOES/WV_loop.gif"
+        }
+      ]
+    },
+    "REQ PIREP": {
+      // An array of images to display for requested PIREPs. Dynamic, 1+ images can be displayed, but expects 1
+      "images": [
+        {
+          "title": "Requested PIREPs",
+          "src": "https://www.weather.gov/images/zme/zan_pirep.png"
+        }
+      ]
+    },
+    "ICING+CONV": {
+      // An array of images to display for icing and convection graphics. Dynamic, 1+ images can be displayed
+      "images": [
+        {
+          "src": "https://www.weather.gov/images/aawu/fcstgraphics/icing_1.png"
+        },
+        {
+          "src": "https://www.weather.gov/images/aawu/fcstgraphics/icing_2.png"
+        },
+        {
+          "src": "https://www.weather.gov/images/aawu/fcstgraphics/icing_3.png"
+        },
+        {
+          "src": "https://www.weather.gov/images/aawu/fcstgraphics/icing_4.png"
+        }
+      ]
+    },
+    "PROG+SIG WX CHART": {
+      // An array of images to display for prog and significant weather charts. Dynamic, 1+ images can be displayed
+      "images": [
+        {
+          "src": "https://www.weather.gov/images/aawu/fcstgraphics/ifr_1.png"
+        },
+        {
+          "src": "https://www.weather.gov/images/aawu/fcstgraphics/ifr_2.png"
+        },
+        {
+          "src": "http://www.weather.gov/images/aawu/sigWx24.gif"
+        },
+        {
+          "src": "http://www.weather.gov/images/aawu/sigWx36.gif"
+        },
+        {
+          "src": "http://www.weather.gov/images/aawu/sigWx48.gif"
+        },
+        {
+          "src": "http://www.weather.gov/images/aawu/sigWx60.gif"
+        }
+      ]
+    }
+  },
+  // Defines each view available in the IDS. The dropdown menu in the navbar will be populated with the name of the view
+  // Facilities determines what airports to add to the SIA view
+  // SOPS is the URL that will be embedded when the SOPS view is displayed
+  "views": [
+    {
+      "name": "Allen AAF ATCT",
+      "facilities": [
+        "BIG"
+      ],
+      "sops": "https://sops.zanartcc.org/docs/terminal/military/"
+    }
+  ],
+  // Airports is an array of objects that define an airport. Note this array is trimmed down to show examples
+  "airports": [
+    {
+      "name": "ANC",
+      "dual_atis": false, // Set this to true to display both the departure and arrival ATIS, default: false
+      "hours": {
+        "continuous": true // Airport is open 24/7
+      }
+    },
+    {
+      "name": "ADQ",
+      "hours": {
+        "continuous": false,
+        // Between 1 April and 30 September, the airport is open from 07:00 to 22:00 local time
+        // Set local to false if the times are in UTC
+        "schedule": [
+          {
+            "start": {
+              "month": 4,
+              "day": 1
+            },
+            "end": {
+              "month": 9,
+              "day": 30
+            },
+            "open": "07:00",
+            "close": "22:00",
+            "local": true
+          },
+          // Between 1 October and 31 March, the airport is open from 06:30 and 20:00 local time
+          {
+            "start": {
+              "month": 10,
+              "day": 1
+            },
+            "end": {
+              "month": 3,
+              "day": 31
+            },
+            "open": "06:30",
+            "close": "20:00",
+            "local": true
+          }
+        ]
+      }
+    },
+    // BIG is only open Monday-Friday
+    {
+      "name": "BIG",
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "whenDST": true,
+            "open": "16:15",
+            "close": "00:00",
+            // 0 is Sunday, 1 is Monday, 2 is Tuesday, 3 is Wednesday, 4 is Thursday, 5 is Friday, 6 is Saturday
+            // An array of days that the airport is open
+            "days": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "local": false // Times are UTC
+          },
+          {
+            "whenDST": false,
+            "open": "17:15",
+            "close": "01:00",
+            "days": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "local": false
+          }
+        ]
+      }
+    }
+  ]
+}

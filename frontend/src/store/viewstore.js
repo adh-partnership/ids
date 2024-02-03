@@ -34,7 +34,7 @@ export const useViewStore = defineStore("view", {
           metar: airport.metar,
           mag_var: airport.mag_var,
           first: true,
-        }
+        };
       });
     },
     signalRAirportUpdate(oldAirport, newAirport) {
@@ -48,7 +48,7 @@ export const useViewStore = defineStore("view", {
         metar: newAirport.metar,
         mag_var: newAirport.mag_var,
         first: false,
-      }
+      };
     },
     signalRCharts(charts) {
       this.charts = charts;
@@ -112,8 +112,8 @@ export const useViewStore = defineStore("view", {
       const now = new Date();
       this.pireps = this.pireps.filter((p) => {
         const tm = new Date(p.tm);
-        return (now - tm) < 1 * 60 * 60 * 1000;
+        return now - tm < 1 * 60 * 60 * 1000;
       });
-    }
+    },
   },
 });

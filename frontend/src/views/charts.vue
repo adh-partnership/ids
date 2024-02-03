@@ -5,10 +5,10 @@
         <div class="flex items-center">
           <label class="block text-gray-100 font-bold pr-4">Filter:</label>
           <input
+            ref="filterInput"
             v-model="filter"
             type="text"
             class="w-[10em] px-4 py-2 text-gray-100 bg-gray-600 rounded focus:bg-gray-600 focus:outline-none uppercase"
-            ref="filterInput"
             autofocus
           />
         </div>
@@ -47,7 +47,7 @@ const chartLength = computed(() => {
 
 const filteredCharts = computed(() => {
   return Object.keys(store.charts).filter((apt) => {
-    return filter != "" && apt.toLowerCase().includes(filter.value.toLowerCase());
+    return filter.value != "" && apt.toLowerCase().includes(filter.value.toLowerCase());
   });
 });
 </script>

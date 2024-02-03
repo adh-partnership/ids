@@ -1,6 +1,6 @@
 {
-  "ids_api_base_url": "http://ids-api.hawton.haus:3000",
-  "ids_base_url": "http://ids-api.hawton.haus:5173",
+  "ids_api_base_url": "https://ids-api.zanartcc.org",
+  "ids_base_url": "https://ids.zanartcc.org",
   "subdivision": {
     "name": "Anchorage ARTCC",
     "id": "ZAN",
@@ -287,7 +287,6 @@
   "airports": [
     {
       "name": "ANC",
-      "dual-atis": true,
       "hours": {
         "continuous": true
       }
