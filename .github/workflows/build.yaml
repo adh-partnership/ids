@@ -1,0 +1,115 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: ["main"]
+    tags: ["v*.*.*"]
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: ["main"]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        facility: [zan]
+        include:
+        - facility: zan
+          name: PAZA
+          secret: ADH_PIPELINE_PAT
+          repo: vpaza/gitops
+
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v3
+    - name: Set sha_short
+      run: |
+        echo "sha_short=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_ENV
+        # Set default branch name for PRs, as we still want to test build an image on PRs
+        # but we have no branch to set a tag for.
+        branch="test"
+        if [[ "$GITHUB_REF" == "refs/heads/"* ]]; then
+          branch="${GITHUB_REF#refs/heads/}"
+        fi
+        echo "branch=${branch}" >> $GITHUB_ENV
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Install cosign
+      uses: sigstore/cosign-installer@v3
+    - name: Copy subdivision frontend config
+      run: |
+        cd frontend
+        cp configs/${{ matrix.facility }}.json config.json
+    - name: Build and Push Container Image
+      if: ${{ github.event_name == 'push' && env.branch == 'main' }}
+      run: |
+        TAG=${{ env.branch }}-${{ env.sha_short }} bash scripts/build.sh
+    - name: Build Container Image
+      if: ${{ env.branch != 'main' }}
+      run: |
+        DRY_RUN=1 TAG=${{ env.branch }}-${{ env.sha_short }} bash scripts/build.sh
+    - name: Sign Image
+      if: ${{ github.event_name == 'push' && env.branch == 'main' }}
+      run: |
+        TAG=${{ env.branch }}-${{ env.sha_short }}
+        image_digest_fe=$(docker inspect --format='{{index .RepoDigests 0}}' ${{ secrets.DOCKER_USERNAME }}/ids-frontend:$TAG)
+        image_digest_be=$(docker inspect --format='{{index .RepoDigests 0}}' ${{ secrets.DOCKER_USERNAME }}/ids-backend:$TAG)
+        cosign sign --yes --key env://COSIGN_PRIVATE_KEY $image_digest_fe $image_digest_be
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    strategy:
+      matrix:
+        facility: [zan]
+        include:
+        - facility: zan
+          name: PAZA
+          secret: ADH_PIPELINE_PAT
+          repo: vpaza/gitops
+
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v3
+    - name: Set sha_short
+      id: vars
+      run: |-
+        echo "sha_short=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_ENV
+        # Set default branch name for PRs, as we still want to test build an image on PRs
+        # but we have no branch to set a tag for.
+        branch="test"
+        if [[ "$GITHUB_REF" == "refs/heads/"* ]]; then
+          branch="${GITHUB_REF#refs/heads/}"
+        fi
+        echo "branch=${branch}" >> $GITHUB_ENV
+    - name: Checkout ${{ matrix.name }} Gitops Repo
+      uses: actions/checkout@v3
+      with:
+        token: ${{ secrets[matrix.secret] }}
+        repository: ${{ matrix.repo }}
+        path: gitops
+    - name: Configure git
+      run: |-
+        cd $GITHUB_WORKSPACE/gitops
+        git config user.name "adh-pipeline"
+        git config user.email "daniel@adhp.dev"
+    - name: Setup Kustomize
+      uses: imranismail/setup-kustomize@v2
+      with:
+        kustomize-version: "5.2.1"
+    - name: Update prod overlay
+      if: ${{ env.branch == 'main' }}
+      run: |
+        TAG=${{ env.branch }}-${{ env.sha_short }}
+        cd $GITHUB_WORKSPACE/gitops/overlays/prod
+        kustomize edit set image adhp/ids-frontend=docker.io/adhp/ids-frontend:${{ matrix.facility }}-$TAG
+        kustomize edit set image adhp/ids-backend=docker.io/adhp/ids-backend:${{ matrix.facility }}-$TAG

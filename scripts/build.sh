@@ -20,6 +20,7 @@ fi
 
 HUB=${HUB:-"docker.io/adhp"}
 TAG=${TAG:-"dirty"}
+TAG="${subdivision}"-"${TAG}"
 
 if [[ -f "frontend/config.json" ]]; then
   mv frontend/config.json frontend/config.json.bak
@@ -30,13 +31,13 @@ cp "frontend/configs/${subdivision}.json" frontend/config.json
 ${CONTAINER_CLI} ${CONTAINER_BUILDER} \
   --target go_final \
   ${PUSH} \
-  --tag "${HUB}/ids-backend:${subdivision}-${TAG}" \
+  --tag "${HUB}/ids-backend:${TAG}" \
   .
 
 ${CONTAINER_CLI} ${CONTAINER_BUILDER} \
   --target node_final \
   ${PUSH} \
-  --tag "${HUB}/ids-frontend:${subdivision}-${TAG}" \
+  --tag "${HUB}/ids-frontend:${TAG}" \
   .
 
 if [[ -f "frontend/config.json.bak" ]]; then
