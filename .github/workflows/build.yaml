@@ -3,7 +3,6 @@ name: Build and Deploy
 on:
   push:
     branches: ["main"]
-    tags: ["v*.*.*"]
   pull_request:
     types: [opened, synchronize, reopened]
     branches: ["main"]
@@ -57,7 +56,7 @@ jobs:
     - name: Sign Image
       if: ${{ github.event_name == 'push' && env.branch == 'main' }}
       run: |
-        TAG=${{ env.branch }}-${{ env.sha_short }}
+        TAG=${{ matrix.facility }}-${{ env.branch }}-${{ env.sha_short }}
         image_digest_fe=$(docker inspect --format='{{index .RepoDigests 0}}' ${{ secrets.DOCKER_USERNAME }}/ids-frontend:$TAG)
         image_digest_be=$(docker inspect --format='{{index .RepoDigests 0}}' ${{ secrets.DOCKER_USERNAME }}/ids-backend:$TAG)
         cosign sign --yes --key env://COSIGN_PRIVATE_KEY $image_digest_fe $image_digest_be

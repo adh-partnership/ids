@@ -1,6 +1,10 @@
 # Shared Configs
 
-These are JSON configurations that are shared/used by both the frontend and backend.
+These are JSON configurations that are shared/used by both the frontend and backend. This file is not yet used
+by the frontend but may in the future.
+
+Currently this file is only run by the backend's update command. Non-ZAN subdivisions do not need to commit their 
+airports.json file.
 
 ## airports.json
 

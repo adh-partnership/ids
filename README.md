@@ -22,7 +22,7 @@ Please consult the [backend README](backend/README.md) for configuration informa
 
 ### Frontend Configuration
 
-Soon (TM).
+Please consult the [frontend README](frontend/README.md) for configuration information.
 
 ### Shared
 
@@ -75,6 +75,28 @@ If you are using the ADH Stack, you will need to add the OAuth2 client credentia
   [frontend README](frontend/README.md) for more information.
 2. Make sure all modules are installed by running `yarn`.
 3. Run `yarn dev` to start the dev environment.
+
+## Subdivision Setup
+
+If you are a member of the ADH Partnership, getting started is fairly easy.
+
+1. Open a PR to add your facility's frontend configuration, and adding it to the workflow [here](.github/workflows/build.yml).
+2. Setup your cluster as appropriate. You can look at ZAN's GitOps repo for more inforation [here](https://github.com/vpaza/gitops/tree/main/overlays/prod/ids).
+   1. You will need to setup the configmap to load the backend's configuration. Override any sensitive information (such as session's block and hash keys, database credentials, etc)
+      utilizing secrets. See the [backend README](backend/README.md) for more information.
+
+If you are not apart of the ADH Partnership, you'll need to do a bit more work as we do not provide building and deployment for non-members.
+
+1. Typically you'll need to clone the repo.
+2. You'll need to provide the backend with a YAML configuration. See the [backend README](backend/README.md) for more information. This can be done at runtime.
+3. Update frontend/config.json with your desired config. This *must* be done prior to building as the config is embedded into the frontend.
+4. Use scripts/build.sh to build the container image. If you don't want to use Docker, you'll need to look at the script and Dockerfile to see the steps needed
+   to build the frontend and backend.
+5. Deploy to your infrastructure as appropriate for it. The ADH Partnership utilizes Kubernetes, so you can look at step #2 above for an example. Any other environments
+   is up to your webmaster to deploy. You will need a reverse proxy to handle the backend, the frontend is static JavaScript and can be served by any web server.
+
+If you have questions, please find Daniel Hawton (@TheFrozenDev on Discord, in the ZAN or VATUSA servers) and ask. I will not provide detailed step-by-step for all environments
+but can answer more general questions and provide guidance.
 
 ## License
 
