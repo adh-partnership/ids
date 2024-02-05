@@ -55,6 +55,9 @@ jobs:
         DRY_RUN=1 TAG=${{ env.branch }}-${{ env.sha_short }} bash scripts/build.sh
     - name: Sign Image
       if: ${{ github.event_name == 'push' && env.branch == 'main' }}
+      env:
+        COSIGN_PASSWORD: ${{ secrets.COSIGN_PRIVATE_KEY_PASSWORD }}
+        COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
       run: |
         TAG=${{ matrix.facility }}-${{ env.branch }}-${{ env.sha_short }}
         image_digest_fe=$(docker inspect --format='{{index .RepoDigests 0}}' ${{ secrets.DOCKER_USERNAME }}/ids-frontend:$TAG)
