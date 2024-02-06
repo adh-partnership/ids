@@ -162,7 +162,7 @@ func NewCommand() *cli.Command {
 			}
 
 			log.Info().Msg("Starting server...")
-			err = s.Start(config.GetConfig().Server.Mode, fmt.Sprintf("127.0.0.1:%d", config.GetConfig().Server.Port), *JobManager)
+			err = s.Start(config.GetConfig().Server.Mode, fmt.Sprintf("%s:%d", config.GetConfig().Server.IP, config.GetConfig().Server.Port), *JobManager)
 			if err != nil && !errors.Is(err, http.ErrServerClosed) {
 				log.Error().Msgf("unable to start server: %s", err)
 			}
