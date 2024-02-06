@@ -115,3 +115,11 @@ jobs:
         cd $GITHUB_WORKSPACE/gitops/overlays/prod
         kustomize edit set image adhp/ids-frontend=docker.io/adhp/ids-frontend:${{ matrix.facility }}-$TAG
         kustomize edit set image adhp/ids-backend=docker.io/adhp/ids-backend:${{ matrix.facility }}-$TAG
+    - name: Commit and Push
+      if: ${{ env.branch == 'main' }}
+      run: |
+        TAG=${{ env.branch }}-${{ env.sha_short }}
+        cd $GITHUB_WORKSPACE/gitops
+        git add overlays/prod
+        git commit -m "Update prod overlay for ${{ matrix.facility }}-$TAG"
+        git push
