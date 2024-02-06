@@ -46,6 +46,9 @@ const chartLength = computed(() => {
 });
 
 const filteredCharts = computed(() => {
+  if (filter.value == "") {
+    return Object.keys(store.charts);
+  }
   return Object.keys(store.charts).filter((apt) => {
     return filter.value != "" && apt.toLowerCase().includes(filter.value.toLowerCase());
   });
