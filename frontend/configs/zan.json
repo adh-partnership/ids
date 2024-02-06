@@ -1,5 +1,5 @@
 {
-  "ids_api_base_url": "https://ids-api.zanartcc.org",
+  "ids_api_base_url": "https://ids.zanartcc.org",
   "ids_base_url": "https://ids.zanartcc.org",
   "subdivision": {
     "name": "Anchorage ARTCC",

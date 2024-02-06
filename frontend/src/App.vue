@@ -80,7 +80,7 @@
         </button>
       </div>
       <div v-else>
-        <a :href="`${config.ids_api_base_url}/v1/oauth/login?redirect=${location}`">
+        <a :href="`${config.ids_api_base_url}/v1/auth/login?redirect=${location}`">
           <button
             class="border-2 border-gray-500 font-bold py-2 px-4 rounded h-full w-[10rem] mr-1"
             :class="`${config.colors.buttons.Login.background} hover:${config.colors.buttons.Login.hover} ${config.colors.buttons.Login.foreground}`"
