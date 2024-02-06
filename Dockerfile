@@ -12,11 +12,10 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o api backend/cmd/api/main.go
 
 FROM nginx:1-alpine AS node_final
 
-RUN sed -i 'lidaemon off;' /etc/nginx/nginx.conf
 COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=node_builder /src/dist/ /app
 
-CMD ["nginx"]
+CMD ["nginx", "-g", "daemon off;"]
 
 FROM gcr.io/distroless/static-debian12 AS go_final
 
