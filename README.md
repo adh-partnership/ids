@@ -80,7 +80,7 @@ If you are using the ADH Stack, you will need to add the OAuth2 client credentia
 
 If you are a member of the ADH Partnership, getting started is fairly easy.
 
-1. Open a PR to add your facility's frontend configuration, and adding it to the workflow [here](.github/workflows/build.yml).
+1. Open a PR to add your facility's frontend configuration, and adding it to the workflow [here](.github/workflows/build.yaml).
 2. Setup your cluster as appropriate. You can look at ZAN's GitOps repo for more inforation [here](https://github.com/vpaza/gitops/tree/main/overlays/prod/ids).
    1. You will need to setup the configmap to load the backend's configuration. Override any sensitive information (such as session's block and hash keys, database credentials, etc)
       utilizing secrets. See the [backend README](backend/README.md) for more information.
