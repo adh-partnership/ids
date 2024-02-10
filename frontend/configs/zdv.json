@@ -1,0 +1,210 @@
+{
+  "ids_api_base_url": "https://ids.zdvartcc.org",
+  "ids_base_url": "https://ids.zdvartcc.org",
+  "subdivision": {
+    "name": "Denver ARTCC",
+    "id": "ZDV",
+    "update_flash_duration": 16
+  },
+  "timezone": {
+    "name": "America/Denver",
+    "offset": -7,
+    "offset_dst": -6
+  },
+  "colors": {
+    "navbar": {
+      "facility": "#002766",
+      "ids": "#ffb612",
+      "clock_background": "#000000",
+      "clock_foreground": "#ffb612"
+    },
+    "sia": {
+      "flash_background_class": "bg-blue-950",
+      "closed_background": "#ff00001a",
+      "identifier": "text-neutral-300",
+      "atis": "text-yellow-400",
+      "arrival_atis": "text-blue-400",
+      "arrival_runways": "text-white",
+      "departure_runways": "text-white",
+      "wind_foreground": "text-yellow-400",
+      "altimeter_foreground": "text-blue-400",
+      "metar": "text-white"
+    },
+    "buttons": {
+      "SIA": {
+        "background": "bg-slate-800",
+        "hover": "bg-gray-700",
+        "foreground": "text-white"
+      },
+      "WX": {
+        "background": "bg-blue-800",
+        "hover": "bg-blue-700",
+        "foreground": "text-white"
+      },
+      "SOP": {
+        "background": "bg-green-800",
+        "hover": "bg-green-700",
+        "foreground": "text-white"
+      },
+      "PIREPS": {
+        "background": "bg-yellow-800",
+        "hover": "bg-yellow-700",
+        "foreground": "text-white"
+      },
+      "CHARTS": {
+        "background": "bg-purple-800",
+        "hover": "bg-purple-700",
+        "foreground": "text-white"
+      },
+      "BRIEF": {
+        "background": "bg-rose-900",
+        "hover": "bg-rose-800",
+        "foreground": "text-white"
+      },
+      "Login": {
+        "background": "bg-slate-800",
+        "hover": "bg-gray-700",
+        "foreground": "text-white"
+      }
+    }
+  },
+  "weather": {
+    "PRE-DUTY BRIEF": {
+      "videoUrl": "https://www.weather.gov/media/zdv/ZDVPDWB.mp4"
+    },
+    "SATELITE": {},
+    "REQ PIREP": {},
+    "ICING+CONV": {},
+    "PROG+SIG WX CHART": {}
+  },
+  "views": [
+    {
+      "name": "Denver ATCT",
+      "default": true,
+      "facilities": ["DEN"],
+      "sops": "https://cdn.zdvartcc.org/uploads/29-den-atct--71101g.pdf"
+    },
+    {
+      "name": "Colorado Springs ATCT",
+      "default": true,
+      "facilities": ["COS"],
+      "sops": "https://cdn.zdvartcc.org/uploads/cos-atcttracon--711010d.pdf"
+    }
+  ],
+  "airports": [
+    {
+      "name": "DEN",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "COS",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "ASE",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "BKF",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "FCS",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "GUR",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "CPR",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "APA",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "CYS",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "CFO",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "EGE",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "RCA",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "FMN",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "GJT",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "FNL",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "PUB",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "RAP",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "BJC",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "AFF",
+      "hours": {
+        "continuous": true
+      }
+    }
+  ]
+}
