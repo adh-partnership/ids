@@ -87,18 +87,130 @@
   },
   "views": [
     {
-      "name": "Denver ATCT",
-      "default": true,
+      "name": "DEN ATCT",
       "facilities": ["DEN"],
       "sops": "https://cdn.zdvartcc.org/uploads/29-den-atct--71101g.pdf"
     },
     {
-      "name": "Colorado Springs ATCT",
-      "default": true,
+      "name": "COS ATCT",
       "facilities": ["COS"],
       "sops": "https://cdn.zdvartcc.org/uploads/cos-atcttracon--711010d.pdf"
     },
-    "TODO"
+    {
+      "name": "ASE ATCT",
+      "facilities": ["ASE"],
+      "sops": "https://cdn.zdvartcc.org/uploads/ase-atcttracab--711010d.pdf"
+    },
+    {
+      "name": "BKF ATCT",
+      "facilities": ["BKF"],
+      "sops": "https://zdvartcc.org/resources"
+    },
+    {
+      "name": "FCS ATCT",
+      "facilities": ["FCS"],
+      "sops": "https://zdvartcc.org/resources"
+    },
+    {
+      "name": "GUR ATCT",
+      "facilities": ["GUR"],
+      "sops": "https://cdn.zdvartcc.org/uploads/gur-atct--711013b.pdf"
+    },
+    {
+      "name": "CPR ATCT",
+      "facilities": ["CPR"],
+      "sops": "https://cdn.zdvartcc.org/uploads/cpr-atcttracon--711014a.pdf"
+    },
+    {
+      "name": "APA ATCT",
+      "facilities": ["APA"],
+      "sops": "https://cdn.zdvartcc.org/uploads/apa-atct--711010d.pdf"
+    },
+    {
+      "name": "CYS ATCT",
+      "facilities": ["CYS"],
+      "sops": "https://cdn.zdvartcc.org/uploads/cys-atct--na.pdf"
+    },
+    {
+      "name": "CFO ATCT",
+      "facilities": ["CFO"],
+      "sops": "https://cdn.zdvartcc.org/uploads/cfo-atct--711010b.pdf"
+    },
+    {
+      "name": "EGE ATCT",
+      "facilities": ["EGE"],
+      "sops": "https://cdn.zdvartcc.org/uploads/30-ege-fct--71104a.pdf"
+    },
+    {
+      "name": "RCA ATCT",
+      "facilities": ["RCA"],
+      "sops": "https://cdn.zdvartcc.org/uploads/raprca-atctrapcon.pdf"
+    },
+    {
+      "name": "FMN ATCT",
+      "facilities": ["FMN"],
+      "sops": "https://cdn.zdvartcc.org/uploads/31-fmn-fct--711013a.pdf"
+    },
+    {
+      "name": "GJT ATCT",
+      "facilities": ["GJT"],
+      "sops": "https://cdn.zdvartcc.org/uploads/33-gjt-fct--71105a.pdf"
+    },
+    {
+      "name": "FNL ATCT",
+      "facilities": ["FNL"],
+      "sops": "https://cdn.zdvartcc.org/uploads/fnl-atct--711012d.pdf"
+    },
+    {
+      "name": "PUB ATCT",
+      "facilities": ["PUB"],
+      "sops": "https://cdn.zdvartcc.org/uploads/35-pub-atct--71106a.pdf"
+    },
+    {
+      "name": "RAP ATCT",
+      "facilities": ["RAP"],
+      "sops": "https://cdn.zdvartcc.org/uploads/raprca-atctrapcon.pdf"
+    },
+    {
+      "name": "BJC ATCT",
+      "facilities": ["BJC"],
+      "sops": "https://cdn.zdvartcc.org/uploads/bjc-atct-711010a.pdf"
+    },
+    {
+      "name": "AFF ATCT",
+      "facilities": ["AFF"],
+      "sops": "https://zdvartcc.org/resources"
+    },
+    {
+      "name": "Denver TRACON",
+      "facilities": ["DEN", "APA", "BJC", "BKF", "CFO", "GJT", "PUB"],
+      "sops": "https://cdn.zdvartcc.org/uploads/d01-tracon--711010d.pdf"
+    },
+    {
+      "name": "ZDV Consolidated",
+      "facilities": [
+        "DEN",
+        "COS",
+        "ASE",
+        "BKF",
+        "FCS",
+        "GUR",
+        "CPR",
+        "APA",
+        "CYS",
+        "CFO",
+        "EGE",
+        "RCA",
+        "FMN",
+        "GJT",
+        "FNL",
+        "PUB",
+        "RAP",
+        "BJC",
+        "AFF"
+      ],
+      "sops": "https://cdn.zdvartcc.org/uploads/zdv--711065d.pdf"
+    }
   ],
   "airports": [
     {
