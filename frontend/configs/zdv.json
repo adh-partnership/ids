@@ -116,15 +116,13 @@
     {
       "name": "ASE",
       "hours": {
-        "continuous": false,
-        "schedule": []
+        "continuous": true
       }
     },
     {
       "name": "BKF",
       "hours": {
-        "continuous": false,
-        "schedule": []
+        "continuous": true
       }
     },
     {
@@ -136,8 +134,7 @@
     {
       "name": "GUR",
       "hours": {
-        "continuous": false,
-        "schedule": []
+        "continuous": true
       }
     },
     {
@@ -155,43 +152,37 @@
     {
       "name": "CYS",
       "hours": {
-        "continuous": false,
-        "schedule": []
+        "continuous": true
       }
     },
     {
       "name": "CFO",
       "hours": {
-        "continuous": false,
-        "schedule": []
+        "continuous": true
       }
     },
     {
       "name": "EGE",
       "hours": {
-        "continuous": false,
-        "schedule": []
+        "continuous": true
       }
     },
     {
       "name": "RCA",
       "hours": {
-        "continuous": false,
-        "schedule": []
+        "continuous": true
       }
     },
     {
       "name": "FMN",
       "hours": {
-        "continuous": false,
-        "schedule": []
+        "continuous": true
       }
     },
     {
       "name": "GJT",
       "hours": {
-        "continuous": false,
-        "schedule": []
+        "continuous": true
       }
     },
     {
@@ -203,8 +194,7 @@
     {
       "name": "PUB",
       "hours": {
-        "continuous": false,
-        "schedule": []
+        "continuous": true
       }
     },
     {
@@ -222,8 +212,7 @@
     {
       "name": "AFF",
       "hours": {
-        "continuous": false,
-        "schedule": []
+        "continuous": true
       }
     }
   ]
