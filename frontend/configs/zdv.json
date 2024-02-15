@@ -72,10 +72,18 @@
     "PRE-DUTY BRIEF": {
       "videoUrl": "https://www.weather.gov/media/zdv/ZDVPDWB.mp4"
     },
-    "SATELITE": {},
-    "REQ PIREP": {},
-    "ICING+CONV": {},
-    "PROG+SIG WX CHART": {}
+    "SATELITE": {
+      "_": "TODO"
+    },
+    "REQ PIREP": {
+      "_": "TODO"
+    },
+    "ICING+CONV": {
+      "_": "TODO"
+    },
+    "PROG+SIG WX CHART": {
+      "_": "TODO"
+    }
   },
   "views": [
     {
@@ -89,7 +97,8 @@
       "default": true,
       "facilities": ["COS"],
       "sops": "https://cdn.zdvartcc.org/uploads/cos-atcttracon--711010d.pdf"
-    }
+    },
+    "TODO"
   ],
   "airports": [
     {
@@ -107,13 +116,15 @@
     {
       "name": "ASE",
       "hours": {
-        "continuous": true
+        "continuous": false,
+        "schedule": []
       }
     },
     {
       "name": "BKF",
       "hours": {
-        "continuous": true
+        "continuous": false,
+        "schedule": []
       }
     },
     {
@@ -125,7 +136,8 @@
     {
       "name": "GUR",
       "hours": {
-        "continuous": true
+        "continuous": false,
+        "schedule": []
       }
     },
     {
@@ -143,37 +155,43 @@
     {
       "name": "CYS",
       "hours": {
-        "continuous": true
+        "continuous": false,
+        "schedule": []
       }
     },
     {
       "name": "CFO",
       "hours": {
-        "continuous": true
+        "continuous": false,
+        "schedule": []
       }
     },
     {
       "name": "EGE",
       "hours": {
-        "continuous": true
+        "continuous": false,
+        "schedule": []
       }
     },
     {
       "name": "RCA",
       "hours": {
-        "continuous": true
+        "continuous": false,
+        "schedule": []
       }
     },
     {
       "name": "FMN",
       "hours": {
-        "continuous": true
+        "continuous": false,
+        "schedule": []
       }
     },
     {
       "name": "GJT",
       "hours": {
-        "continuous": true
+        "continuous": false,
+        "schedule": []
       }
     },
     {
@@ -185,7 +203,8 @@
     {
       "name": "PUB",
       "hours": {
-        "continuous": true
+        "continuous": false,
+        "schedule": []
       }
     },
     {
@@ -203,7 +222,8 @@
     {
       "name": "AFF",
       "hours": {
-        "continuous": true
+        "continuous": false,
+        "schedule": []
       }
     }
   ]
