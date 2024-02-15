@@ -73,16 +73,40 @@
       "videoUrl": "https://www.weather.gov/media/zdv/ZDVPDWB.mp4"
     },
     "SATELITE": {
-      "_": "TODO"
+      "images": [
+        {
+          "title": "ZDV West",
+          "src": "https://radar.weather.gov/ridge/standard/NORTHROCKIES_loop.gif"
+        },
+        {
+          "title": "ZDV East",
+          "src": "https://radar.weather.gov/ridge/standard/UPPERMISSVLY_loop.gif"
+        }
+      ]
     },
     "REQ PIREP": {
-      "_": "TODO"
+      "images": [
+        {
+          "title": "Requested PIREPs",
+          "src": "https://www.weather.gov/images/zdv/PIREPS.png"
+        }
+      ]
     },
     "ICING+CONV": {
-      "_": "TODO"
+      "images": [
+        {
+          "title": "Fronts",
+          "src": "https://www.wpc.ncep.noaa.gov/basicwx/92fndfd.gif"
+        }
+      ]
     },
     "PROG+SIG WX CHART": {
-      "_": "TODO"
+      "images": [
+        {
+          "title": "Fronts",
+          "src": "https://www.wpc.ncep.noaa.gov/basicwx/92fndfd.gif"
+        }
+      ]
     }
   },
   "views": [
