@@ -14,12 +14,16 @@ jobs:
 
     strategy:
       matrix:
-        facility: [zan]
+        facility: [zan, zdv]
         include:
         - facility: zan
           name: PAZA
           secret: ADH_PIPELINE_PAT
           repo: vpaza/gitops
+        - facility: zdv
+          name: KZDV
+          secret: ADH_PIPELINE_PAT
+          repo: kzdv/gitops
 
     steps:
     - name: Checkout Repo
