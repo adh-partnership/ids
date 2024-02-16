@@ -1,0 +1,307 @@
+{
+  "ids_api_base_url": "https://ids.zlcartcc.org",
+  "ids_base_url": "https://ids.zlcartcc.org",
+  "subdivision": {
+    "name": "Salt Lake City ARTCC",
+    "id": "ZLC",
+    "update_flash_duration": 16
+  },
+  "timezone": {
+    "name": "US/Mountain",
+    "offset": -7,
+    "offset_dst": -6
+  },
+  "colors": {
+    "navbar": {
+      "facility": "#002766",
+      "ids": "#ffb612",
+      "clock_background": "#000000",
+      "clock_foreground": "#ffb612"
+    },
+    "sia": {
+      "flash_background_class": "bg-blue-950",
+      "closed_background": "#ff00001a",
+      "identifier": "text-neutral-300",
+      "atis": "text-yellow-400",
+      "arrival_atis": "text-blue-400",
+      "arrival_runways": "text-white",
+      "departure_runways": "text-white",
+      "wind_foreground": "text-yellow-400",
+      "altimeter_foreground": "text-blue-400",
+      "metar": "text-white"
+    },
+    "buttons": {
+      "SIA": {
+        "background": "bg-slate-800",
+        "hover": "bg-gray-700",
+        "foreground": "text-white"
+      },
+      "WX": {
+        "background": "bg-blue-800",
+        "hover": "bg-blue-700",
+        "foreground": "text-white"
+      },
+      "SOP": {
+        "background": "bg-green-800",
+        "hover": "bg-green-700",
+        "foreground": "text-white"
+      },
+      "PIREPS": {
+        "background": "bg-yellow-800",
+        "hover": "bg-yellow-700",
+        "foreground": "text-white"
+      },
+      "CHARTS": {
+        "background": "bg-purple-800",
+        "hover": "bg-purple-700",
+        "foreground": "text-white"
+      },
+      "BRIEF": {
+        "background": "bg-rose-900",
+        "hover": "bg-rose-800",
+        "foreground": "text-white"
+      },
+      "Login": {
+        "background": "bg-slate-800",
+        "hover": "bg-gray-700",
+        "foreground": "text-white"
+      }
+    }
+  },
+  "weather": {
+    "PRE-DUTY BRIEF": {
+      "videoUrl": "https://www.weather.gov/media/zlc/ZLCPDWB.mp4"
+    },
+    "SATELITE": {
+      "images": []
+    },
+    "REQ PIREP": {
+      "images": []
+    },
+    "ICING+CONV": {
+      "images": []
+    },
+    "PROG+SIG WX CHART": {
+      "images": []
+    }
+  },
+  "views": [
+    {
+      "name": "BIL ATCT",
+      "facilities": ["BIL"],
+      "sops": "https://cdn.zlcartcc.org/uploads/1.pdf"
+    },
+    {
+      "name": "BOI ATCT",
+      "facilities": ["BOI"],
+      "sops": "https://cdn.zlcartcc.org/uploads/2-boi-atcttracon--na.pdf"
+    },
+    {
+      "name": "BZN ATCT",
+      "facilities": ["BZN"],
+      "sops": "https://cdn.zlcartcc.org/uploads/3-bzn-fcttracon--na.pdf"
+    },
+    {
+      "name": "SUN ATCT",
+      "facilities": ["SUN"],
+      "sops": "https://cdn.zlcartcc.org/uploads/15-sun-fct--na.pdf"
+    },
+    {
+      "name": "GPI ATCT",
+      "facilities": ["GPI"],
+      "sops": "https://cdn.zlcartcc.org/uploads/4-gpi-fct--na.pdf"
+    },
+    {
+      "name": "GTF ATCT",
+      "facilities": ["GTF"],
+      "sops": "https://cdn.zlcartcc.org/uploads/5-gtf-atcttracon--na.pdf"
+    },
+    {
+      "name": "HLN ATCT",
+      "facilities": ["HLN"],
+      "sops": "https://cdn.zlcartcc.org/uploads/6-hln-atct--na.pdf"
+    },
+    {
+      "name": "HIF ATCT",
+      "facilities": ["HIF"],
+      "sops": "https://zlcartcc.org/resources"
+    },
+    {
+      "name": "IDA ATCT",
+      "facilities": ["IDA"],
+      "sops": "https://cdn.zlcartcc.org/uploads/7-ida-fct--na.pdf"
+    },
+    {
+      "name": "JAC ATCT",
+      "facilities": ["JAC"],
+      "sops": "https://cdn.zlcartcc.org/uploads/8-jac-fct--na.pdf"
+    },
+    {
+      "name": "TWF ATCT",
+      "facilities": ["TWF"],
+      "sops": "https://cdn.zlcartcc.org/uploads/16-twf-atct--na.pdf"
+    },
+    {
+      "name": "MSO ATCT",
+      "facilities": ["MSO"],
+      "sops": "https://cdn.zlcartcc.org/uploads/9-mso-fcttracon--na.pdf"
+    },
+    {
+      "name": "MUO ATCT",
+      "facilities": ["MUO"],
+      "sops": "https://zlcartcc.org/resources"
+    },
+    {
+      "name": "OGD ATCT",
+      "facilities": ["OGD"],
+      "sops": "https://cdn.zlcartcc.org/uploads/10-ogd-fct--na.pdf"
+    },
+    {
+      "name": "PIH ATCT",
+      "facilities": ["PIH"],
+      "sops": "https://cdn.zlcartcc.org/uploads/11-pih-fct--na.pdf"
+    },
+    {
+      "name": "PVU ATCT",
+      "facilities": ["PVU"],
+      "sops": "https://cdn.zlcartcc.org/uploads/12-pvu-fct--na.pdf"
+    },
+    {
+      "name": "SLC ATCT",
+      "facilities": ["SLC"],
+      "sops": "https://cdn.zlcartcc.org/uploads/13-slc-atct--na.pdf"
+    },
+    {
+      "name": "SLC TRACON",
+      "facilities": ["SLC"],
+      "sops": "https://cdn.zlcartcc.org/uploads/14-s56-tracon--na.pdf"
+    },
+    {
+      "name": "ZLC Consolidated",
+      "facilities": [
+        "BIL",
+        "BOI",
+        "BZN",
+        "SUN",
+        "GPI",
+        "GTF",
+        "HLN",
+        "HIF",
+        "IDA",
+        "JAC",
+        "TWF",
+        "MSO",
+        "MUO",
+        "OGD",
+        "PIH",
+        "PVU",
+        "SLC"
+      ],
+      "sops": "https://cdn.zlcartcc.org/uploads/76-zlc-artcc--na.pdf"
+    }
+  ],
+  "airports": [
+    {
+      "name": "BIL",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "BOI",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "BZN",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "SUN",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "GPI",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "GTF",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "HLN",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "HIF",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "IDA",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "JAC",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "TWF",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "MSO",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "MUO",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "OGD",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "PIH",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "PVU",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "SLC",
+      "hours": {
+        "continuous": true
+      }
+    }
+  ]
+}
