@@ -23,7 +23,7 @@ func NewExternalHandler(router chi.Router, airportService *airports.AirportServi
 	}
 
 	router.Route("/external", func(r chi.Router) {
-		r.Get("/vatis", controller.vatis)
+		r.Post("/vatis", controller.vatis)
 	})
 
 	return controller
