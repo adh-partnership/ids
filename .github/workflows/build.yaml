@@ -22,7 +22,7 @@ jobs:
           repo: vpaza/gitops
         - facility: zdv
           name: KZDV
-          secret: ADH_PIPELINE_PAT
+          secret: GH_PIPELINE_PAT
           repo: kzdv/gitops
 
     steps:
