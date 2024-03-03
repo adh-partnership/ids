@@ -9,10 +9,11 @@ import (
 )
 
 type Handlers struct {
-	AirportHandler *AirportHandler
-	AuthHandler    *AuthHandler
-	PIREPHandler   *PIREPHandler
-	ChartHandler   *ChartHandler
+	AirportHandler  *AirportHandler
+	AuthHandler     *AuthHandler
+	PIREPHandler    *PIREPHandler
+	ChartHandler    *ChartHandler
+	ExternalHandler *ExternalHandler
 }
 
 type Services struct {
@@ -31,6 +32,7 @@ func RegisterHandlers(
 	h.AuthHandler = NewAuthHandler(router, services.AuthService)
 	h.PIREPHandler = NewPIREPHandler(router, services.PIREPService)
 	h.ChartHandler = NewChartHandler(router, services.ChartService, services.AirportService)
+	h.ExternalHandler = NewExternalHandler(router, services.AirportService)
 
 	return router, h
 }

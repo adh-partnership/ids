@@ -31,7 +31,7 @@ func NewExternalHandler(router chi.Router, airportService *airports.AirportServi
 
 // Soon(TM)
 func (h *ExternalHandler) vatis(w http.ResponseWriter, r *http.Request) {
-	var dto *dtos.VATISRequest
+	dto := &dtos.VATISRequest{}
 	if err := render.Bind(r, dto); err != nil {
 		response.Respond(w, r, nil, http.StatusBadRequest)
 		return
