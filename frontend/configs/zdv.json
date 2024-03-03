@@ -1,0 +1,355 @@
+{
+  "ids_api_base_url": "https://ids.zdvartcc.org",
+  "ids_base_url": "https://ids.zdvartcc.org",
+  "subdivision": {
+    "name": "Denver ARTCC",
+    "id": "ZDV",
+    "update_flash_duration": 16
+  },
+  "timezone": {
+    "name": "America/Denver",
+    "offset": -7,
+    "offset_dst": -6
+  },
+  "colors": {
+    "navbar": {
+      "facility": "#002766",
+      "ids": "#ffb612",
+      "clock_background": "#000000",
+      "clock_foreground": "#ffb612"
+    },
+    "sia": {
+      "flash_background_class": "bg-blue-950",
+      "closed_background": "#ff00001a",
+      "identifier": "text-neutral-300",
+      "atis": "text-yellow-400",
+      "arrival_atis": "text-blue-400",
+      "arrival_runways": "text-white",
+      "departure_runways": "text-white",
+      "wind_foreground": "text-yellow-400",
+      "altimeter_foreground": "text-blue-400",
+      "metar": "text-white"
+    },
+    "buttons": {
+      "SIA": {
+        "background": "bg-slate-800",
+        "hover": "bg-gray-700",
+        "foreground": "text-white"
+      },
+      "WX": {
+        "background": "bg-blue-800",
+        "hover": "bg-blue-700",
+        "foreground": "text-white"
+      },
+      "SOP": {
+        "background": "bg-green-800",
+        "hover": "bg-green-700",
+        "foreground": "text-white"
+      },
+      "PIREPS": {
+        "background": "bg-yellow-800",
+        "hover": "bg-yellow-700",
+        "foreground": "text-white"
+      },
+      "CHARTS": {
+        "background": "bg-purple-800",
+        "hover": "bg-purple-700",
+        "foreground": "text-white"
+      },
+      "BRIEF": {
+        "background": "bg-rose-900",
+        "hover": "bg-rose-800",
+        "foreground": "text-white"
+      },
+      "Login": {
+        "background": "bg-slate-800",
+        "hover": "bg-gray-700",
+        "foreground": "text-white"
+      }
+    }
+  },
+  "weather": {
+    "PRE-DUTY BRIEF": {
+      "videoUrl": "https://www.weather.gov/media/zdv/ZDVPDWB.mp4"
+    },
+    "SATELITE": {
+      "images": [
+        {
+          "title": "ZDV West",
+          "src": "https://radar.weather.gov/ridge/standard/NORTHROCKIES_loop.gif"
+        },
+        {
+          "title": "ZDV East",
+          "src": "https://radar.weather.gov/ridge/standard/UPPERMISSVLY_loop.gif"
+        }
+      ]
+    },
+    "REQ PIREP": {
+      "images": [
+        {
+          "title": "Requested PIREPs",
+          "src": "https://www.weather.gov/images/zdv/PIREPS.png"
+        }
+      ]
+    },
+    "ICING+CONV": {
+      "images": [
+        {
+          "title": "Fronts",
+          "src": "https://www.wpc.ncep.noaa.gov/basicwx/92fndfd.gif"
+        }
+      ]
+    },
+    "PROG+SIG WX CHART": {
+      "images": [
+        {
+          "title": "Fronts",
+          "src": "https://www.wpc.ncep.noaa.gov/basicwx/92fndfd.gif"
+        }
+      ]
+    }
+  },
+  "views": [
+    {
+      "name": "DEN ATCT",
+      "facilities": ["DEN"],
+      "sops": "https://cdn.zdvartcc.org/uploads/29-den-atct--71101g.pdf"
+    },
+    {
+      "name": "COS ATCT",
+      "facilities": ["COS"],
+      "sops": "https://cdn.zdvartcc.org/uploads/cos-atcttracon--711010d.pdf"
+    },
+    {
+      "name": "ASE ATCT",
+      "facilities": ["ASE"],
+      "sops": "https://cdn.zdvartcc.org/uploads/ase-atcttracab--711010d.pdf"
+    },
+    {
+      "name": "BKF ATCT",
+      "facilities": ["BKF"],
+      "sops": "https://zdvartcc.org/resources"
+    },
+    {
+      "name": "FCS ATCT",
+      "facilities": ["FCS"],
+      "sops": "https://zdvartcc.org/resources"
+    },
+    {
+      "name": "GUR ATCT",
+      "facilities": ["GUR"],
+      "sops": "https://cdn.zdvartcc.org/uploads/gur-atct--711013b.pdf"
+    },
+    {
+      "name": "CPR ATCT",
+      "facilities": ["CPR"],
+      "sops": "https://cdn.zdvartcc.org/uploads/cpr-atcttracon--711014a.pdf"
+    },
+    {
+      "name": "APA ATCT",
+      "facilities": ["APA"],
+      "sops": "https://cdn.zdvartcc.org/uploads/apa-atct--711010d.pdf"
+    },
+    {
+      "name": "CYS ATCT",
+      "facilities": ["CYS"],
+      "sops": "https://cdn.zdvartcc.org/uploads/cys-atct--na.pdf"
+    },
+    {
+      "name": "CFO ATCT",
+      "facilities": ["CFO"],
+      "sops": "https://cdn.zdvartcc.org/uploads/cfo-atct--711010b.pdf"
+    },
+    {
+      "name": "EGE ATCT",
+      "facilities": ["EGE"],
+      "sops": "https://cdn.zdvartcc.org/uploads/30-ege-fct--71104a.pdf"
+    },
+    {
+      "name": "RCA ATCT",
+      "facilities": ["RCA"],
+      "sops": "https://cdn.zdvartcc.org/uploads/raprca-atctrapcon.pdf"
+    },
+    {
+      "name": "FMN ATCT",
+      "facilities": ["FMN"],
+      "sops": "https://cdn.zdvartcc.org/uploads/31-fmn-fct--711013a.pdf"
+    },
+    {
+      "name": "GJT ATCT",
+      "facilities": ["GJT"],
+      "sops": "https://cdn.zdvartcc.org/uploads/33-gjt-fct--71105a.pdf"
+    },
+    {
+      "name": "FNL ATCT",
+      "facilities": ["FNL"],
+      "sops": "https://cdn.zdvartcc.org/uploads/fnl-atct--711012d.pdf"
+    },
+    {
+      "name": "PUB ATCT",
+      "facilities": ["PUB"],
+      "sops": "https://cdn.zdvartcc.org/uploads/35-pub-atct--71106a.pdf"
+    },
+    {
+      "name": "RAP ATCT",
+      "facilities": ["RAP"],
+      "sops": "https://cdn.zdvartcc.org/uploads/raprca-atctrapcon.pdf"
+    },
+    {
+      "name": "BJC ATCT",
+      "facilities": ["BJC"],
+      "sops": "https://cdn.zdvartcc.org/uploads/bjc-atct-711010a.pdf"
+    },
+    {
+      "name": "AFF ATCT",
+      "facilities": ["AFF"],
+      "sops": "https://zdvartcc.org/resources"
+    },
+    {
+      "name": "Denver TRACON",
+      "facilities": ["DEN", "APA", "BJC", "BKF", "CFO", "GJT", "PUB"],
+      "sops": "https://cdn.zdvartcc.org/uploads/d01-tracon--711010d.pdf"
+    },
+    {
+      "name": "ZDV Consolidated",
+      "facilities": [
+        "DEN",
+        "COS",
+        "ASE",
+        "BKF",
+        "FCS",
+        "GUR",
+        "CPR",
+        "APA",
+        "CYS",
+        "CFO",
+        "EGE",
+        "RCA",
+        "FMN",
+        "GJT",
+        "FNL",
+        "PUB",
+        "RAP",
+        "BJC",
+        "AFF"
+      ],
+      "sops": "https://cdn.zdvartcc.org/uploads/zdv--711065d.pdf"
+    }
+  ],
+  "airports": [
+    {
+      "name": "DEN",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "COS",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "ASE",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "BKF",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "FCS",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "GUR",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "CPR",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "APA",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "CYS",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "CFO",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "EGE",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "RCA",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "FMN",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "GJT",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "FNL",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "PUB",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "RAP",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "BJC",
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "AFF",
+      "hours": {
+        "continuous": true
+      }
+    }
+  ]
+}
