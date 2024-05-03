@@ -21,6 +21,13 @@ jobs:
           secret: ADH_PIPELINE_PAT
           repo: vpaza/gitops
 
+        facility: [zlc]
+        include:
+        - facility: zlc
+          name: KZLC
+          secret: KZLC_GITOPS_TOKEN
+          repo: kzlc/gitops
+
     steps:
     - name: Checkout Repo
       uses: actions/checkout@v4
@@ -78,6 +85,13 @@ jobs:
           name: PAZA
           secret: ADH_PIPELINE_PAT
           repo: vpaza/gitops
+
+        facility: [zlc]
+        include:
+        - facility: zlc
+          name: KZLC
+          secret: KZLC_GITOPS_TOKEN
+          repo: kzlc/gitops
 
     steps:
     - name: Checkout Repo
