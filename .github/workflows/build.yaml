@@ -90,7 +90,7 @@ jobs:
         include:
         - facility: zlc
           name: KZLC
-          secret: ADH_PIPELINE_PAT
+          secret: KZLC_GITOPS_TOKEN
           repo: kzlc/gitops
 
     steps:
