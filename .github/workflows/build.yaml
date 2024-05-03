@@ -91,7 +91,7 @@ jobs:
         - facility: zlc
           name: KZLC
           secret: ADH_PIPELINE_PAT
-          repo: kzlc/gtiops
+          repo: kzlc/gitops
 
     steps:
     - name: Checkout Repo
