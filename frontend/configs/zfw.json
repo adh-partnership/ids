@@ -1,0 +1,988 @@
+{
+  "ids_api_base_url": "http://ids-api.zfwartcc.net:3000",
+  "ids_base_url": "http://ids-api.zfwartcc.net:5173",
+  "subdivision": {
+    "name": "Fort Worth ARTCC",
+    "id": "ZFW",
+    "update_flash_duration": 16
+  },
+  "timezone": {
+    "name": "America/Chicago",
+    "offset": -6,
+    "offset_dst": -5
+  },
+  "colors": {
+    "navbar": {
+      "facility": "#002766",
+      "ids": "#ffb612",
+      "clock_background": "#000000",
+      "clock_foreground": "#ffb612"
+    },
+    "sia": {
+      "flash_background_class": "bg-blue-950",
+      "closed_background": "#ff00001a",
+      "identifier": "text-neutral-300",
+      "atis": "text-yellow-400",
+      "arrival_atis": "text-blue-400",
+      "arrival_runways": "text-white",
+      "departure_runways": "text-white",
+      "wind_foreground": "text-yellow-400",
+      "altimeter_foreground": "text-blue-400",
+      "metar": "text-white"
+    },
+    "buttons": {
+      "SIA": {
+        "background": "bg-slate-800",
+        "hover": "bg-gray-700",
+        "foreground": "text-white"
+      },
+      "WX": {
+        "background": "bg-blue-800",
+        "hover": "bg-blue-700",
+        "foreground": "text-white"
+      },
+      "SOP": {
+        "background": "bg-green-800",
+        "hover": "bg-green-700",
+        "foreground": "text-white"
+      },
+      "PIREPS": {
+        "background": "bg-yellow-800",
+        "hover": "bg-yellow-700",
+        "foreground": "text-white"
+      },
+      "CHARTS": {
+        "background": "bg-purple-800",
+        "hover": "bg-purple-700",
+        "foreground": "text-white"
+      },
+      "BRIEF": {
+        "background": "bg-rose-900",
+        "hover": "bg-rose-800",
+        "foreground": "text-white"
+      },
+      "Login": {
+        "background": "bg-slate-800",
+        "hover": "bg-gray-700",
+        "foreground": "text-white"
+      }
+    }
+  },
+  "weather": {
+    "PRE-DUTY BRIEF": {
+      "videoUrl": "https://www.weather.gov/media/zfw/multimedia.mp4"
+    },
+    "SATELITE": {
+      "images": [
+        {
+          "title": "IR View",
+          "src": "https://www.weather.gov/images/aawu/GOES/IR_loop.gif"
+        },
+        {
+          "title": "Visible View",
+          "src": "https://www.weather.gov/images/aawu/GOES/VIS_loop.gif"
+        },
+        {
+          "title": "Water Vapor View",
+          "src": "https://www.weather.gov/images/aawu/GOES/WV_loop.gif"
+        }
+      ]
+    },
+    "REQ PIREP": {
+      "images": [
+        {
+          "title": "Requested PIREPs",
+          "src": "https://www.weather.gov/images/zme/zan_pirep.png"
+        }
+      ]
+    },
+    "ICING+CONV": {
+      "images": [
+        {
+          "src": "https://www.weather.gov/images/aawu/fcstgraphics/icing_1.png"
+        },
+        {
+          "src": "https://www.weather.gov/images/aawu/fcstgraphics/icing_2.png"
+        },
+        {
+          "src": "https://www.weather.gov/images/aawu/fcstgraphics/icing_3.png"
+        },
+        {
+          "src": "https://www.weather.gov/images/aawu/fcstgraphics/icing_4.png"
+        }
+      ]
+    },
+    "PROG+SIG WX CHART": {
+      "images": [
+        {
+          "src": "https://www.weather.gov/images/aawu/fcstgraphics/ifr_1.png"
+        },
+        {
+          "src": "https://www.weather.gov/images/aawu/fcstgraphics/ifr_2.png"
+        },
+        {
+          "src": "http://www.weather.gov/images/aawu/sigWx24.gif"
+        },
+        {
+          "src": "http://www.weather.gov/images/aawu/sigWx36.gif"
+        },
+        {
+          "src": "http://www.weather.gov/images/aawu/sigWx48.gif"
+        },
+        {
+          "src": "http://www.weather.gov/images/aawu/sigWx60.gif"
+        }
+      ]
+    }
+  },
+  "views": [
+    {
+      "name": "Allen AAF ATCT",
+      "facilities": [
+        "BIG"
+      ],
+      "sops": "https://sops.zanartcc.org/docs/terminal/military/"
+    }
+  ],
+  "airports": [
+    {
+      "name": "ABI",
+      "dual_atis": false,
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "ACT",
+      "dual_atis": false,
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "open": "06:00",
+            "close": "00:00",
+            "local": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "ADH",
+      "dual_atis": false
+    },
+    {
+      "name": "ADM",
+      "dual_atis": false,
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "open": "07:00",
+            "close": "23:00",
+            "days": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "local": true
+          },
+          {
+            "open": "07:00",
+            "close": "17:00",
+            "days": [
+              0,
+              6
+            ],
+            "local": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "ADS",
+      "dual_atis": false,
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "open": "06:00",
+            "close": "22:00",
+            "local": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "AFW",
+      "dual_atis": false,
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "AGO",
+      "dual_atis": false
+    },
+    {
+      "name": "AQR",
+      "dual_atis": false
+    },
+    {
+      "name": "ASL",
+      "dual_atis": false
+    },
+    {
+      "name": "ATA",
+      "dual_atis": false
+    },
+    {
+      "name": "AXS",
+      "dual_atis": false
+    },
+    {
+      "name": "BAD",
+      "dual_atis": false,
+      //TODO: Special Times - OPR 1300-0400Z++ MON-FRI 1400-2200Z++ WKENDS; CLSD AFGSC FAMILY DAYS & FEDERAL HOL AND 1200-1500Z++ THIRD FRI MONTHLY FOR A-G MAINT.
+    },
+    {
+      "name": "BFE",
+      "dual_atis": false
+    },
+    {
+      "name": "BKD",
+      "dual_atis": false
+    },
+    {
+      "name": "BPG",
+      "dual_atis": false
+    },
+    {
+      "name": "BQP",
+      "dual_atis": false
+    },
+    {
+      "name": "BWD",
+      "dual_atis": false
+    },
+    {
+      "name": "CDH",
+      "dual_atis": false
+    },
+    {
+      "name": "CDS",
+      "dual_atis": false
+    },
+    {
+      "name": "CHK",
+      "dual_atis": false
+    },
+    {
+      "name": "CLK",
+      "dual_atis": false
+    },
+    {
+      "name": "CNW",
+      "dual_atis": false,
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "open": "07:15",
+            "close": "23:00",
+            "local": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "COM",
+      "dual_atis": false
+    },
+    {
+      "name": "CPT",
+      "dual_atis": false
+    },
+    {
+      "name": "CRS",
+      "dual_atis": false
+    },
+    {
+      "name": "CSM",
+      "dual_atis": false,
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "open": "09:00",
+            "close": "01:00",
+            "days": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "local": true
+          }
+        ]
+      }
+      //TODO: Special - "EXCEPT FEDERAL HDL."
+    },
+    {
+      "name": "CWC",
+      "dual_atis": false
+    },
+    {
+      "name": "DAL",
+      "dual_atis": false,
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "DEQ",
+      "dual_atis": false
+    },
+    {
+      "name": "DFW",
+      "dual_atis": false,
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "DTN",
+      "dual_atis": false,
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "open": "07:00",
+            "close": "22:00",
+            "local": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "DTO",
+      "dual_atis": false,
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "open": "06:00",
+            "close": "22:00",
+            "local": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "DUA",
+      "dual_atis": false
+    },
+    {
+      "name": "DUC",
+      "dual_atis": false
+    },
+    {
+      "name": "DYS",
+      "dual_atis": false,
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "ELD",
+      "dual_atis": false
+    },
+    {
+      "name": "ELK",
+      "dual_atis": false
+    },
+    {
+      "name": "ETN",
+      "dual_atis": false
+    },
+    {
+      "name": "FDR",
+      "dual_atis": false
+    },
+    {
+      "name": "FSI",
+      "dual_atis": false,
+      //TODO: Special - "OPR BY NOTAM."
+    },
+    {
+      "name": "FTW",
+      "dual_atis": false,
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "FWS",
+      "dual_atis": false,
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "open": "07:00",
+            "close": "20:00",
+            "local": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "GDJ",
+      "dual_atis": false
+    },
+    {
+      "name": "GGG",
+      "dual_atis": true,
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "open": "06:00",
+            "close": "22:00",
+            "local": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "GKY",
+      "dual_atis": false,
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "open": "07:00",
+            "close": "21:00",
+            "local": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "GLE",
+      "dual_atis": false
+    },
+    {
+      "name": "GNC",
+      "dual_atis": false
+    },
+    {
+      "name": "GOK",
+      "dual_atis": false
+    },
+    {
+      "name": "GOP",
+      "dual_atis": false
+    },
+    {
+      "name": "GPM",
+      "dual_atis": false,
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "whenDST": true,
+            "open": "07:00",
+            "close": "21:00",
+            "local": true
+          },
+          {
+            "whenDST": false,
+            "open": "08:00",
+            "close": "18:00",
+            "local": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "GRK",
+      "dual_atis": false,
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "GVT",
+      "dual_atis": false,
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "open": "07:30",
+            "close": "16:00",
+            "days": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],//TODO: Special - "IRREGULAR OTHER HOURS"
+            "local": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "GYI",
+      "dual_atis": false,
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "open": "07:00",
+            "close": "19:00",
+            "local": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "GZL",
+      "dual_atis": false
+    },
+    {
+      "name": "GZN",
+      "dual_atis": false
+    },
+    {
+      "name": "HBR",
+      "dual_atis": false
+    },
+    {
+      "name": "HHW",
+      "dual_atis": false
+    },
+    {
+      "name": "HLR",
+      "dual_atis": false,
+      //TODO: Special - OPR 1400-0600Z++ MON-FRI EXC HOL, OT CTC ROBERT GRAY TWR 120.75 285.5 AIRBORNE;133.85 225.4 ON GND.
+    },
+    {
+      "name": "HMY",
+      "dual_atis": false
+    },
+    {
+      "name": "HOB",
+      "dual_atis": false,
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "open": "06:00",
+            "close": "18:00",
+            "local": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "HQZ",
+      "dual_atis": false,
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "open": "07:00",
+            "close": "21:00",
+            "local": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "HSD",
+      "dual_atis": false
+    },
+    {
+      "name": "ILE",
+      "dual_atis": false
+    },
+    {
+      "name": "INJ",
+      "dual_atis": false
+    },
+    {
+      "name": "INK",
+      "dual_atis": false
+    },
+    {
+      "name": "JDD",
+      "dual_atis": false
+    },
+    {
+      "name": "JSO",
+      "dual_atis": false
+    },
+    {
+      "name": "JWY",
+      "dual_atis": false
+    },
+    {
+      "name": "JXI",
+      "dual_atis": false
+    },
+    {
+      "name": "LAW",
+      "dual_atis": false,
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "open": "08:00",
+            "close": "19:00",
+            "local": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "LBB",
+      "dual_atis": false,
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "LBR",
+      "dual_atis": false
+    },
+    {
+      "name": "LIU",
+      "dual_atis": false
+    },
+    {
+      "name": "LLN",
+      "dual_atis": false
+    },
+    {
+      "name": "LNC",
+      "dual_atis": false
+    },
+    {
+      "name": "LTS",
+      "dual_atis": false,
+      //TODO: Special - 1500-0830Z++ MON-FRI; CLSD WKEND AND HOL.
+    },
+    {
+      "name": "LUD",
+      "dual_atis": false
+    },
+    {
+      "name": "LUV",
+      "dual_atis": false
+    },
+    {
+      "name": "LXY",
+      "dual_atis": false
+    },
+    {
+      "name": "LZZ",
+      "dual_atis": false
+    },
+    {
+      "name": "MAF",
+      "dual_atis": false,
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "open": "06:00",
+            "close": "00:00",
+            "local": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "MDD",
+      "dual_atis": false
+    },
+    {
+      "name": "MKN",
+      "dual_atis": false
+    },
+    {
+      "name": "MKO",
+      "dual_atis": false
+    },
+    {
+      "name": "MLC",
+      "dual_atis": false
+    },
+    {
+      "name": "MLU",
+      "dual_atis": false,
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "open": "06:00",
+            "close": "22:00",
+            "local": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "MNE",
+      "dual_atis": false
+    },
+    {
+      "name": "MNZ",
+      "dual_atis": false
+    },
+    {
+      "name": "MWL",
+      "dual_atis": false
+    },
+    {
+      "name": "NFW",
+      "dual_atis": false,
+      //TODO: Special - 1300-0500Z++ MON-FRI; 1500-2300Z++ SAT & SUN, OT BY NOTAM.
+    },
+    {
+      "name": "ODO",
+      "dual_atis": false
+    },
+    {
+      "name": "OJA",
+      "dual_atis": false
+    },
+    {
+      "name": "OKC",
+      "dual_atis": false,
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "ONY",
+      "dual_atis": false
+    },
+    {
+      "name": "OSA",
+      "dual_atis": false
+    },
+    {
+      "name": "OUN",
+      "dual_atis": false,
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "open": "08:00",
+            "close": "22:00",
+            "local": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "PRX",
+      "dual_atis": false
+    },
+    {
+      "name": "PSN",
+      "dual_atis": false
+    },
+    {
+      "name": "PVJ",
+      "dual_atis": false
+    },
+    {
+      "name": "PVW",
+      "dual_atis": false
+    },
+    {
+      "name": "PWA",
+      "dual_atis": false,
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "open": "07:00",
+            "close": "22:00",
+            "local": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "PWG",
+      "dual_atis": false
+    },
+    {
+      "name": "RBD",
+      "dual_atis": false,
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "open": "07:00",
+            "close": "21:00",
+            "local": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "RCE",
+      "dual_atis": false
+    },
+    {
+      "name": "RFI",
+      "dual_atis": false
+    },
+    {
+      "name": "RPH",
+      "dual_atis": false
+    },
+    {
+      "name": "RQO",
+      "dual_atis": false
+    },
+    {
+      "name": "RSN",
+      "dual_atis": false
+    },
+    {
+      "name": "SEP",
+      "dual_atis": false
+    },
+    {
+      "name": "SHV",
+      "dual_atis": false,
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "SJT",
+      "dual_atis": false,
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "open": "07:00",
+            "close": "21:00",
+            "local": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "SLR",
+      "dual_atis": false
+    },
+    {
+      "name": "SNK",
+      "dual_atis": false
+    },
+    {
+      "name": "SNL",
+      "dual_atis": false
+    },
+    {
+      "name": "SPH",
+      "dual_atis": false
+    },
+    {
+      "name": "SPS",
+      "dual_atis": false,
+      //TODO: Special - OPR 1200-0200Z++ MON-FRI; 1800-2300Z++ SUN; CLSD SAT AND HOL, OT USE CTAF.
+    },
+    {
+      "name": "SRE",
+      "dual_atis": false
+    },
+    {
+      "name": "SWI",
+      "dual_atis": false
+    },
+    {
+      "name": "SWW",
+      "dual_atis": false
+    },
+    {
+      "name": "TIK",
+      "dual_atis": false,
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "TKI",
+      "dual_atis": false,
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "open": "06:00",
+            "close": "22:00",
+            "local": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "TPL",
+      "dual_atis": false
+    },
+    {
+      "name": "TRL",
+      "dual_atis": false
+    },
+    {
+      "name": "TXK",
+      "dual_atis": false,
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "open": "06:00",
+            "close": "22:00",
+            "local": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "TYR",
+      "dual_atis": false,
+      "hours": {
+        "continuous": false,
+        "schedule": [
+          {
+            "open": "06:30",
+            "close": "21:30",
+            "local": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "WEA",
+      "dual_atis": false
+    },
+    {
+      "name": "XBP",
+      "dual_atis": false
+    }
+    ]
+}
+
+
+
+
