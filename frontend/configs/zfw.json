@@ -243,8 +243,7 @@
     },
     {
       "name": "BAD",
-      "dual_atis": false,
-      //TODO: Special Times - OPR 1300-0400Z++ MON-FRI 1400-2200Z++ WKENDS; CLSD AFGSC FAMILY DAYS & FEDERAL HOL AND 1200-1500Z++ THIRD FRI MONTHLY FOR A-G MAINT.
+      "dual_atis": false
     },
     {
       "name": "BFE",
@@ -328,7 +327,6 @@
           }
         ]
       }
-      //TODO: Special - "EXCEPT FEDERAL HDL."
     },
     {
       "name": "CWC",
@@ -413,8 +411,7 @@
     },
     {
       "name": "FSI",
-      "dual_atis": false,
-      //TODO: Special - "OPR BY NOTAM."
+      "dual_atis": false
     },
     {
       "name": "FTW",
@@ -528,7 +525,7 @@
               3,
               4,
               5
-            ],//TODO: Special - "IRREGULAR OTHER HOURS"
+            ],
             "local": true
           }
         ]
@@ -566,8 +563,7 @@
     },
     {
       "name": "HLR",
-      "dual_atis": false,
-      //TODO: Special - OPR 1400-0600Z++ MON-FRI EXC HOL, OT CTC ROBERT GRAY TWR 120.75 285.5 AIRBORNE;133.85 225.4 ON GND.
+      "dual_atis": false
     },
     {
       "name": "HMY",
@@ -672,8 +668,7 @@
     },
     {
       "name": "LTS",
-      "dual_atis": false,
-      //TODO: Special - 1500-0830Z++ MON-FRI; CLSD WKEND AND HOL.
+      "dual_atis": false
     },
     {
       "name": "LUD",
@@ -749,8 +744,7 @@
     },
     {
       "name": "NFW",
-      "dual_atis": false,
-      //TODO: Special - 1300-0500Z++ MON-FRI; 1500-2300Z++ SAT & SUN, OT BY NOTAM.
+      "dual_atis": false
     },
     {
       "name": "ODO",
@@ -900,8 +894,7 @@
     },
     {
       "name": "SPS",
-      "dual_atis": false,
-      //TODO: Special - OPR 1200-0200Z++ MON-FRI; 1800-2300Z++ SUN; CLSD SAT AND HOL, OT USE CTAF.
+      "dual_atis": false
     },
     {
       "name": "SRE",
