@@ -51,7 +51,7 @@ jobs:
     - name: Build and Push Container Image
       if: ${{ github.event_name == 'push' && env.branch == 'main' }}
       run: |
-        TAG=${{ env.branch }}-${{ env.sha_short }} bash scripts/build.sh
+        TAG=${{ env.branch }}-${{ env.sha_short }} subdivision=${{ matrix.name }} bash scripts/build.sh
     - name: Build Container Image
       if: ${{ env.branch != 'main' }}
       run: |
