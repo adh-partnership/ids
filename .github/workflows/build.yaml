@@ -22,7 +22,7 @@ jobs:
           repo: vpaza/gitops
         - facility: zfw
           name: ZFW
-          secret: KZFW_GITOPS_TOKEN
+          secret: ADH_PIPELINE_PAT
           repo: kzfw/gitops
     steps:
     - name: Checkout Repo
@@ -83,7 +83,7 @@ jobs:
           repo: vpaza/gitops
         - facility: zfw
           name: ZFW
-          secret: KZFW_GITOPS_TOKEN
+          secret: ADH_PIPELINE_PAT
           repo: kzfw/gitops
     steps:
     - name: Checkout Repo
