@@ -55,7 +55,7 @@ jobs:
     - name: Build Container Image
       if: ${{ env.branch != 'main' }}
       run: |
-        DRY_RUN=1 TAG=${{ env.branch }}-${{ env.sha_short }} bash scripts/build.sh
+        DRY_RUN=1 TAG=${{ env.branch }}-${{ env.sha_short }} subdivision=${{ matrix.name }} bash scripts/build.sh
     - name: Sign Image
       if: ${{ github.event_name == 'push' && env.branch == 'main' }}
       env:
