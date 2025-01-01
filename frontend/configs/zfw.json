@@ -1,6 +1,6 @@
 {
-  "ids_api_base_url": "http://ids.zfwartcc.net",
-  "ids_base_url": "http://ids.zfwartcc.net",
+  "ids_api_base_url": "https://ids.zfwartcc.net",
+  "ids_base_url": "https://ids.zfwartcc.net",
   "subdivision": {
     "name": "Fort Worth ARTCC",
     "id": "ZFW",
