@@ -20,7 +20,10 @@ jobs:
           name: PAZA
           secret: ADH_PIPELINE_PAT
           repo: vpaza/gitops
-
+        - facility: zfw
+          name: ZFW
+          secret: KZFW_GITOPS_TOKEN
+          repo: kzfw/gitops
     steps:
     - name: Checkout Repo
       uses: actions/checkout@v4
@@ -78,7 +81,10 @@ jobs:
           name: PAZA
           secret: ADH_PIPELINE_PAT
           repo: vpaza/gitops
-
+        - facility: zfw
+          name: ZFW
+          secret: KZFW_GITOPS_TOKEN
+          repo: kzfw/gitops
     steps:
     - name: Checkout Repo
       uses: actions/checkout@v4
