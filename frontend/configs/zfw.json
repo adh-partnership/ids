@@ -70,7 +70,7 @@
   },
   "weather": {
     "PRE-DUTY BRIEF": {
-      "videoUrl": "https://www.weather.gov/media/zfw/multimedia.mp4"
+      "src": "https://www.weather.gov/zfw/zfw_wxbrief"
     },
     "SATELITE": {
       "images": [
