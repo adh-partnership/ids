@@ -137,9 +137,14 @@
   },
   "views": [
     {
-      "name": "Allen AAF ATCT",
+      "name": "Fort Worth Center",
       "facilities": [
-        "BIG"
+        "DFW",
+        "DAL",
+        "OKC",
+        "LBB",
+        "ABI",
+        "ACT"
       ],
       "sops": "https://zfwartcc.net/resources"
     }
@@ -147,6 +152,27 @@
   "airports": [
     {
       "name": "ABI",
+      "dual_atis": false,
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "DAL",
+      "dual_atis": false,
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "OKC",
+      "dual_atis": false,
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "LBB",
       "dual_atis": false,
       "hours": {
         "continuous": true
