@@ -75,8 +75,8 @@
     "SATELITE": {
       "images": [
         {
-          "title": "IR View",
-          "src": "https://www.weather.gov/images/aawu/GOES/IR_loop.gif"
+          "title": "Radar",
+          "src": "https://radar.weather.gov/ridge/standard/SOUTHPLAINS_loop.gif"
         },
         {
           "title": "Visible View",
