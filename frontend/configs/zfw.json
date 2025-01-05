@@ -70,13 +70,13 @@
   },
   "weather": {
     "PRE-DUTY BRIEF": {
-      "videoUrl": "https://www.weather.gov/media/zfw/multimedia.mp4"
+      "src": "https://www.weather.gov/zfw/zfw_wxbrief"
     },
     "SATELITE": {
       "images": [
         {
-          "title": "IR View",
-          "src": "https://www.weather.gov/images/aawu/GOES/IR_loop.gif"
+          "title": "Radar",
+          "src": "https://radar.weather.gov/ridge/standard/SOUTHPLAINS_loop.gif"
         },
         {
           "title": "Visible View",
@@ -137,9 +137,14 @@
   },
   "views": [
     {
-      "name": "Allen AAF ATCT",
+      "name": "Fort Worth Center",
       "facilities": [
-        "BIG"
+        "DFW",
+        "DAL",
+        "OKC",
+        "LBB",
+        "ABI",
+        "ACT"
       ],
       "sops": "https://zfwartcc.net/resources"
     }
@@ -147,6 +152,27 @@
   "airports": [
     {
       "name": "ABI",
+      "dual_atis": false,
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "DAL",
+      "dual_atis": false,
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "OKC",
+      "dual_atis": false,
+      "hours": {
+        "continuous": true
+      }
+    },
+    {
+      "name": "LBB",
       "dual_atis": false,
       "hours": {
         "continuous": true
