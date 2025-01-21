@@ -76,15 +76,11 @@
       "images": [
         {
           "title": "IR View",
-          "src": "https://www.weather.gov/images/aawu/GOES/IR_loop.gif"
+          "src": "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/sp/13/GOES16-SP-13-600x600.gif"
         },
         {
           "title": "Visible View",
-          "src": "https://www.weather.gov/images/aawu/GOES/VIS_loop.gif"
-        },
-        {
-          "title": "Water Vapor View",
-          "src": "https://www.weather.gov/images/aawu/GOES/WV_loop.gif"
+          "src": "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/sp/GEOCOLOR/GOES16-SP-GEOCOLOR-600x600.gif"
         }
       ]
     },
@@ -92,54 +88,50 @@
       "images": [
         {
           "title": "Requested PIREPs",
-          "src": "https://www.weather.gov/images/zme/zan_pirep.png"
+          "src": "https://www.weather.gov/images/zfw/rtimages/PIREP_REQUEST_CRRNT.png"
         }
       ]
     },
-    "ICING+CONV": {
+    "D10 GATE FORECAST": {
       "images": [
         {
-          "src": "https://www.weather.gov/images/aawu/fcstgraphics/icing_1.png"
-        },
-        {
-          "src": "https://www.weather.gov/images/aawu/fcstgraphics/icing_2.png"
-        },
-        {
-          "src": "https://www.weather.gov/images/aawu/fcstgraphics/icing_3.png"
-        },
-        {
-          "src": "https://www.weather.gov/images/aawu/fcstgraphics/icing_4.png"
+          "src": "https://www.weather.gov/images/zfw/rtimages/CornerPost.png"
         }
       ]
     },
-    "PROG+SIG WX CHART": {
+    "REGIONAL/SURFACE FORECAST: {
       "images": [
         {
-          "src": "https://www.weather.gov/images/aawu/fcstgraphics/ifr_1.png"
+          "title": "Surface Analysis",
+          "src": "https://www.weather.gov/images/zfw/rtimages/SFC_Current.png"
         },
         {
-          "src": "https://www.weather.gov/images/aawu/fcstgraphics/ifr_2.png"
+          "title": "Surface Forecast",
+          "src": "https://www.weather.gov/images/zfw/rtimages/SFC_Forecast.png"
         },
         {
-          "src": "http://www.weather.gov/images/aawu/sigWx24.gif"
+          "title": "Radar",
+          "src": "https://radar.weather.gov/ridge/standard/SOUTHPLAINS_loop.gif"
         },
         {
-          "src": "http://www.weather.gov/images/aawu/sigWx36.gif"
-        },
-        {
-          "src": "http://www.weather.gov/images/aawu/sigWx48.gif"
-        },
-        {
-          "src": "http://www.weather.gov/images/aawu/sigWx60.gif"
+          "title": "ZFW Jetstream",
+          "src": "https://www.weather.gov/images/zfw/rtimages/Jetstream_ZFW.png"
         }
       ]
     }
   },
   "views": [
     {
-      "name": "Allen AAF ATCT",
+      "name": "KDFW ATCT",
       "facilities": [
-        "BIG"
+        "DFW"
+      ],
+      "sops": "https://zfwartcc.net/resources"
+    },
+    {
+      "name": "KDAL ACTC",
+      "facilities": [
+        "DAL"
       ],
       "sops": "https://zfwartcc.net/resources"
     }
